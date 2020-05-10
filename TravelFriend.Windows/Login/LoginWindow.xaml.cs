@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows
 {
@@ -17,9 +18,12 @@ namespace TravelFriend.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private LoginViewModel LoginViewModel;
         public LoginWindow()
         {
             InitializeComponent();
+            DataContext = new LoginViewModel();
+            LoginViewModel = DataContext as LoginViewModel;
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -29,7 +33,7 @@ namespace TravelFriend.Windows
 
         private void Min_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
+
         }
 
         private void Avatar_MouseEnter(object sender, MouseEventArgs e)
@@ -47,6 +51,24 @@ namespace TravelFriend.Windows
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        /// <summary>
+        /// 登录按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Login_Click(object sender, RoutedEventArgs e)
+        {
+            var response = await HttpManager.PostAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, LoginViewModel.Password));
+            switch (response.code)
+            {
+                case 200:
+                    //登录成功
+
+                    break;
+            }
+
         }
     }
 }

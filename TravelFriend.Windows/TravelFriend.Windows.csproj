@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TravelFriend.Windows.Http\TravelFriend.Windows.Http.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
