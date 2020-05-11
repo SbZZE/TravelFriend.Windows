@@ -54,7 +54,5 @@ namespace TravelFriend.Windows.Http
                 return error;
             }
         }
-
-
     }
 }

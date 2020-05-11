@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows
@@ -33,7 +36,7 @@ namespace TravelFriend.Windows
 
         private void Min_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            this.WindowState = WindowState.Minimized;
         }
 
         private void Avatar_MouseEnter(object sender, MouseEventArgs e)
@@ -65,10 +68,17 @@ namespace TravelFriend.Windows
             {
                 case 200:
                     //登录成功
-
+                    AccountManager.Instance.Account = LoginViewModel.UserName;
+                    AccountManager.Instance.UserToken = response.token;
+                    break;
+                case 201:
+                    break;
+                case 202:
+                    break;
+                default:
+                    Console.WriteLine(response.message);
                     break;
             }
-
         }
     }
 }
