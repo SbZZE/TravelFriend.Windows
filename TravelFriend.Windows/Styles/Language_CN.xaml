@@ -8,4 +8,8 @@
     <sys:String x:Key="InputPassword">请输入密码</sys:String>
     <sys:String x:Key="RememberPassword">记住密码</sys:String>
     <sys:String x:Key="ForgetPassword">忘记密码</sys:String>
+    <sys:String x:Key="AppName_EN">TravelFriend</sys:String>
+    <sys:String x:Key="Trend">动态</sys:String>
+    <sys:String x:Key="Follow">关注</sys:String>
+    <sys:String x:Key="Fan">粉丝</sys:String>
 </ResourceDictionary>

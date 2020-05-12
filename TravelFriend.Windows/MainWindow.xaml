@@ -4,11 +4,176 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:team="clr-namespace:TravelFriend.Windows.Team"
+        xmlns:home="clr-namespace:TravelFriend.Windows.Home"
         xmlns:local="clr-namespace:TravelFriend.Windows"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True"
-        Title="MainWindow" Height="400" Width="300" Cursor="Hand">
-    <Grid Height="400" Width="300">
-       
+        AllowsTransparency="True" ResizeMode="CanResize"
+        Title="MainWindow" Height="750" Width="1100">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.RowSpan="2" Width="215" BorderBrush="{StaticResource LightGray}" BorderThickness="0 0 1 0" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="15" ShadowDepth="6" Opacity=".8"/>
+            </Border.Effect>
+        </Border>
+        <Grid Grid.RowSpan="2" Width="215" Background="White" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image HorizontalAlignment="Left" Width="24" Height="24" Source="/Resources/Logo.png"/>
+                <TextBlock Grid.Column="1" Text="{DynamicResource AppName_EN}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="18" FontStyle="Italic" FontWeight="Bold"/>
+            </Grid>
+            <Border Background="Transparent" MouseLeftButtonDown="TopArea_MouseLeftButtonDown"/>
+            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 40 0 0">
+                <Border Width="80" Height="80" CornerRadius="80" BorderThickness="1" BorderBrush="{StaticResource MainGreen}"/>
+                <Border Width="66" Height="66" CornerRadius="66" BorderThickness="1" BorderBrush="Transparent">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="25" ShadowDepth="0" Opacity=".8" />
+                    </Border.Effect>
+                    <Image Source="/Resources/zhangzhier.png" Width="66" Height="66">
+                        <Image.Clip>
+                            <EllipseGeometry Center="33,33" RadiusX="33" RadiusY="31"/>
+                        </Image.Clip>
+                    </Image>
+                </Border>
+            </Grid>
+            <TextBlock Grid.Row="2" Text="张之二sb" Margin="0 20 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold"/>
+            <TextBlock Grid.Row="3" Text="中国 湖南" Foreground="{StaticResource Gray}" Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+            <Grid Grid.Row="4" HorizontalAlignment="Stretch" Margin="20 15 20 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                    <TextBlock Text="{DynamicResource Trend}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Text="10" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                    <TextBlock Text="{DynamicResource Follow}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Text="130" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                    <TextBlock Text="{DynamicResource Fan}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <TextBlock Text="15028" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="{StaticResource Gray}"/>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 70 0 0">
+                <RadioButton Margin="40 0" Cursor="Hand" IsChecked="True">
+                    <RadioButton.Style>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Resources/zhangzhier.png" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                            <TextBlock Text="首页" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter Property="Foreground" Value="Black"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+                <RadioButton Cursor="Hand">
+                    <RadioButton.Style>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <StackPanel Orientation="Horizontal" Margin="40 30 40 0">
+                                            <Image Source="/Resources/zhangzhier.png" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                            <TextBlock Text="团队" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter Property="Foreground" Value="Black"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+                <RadioButton Margin="40 30 40 0" Cursor="Hand">
+                    <RadioButton.Style>
+                        <Style TargetType="RadioButton">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="RadioButton">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Resources/zhangzhier.png" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                            <TextBlock Text="旅程" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="False">
+                                                <Setter Property="Foreground" Value="Black"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </RadioButton.Style>
+                </RadioButton>
+            </StackPanel>
+        </Grid>
+        <Border Grid.Column="1" Height="70" BorderBrush="{StaticResource LightGray}" BorderThickness="0 0 0 1">
+            <Grid x:Name="TopArea" Background="Transparent">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="5" MouseLeftButtonDown="TopArea_MouseLeftButtonDown" Background="Transparent"/>
+                <Border x:Name="PersonalData" Grid.Column="4" Margin="0 0 35 0" Width="30" Height="30" MouseLeftButtonUp="PersonalData_MouseLeftButtonUp" Cursor="Hand" VerticalAlignment="Center" CornerRadius="30" BorderThickness="1" BorderBrush="Transparent">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Black" BlurRadius="25" ShadowDepth="0" Opacity=".5"/>
+                    </Border.Effect>
+                    <Image Source="/Resources/zhangzhier.png" Width="30" Height="30">
+                        <Image.Clip>
+                            <EllipseGeometry Center="15,15" RadiusX="15" RadiusY="15"/>
+                        </Image.Clip>
+                    </Image>
+                </Border>
+            </Grid>
+        </Border>
+        <home:HomePage Grid.Row="1" Grid.Column="1"/>
+        <team:TeamPage Grid.Row="1" Grid.Column="1" Visibility="Collapsed"/>
     </Grid>
 </Window>
