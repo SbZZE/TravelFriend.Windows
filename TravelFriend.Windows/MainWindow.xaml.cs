@@ -23,7 +23,10 @@ namespace TravelFriend.Windows
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
+
+        private MainWindowViewModel GetViewModel => DataContext is MainWindowViewModel viewModel ? viewModel : null;
 
         private void TopArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -31,6 +34,26 @@ namespace TravelFriend.Windows
         }
 
         private void PersonalData_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Close();
+        }
+
+        private void Max_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
+        }
+
+        private void Min_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
         {
 
         }

@@ -8,7 +8,7 @@ namespace TravelFriend.Windows
     /// <summary>
     /// 登录的视图模型
     /// </summary>
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : BaseViewModel
     {
         private string _userName;
         public string UserName
@@ -37,13 +37,5 @@ namespace TravelFriend.Windows
                 Change(nameof(_password));
             }
         }
-
-        #region 属性通知事件
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void Change(string name)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        #endregion
     }
 }

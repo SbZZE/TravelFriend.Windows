@@ -41,14 +41,14 @@ namespace TravelFriend.Windows
 
         private void Avatar_MouseEnter(object sender, MouseEventArgs e)
         {
-            AvatarScale.ScaleX = 1.1;
-            AvatarScale.ScaleY = 1.1;
+            //AvatarScale.ScaleX = 1.1;
+            //AvatarScale.ScaleY = 1.1;
         }
 
         private void Avatar_MouseLeave(object sender, MouseEventArgs e)
         {
-            AvatarScale.ScaleX = 1;
-            AvatarScale.ScaleY = 1;
+            //AvatarScale.ScaleX = 1;
+            //AvatarScale.ScaleY = 1;
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

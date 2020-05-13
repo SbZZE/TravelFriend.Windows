@@ -9,7 +9,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent"
         Title="{DynamicResource AppName}" Height="400" Width="300">
-    <Grid>
+    <!--<Grid>
         <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}">
             <materialDesign:Flipper.FrontContent>
                 <Grid Height="400" Width="300">
@@ -101,5 +101,5 @@
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
-    </Grid>
+    </Grid>-->
 </Window>
