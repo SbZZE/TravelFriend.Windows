@@ -41,19 +41,14 @@ namespace TravelFriend.Windows
 
         private void Avatar_MouseEnter(object sender, MouseEventArgs e)
         {
-            //AvatarScale.ScaleX = 1.1;
-            //AvatarScale.ScaleY = 1.1;
+            AvatarScale.ScaleX = 1.1;
+            AvatarScale.ScaleY = 1.1;
         }
 
         private void Avatar_MouseLeave(object sender, MouseEventArgs e)
         {
-            //AvatarScale.ScaleX = 1;
-            //AvatarScale.ScaleY = 1;
-        }
-
-        private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
+            AvatarScale.ScaleX = 1;
+            AvatarScale.ScaleY = 1;
         }
 
         /// <summary>
@@ -63,13 +58,14 @@ namespace TravelFriend.Windows
         /// <param name="e"></param>
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            var response = await HttpManager.PostAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, LoginViewModel.Password));
+            var response = await HttpManager.GetAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, Password.Password));
             switch (response.code)
             {
                 case 200:
                     //登录成功
                     AccountManager.Instance.Account = LoginViewModel.UserName;
                     AccountManager.Instance.UserToken = response.token;
+                    LoginSuccess();
                     break;
                 case 201:
                     break;
@@ -78,6 +74,18 @@ namespace TravelFriend.Windows
                 default:
                     Console.WriteLine(response.message);
                     break;
+            }
+        }
+
+        private void LoginSuccess()
+        {
+            Close();
+            //主界面更新
+            if (App.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.Unlogin.Visibility = Visibility.Collapsed;
+                mainWindow.PersonalData.Visibility = Visibility.Visible;
+                mainWindow.WindowState = WindowState.Normal;
             }
         }
     }

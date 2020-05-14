@@ -17,4 +17,5 @@
     <sys:String x:Key="Travel">旅程</sys:String>
     <sys:String x:Key="Search">搜索</sys:String>
     <sys:String x:Key="AddTrend">添加动态</sys:String>
+    <sys:String x:Key="Unlogin">未登录</sys:String>
 </ResourceDictionary>

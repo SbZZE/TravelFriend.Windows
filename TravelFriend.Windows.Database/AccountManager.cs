@@ -7,7 +7,8 @@ namespace TravelFriend.Windows.Database
     public class AccountManager
     {
         //加载单例
-        private static readonly Lazy<AccountManager> _instance = new Lazy<AccountManager>();
+        private static readonly Lazy<AccountManager> _instance = new Lazy<AccountManager>(() => new AccountManager());
+        //获取单例
         public static AccountManager Instance
         {
             get
@@ -15,6 +16,7 @@ namespace TravelFriend.Windows.Database
                 return _instance.Value;
             }
         }
+
         private AccountManager() { }
 
         /// <summary>

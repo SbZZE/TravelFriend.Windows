@@ -6,7 +6,7 @@ namespace TravelFriend.Windows.Http
 {
     public class ApiUtils
     {
-        private static string BaseUrl => "https://localhost:5001/api";
+        private static string BaseUrl => "http://47.106.139.187:8081/api";
 
         public static string Register => BaseUrl + "/user/regieter";
         public static string Login => BaseUrl + "/user/login";

@@ -16,6 +16,7 @@
     <None Remove="Resources\Gray\Max.png" />
     <None Remove="Resources\Gray\Message.png" />
     <None Remove="Resources\Gray\Min.png" />
+    <None Remove="Resources\Gray\NoMax.png" />
     <None Remove="Resources\Gray\Search.png" />
     <None Remove="Resources\Gray\Setting.png" />
     <None Remove="Resources\Gray\ToggleDown.png" />
@@ -65,6 +66,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\Min.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\NoMax.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\Search.png">

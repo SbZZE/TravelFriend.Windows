@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,11 +27,13 @@ namespace TravelFriend.Windows
             DataContext = new MainWindowViewModel();
         }
 
-        private MainWindowViewModel GetViewModel => DataContext is MainWindowViewModel viewModel ? viewModel : null;
+        public MainWindowViewModel GetViewModel => DataContext is MainWindowViewModel viewModel ? viewModel : null;
 
-        private void TopArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void Unlogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            //未登录，打开登录窗口
+            var loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
         }
 
         private void PersonalData_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -45,7 +48,7 @@ namespace TravelFriend.Windows
 
         private void Max_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            WindowState = WindowState.Maximized;
+            WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         }
 
         private void Min_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -53,9 +56,21 @@ namespace TravelFriend.Windows
             WindowState = WindowState.Minimized;
         }
 
+        private void TopArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            }
+            else
+            {
+                DragMove();
+            }
+        }
+
         private void Window_StateChanged(object sender, EventArgs e)
         {
-
+            GetViewModel.IsMax = WindowState == WindowState.Maximized ? new BitmapImage(new Uri("/Resources/Gray/NoMax.png", UriKind.Relative)) : new BitmapImage(new Uri("/Resources/Gray/Max.png", UriKind.Relative));
         }
     }
 }

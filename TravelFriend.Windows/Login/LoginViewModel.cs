@@ -24,17 +24,17 @@ namespace TravelFriend.Windows
             }
         }
 
-        private string _password;
-        public string Password
+        private string _nickName;
+        public string NickName
         {
             get
             {
-                return _password;
+                return _nickName;
             }
             set
             {
-                _password = value;
-                Change(nameof(_password));
+                _nickName = value;
+                Change(nameof(NickName));
             }
         }
     }
