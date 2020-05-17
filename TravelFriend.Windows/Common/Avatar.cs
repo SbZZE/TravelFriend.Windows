@@ -29,27 +29,11 @@ namespace TravelFriend.Windows.Common
         {
             if (e.NewValue != null)
             {
-                try
+                var image = (Avatar)d;
+                var avatar = await ImageHelper.GetAvatarAsync((string)e.NewValue);
+                if (avatar != null)
                 {
-                    var image = (Avatar)d;
-                    var userName = (string)e.NewValue;
-
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}"), ms);
-                        ms.Position = 0;
-                        BitmapImage result = new BitmapImage();
-                        result.BeginInit();
-                        result.CacheOption = BitmapCacheOption.OnLoad;
-                        result.StreamSource = ms;
-                        result.EndInit();
-                        result.Freeze();
-                        image.Source = result;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
+                    image.Source = avatar;
                 }
             }
         }

@@ -29,7 +29,7 @@
                             <Image Margin="20 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left" SnapsToDevicePixels="True"/>
                             <materialDesign:PackIcon Grid.Column="1" Kind="WindowClose" Cursor="Hand" Background="Transparent" Foreground="White" MouseLeftButtonUp="Close_MouseLeftButtonUp" Width="25" Height="25" Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                         </Grid>
-                        <styles:ImageButton Grid.Row="1" x:Name="Avatar" MouseEnter="Avatar_MouseEnter" MouseLeave="Avatar_MouseLeave" Cursor="Hand" Command="{x:Static materialDesign:Flipper.FlipCommand}" Image="../Resources/zhangzhier.png" Width="100" Height="100" Margin="0 90 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <styles:ImageButton Grid.Row="1" x:Name="Avatar" MouseEnter="Avatar_MouseEnter" MouseLeave="Avatar_MouseLeave" Cursor="Hand" Command="{x:Static materialDesign:Flipper.FlipCommand}" Image="{Binding Avatar}" Width="100" Height="100" Margin="0 90 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
                             <styles:ImageButton.Clip>
                                 <EllipseGeometry Center="50,45" RadiusX="45" RadiusY="45"/>
                             </styles:ImageButton.Clip>
@@ -38,7 +38,7 @@
                             </styles:ImageButton.RenderTransform>
                         </styles:ImageButton>
                         <TextBlock Grid.Row="2" Text="{Binding NickName}" FontSize="16" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 40"/>
-                        <Button x:Name="Login" Click="Login_Click" Grid.Row="3" Content="{DynamicResource Login}" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
+                        <Button x:Name="Login" Click="Login_Click" Grid.Row="3" Content="{DynamicResource Login}" IsEnabled="{Binding IsLoginEnable}" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
                     </Grid>
                 </Grid>
             </materialDesign:Flipper.FrontContent>

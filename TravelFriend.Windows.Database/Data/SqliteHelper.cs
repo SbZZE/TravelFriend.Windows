@@ -38,7 +38,7 @@ namespace TravelFriend.Windows.Database.Data
 
         public int Delete<T>(T model)
         {
-            return db.Update(model);
+            return db.Delete(model);
         }
 
         public List<T> Query<T>(string sql) where T : new()

@@ -145,27 +145,6 @@ namespace TravelFriend.Windows.Http
                     return result;
                 }
             }
-            catch (WebException we)
-            {
-                if (we.Response is HttpWebResponse response)
-                {
-                    var error = new HttpResponse()
-                    {
-                        code = (int)response.StatusCode,
-                        message = we.Message
-                    };
-                    return error;
-                }
-                else
-                {
-                    var error = new HttpResponse()
-                    {
-                        code = 100,
-                        message = we.Message
-                    };
-                    return error;
-                }
-            }
             catch (Exception e)
             {
                 var error = new HttpResponse()

@@ -1,6 +1,7 @@
 ﻿using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,9 +12,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
+using TravelFriend.Windows.Http.UserInfo;
 
 namespace TravelFriend.Windows
 {
@@ -59,7 +63,8 @@ namespace TravelFriend.Windows
         /// <param name="e"></param>
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            var response = await HttpManager.Instance.GetAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, Password.Password));
+            LoginViewModel.Password = string.IsNullOrEmpty(Password.Password) ? LoginViewModel.Password : Password.Password;
+            var response = await HttpManager.Instance.GetAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, LoginViewModel.Password));
             switch (response.code)
             {
                 case 200:
@@ -81,7 +86,6 @@ namespace TravelFriend.Windows
         private void LoginSuccess()
         {
             Close();
-
             //主界面更新
             if (App.Current.MainWindow is MainWindow mainWindow)
             {
@@ -89,6 +93,21 @@ namespace TravelFriend.Windows
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
             }
+            Task.Run(async () =>
+            {
+                //获取头像
+                byte[] avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
+                //获取个人资料
+                var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={LoginViewModel.UserName}"));
+                if (response.Ok)
+                {
+                    var user = response.data;
+                    user.Avatar = avatar;
+                    user.Password = LoginViewModel.Password;
+                    //把最近登录的账号信息存到本地数据库
+                    DatabaseManager.AddUser(user);
+                }
+            });
         }
     }
 }

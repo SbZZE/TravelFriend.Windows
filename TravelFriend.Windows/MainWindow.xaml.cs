@@ -15,7 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows
@@ -37,12 +39,18 @@ namespace TravelFriend.Windows
             AccountManager.Instance.AccountChanged += AccountManager_AccountChanged;//监听账号变化
         }
 
-        private void AccountManager_AccountChanged(object sender, EventArgs e)
+        private async void AccountManager_AccountChanged(object sender, EventArgs e)
         {
             if (sender is AccountManager accountManager)
             {
                 GetViewModel.UserName = null;
                 GetViewModel.UserName = accountManager.Account;
+                var user = DatabaseManager.GetUserByUserName(GetViewModel.UserName);
+                if (user != null)
+                {
+                    user.Avatar = await ImageHelper.GetAvatarByteAsync(GetViewModel.UserName);
+                    DatabaseManager.UpdateUser(user);
+                }
             }
         }
 
