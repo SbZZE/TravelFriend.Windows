@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:team="clr-namespace:TravelFriend.Windows.Team"
         xmlns:home="clr-namespace:TravelFriend.Windows.Home"
+        xmlns:common="clr-namespace:TravelFriend.Windows.Common"
         xmlns:local="clr-namespace:TravelFriend.Windows"
         xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -86,17 +87,17 @@
                 <TextBlock Grid.Column="1" Foreground="{StaticResource MainGreen}" Text="{DynamicResource AppName_EN}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="18" FontStyle="Italic" FontWeight="Bold"/>
             </Grid>
             <Border Background="Transparent" MouseLeftButtonDown="TopArea_MouseLeftButtonDown"/>
-            <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 40 0 0">
+            <Grid x:Name="MenuAvatar" Grid.Row="1" MouseLeftButtonUp="MenuAvatar_MouseLeftButtonUp" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 40 0 0" Cursor="Hand">
                 <Border Width="80" Height="80" CornerRadius="80" BorderThickness="1" BorderBrush="{StaticResource MainGreen}"/>
                 <Border Width="66" Height="66" CornerRadius="66" BorderThickness="1" BorderBrush="Transparent">
                     <Border.Effect>
                         <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity=".8" />
                     </Border.Effect>
-                    <Image Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66">
+                    <common:Avatar x:Name="MenuAvatarImage" UserName="{Binding UserName}" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
                         <Image.Clip>
                             <EllipseGeometry Center="33,33" RadiusX="31" RadiusY="31"/>
                         </Image.Clip>
-                    </Image>
+                    </common:Avatar>
                 </Border>
             </Grid>
             <TextBlock Grid.Row="2" Text="{Binding NickName}" Margin="0 20 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="14" FontWeight="Bold"/>
@@ -245,11 +246,11 @@
                         <Border.Effect>
                             <DropShadowEffect Color="Black" BlurRadius="25" ShadowDepth="0" Opacity=".5"/>
                         </Border.Effect>
-                        <Image Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28">
+                        <common:Avatar x:Name="PersonaleDataImage" UserName="{Binding UserName}" Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28" Stretch="UniformToFill">
                             <Image.Clip>
-                                <EllipseGeometry Center="14,14" RadiusX="14" RadiusY="14"/>
+                                <EllipseGeometry Center="14,14" RadiusX="12" RadiusY="12"/>
                             </Image.Clip>
-                        </Image>
+                        </common:Avatar>
                     </Border>
                     <Image Grid.Column="1" Source="/Resources/Gray/ToggleDown.png" Width="12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 </Grid>
@@ -263,5 +264,6 @@
         </Border>
         <home:HomePage Grid.Row="1" Grid.Column="1"/>
         <team:TeamPage Grid.Row="1" Grid.Column="1" Visibility="Collapsed"/>
+        <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
     </Grid>
 </Window>

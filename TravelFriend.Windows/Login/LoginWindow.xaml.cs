@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows
@@ -58,13 +59,13 @@ namespace TravelFriend.Windows
         /// <param name="e"></param>
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-            var response = await HttpManager.GetAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, Password.Password));
+            var response = await HttpManager.Instance.GetAsync<LoginResponse>(new LoginRequest(LoginViewModel.UserName, Password.Password));
             switch (response.code)
             {
                 case 200:
                     //登录成功
-                    AccountManager.Instance.Account = LoginViewModel.UserName;
                     AccountManager.Instance.UserToken = response.token;
+                    AccountManager.Instance.Account = LoginViewModel.UserName;
                     LoginSuccess();
                     break;
                 case 201:
@@ -80,6 +81,7 @@ namespace TravelFriend.Windows
         private void LoginSuccess()
         {
             Close();
+
             //主界面更新
             if (App.Current.MainWindow is MainWindow mainWindow)
             {

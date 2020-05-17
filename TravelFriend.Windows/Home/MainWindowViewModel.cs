@@ -9,6 +9,23 @@ namespace TravelFriend.Windows
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        private string _userName = AccountManager.Instance.Account;
+        /// <summary>
+        /// 用户昵称
+        /// </summary>
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                Change("UserName");
+            }
+        }
+
         private string _nickName = "隔壁的王王王";
         /// <summary>
         /// 用户昵称

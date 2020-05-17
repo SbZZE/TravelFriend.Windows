@@ -10,5 +10,12 @@ namespace TravelFriend.Windows.Http
         public string message { get; set; }
 
         public string localError { get; set; }
+        public bool Ok
+        {
+            get
+            {
+                return code == 200;
+            }
+        }
     }
 }
