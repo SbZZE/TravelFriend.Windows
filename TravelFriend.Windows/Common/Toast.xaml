@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Common.Toast"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelFriend.Windows.Common"
+             mc:Ignorable="d" VerticalAlignment="Center" HorizontalAlignment="Center"
+             IsHitTestVisible="False" Visibility="Collapsed">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black">
+        <TextBlock x:Name="ToastText" Foreground="White" FontSize="16" Text="aaa" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+    </Grid>
+</UserControl>

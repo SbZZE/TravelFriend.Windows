@@ -15,7 +15,8 @@
                         <Image Grid.Row="0" Source="{TemplateBinding Image}"
                                     Width="{TemplateBinding ImageWidth}"
                                     Height="{TemplateBinding ImageHeight}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                    Stretch="UniformToFill"/>
                         <ContentPresenter Grid.Row="1" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}"   
                                      VerticalAlignment="Center" RecognizesAccessKey="True" />
                     </Grid>

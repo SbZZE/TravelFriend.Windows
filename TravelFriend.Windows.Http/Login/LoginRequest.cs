@@ -4,15 +4,9 @@ namespace TravelFriend.Windows.Http
 {
     public class LoginRequest : HttpRequest
     {
-        public LoginRequest(string userName, string password) : base(ApiUtils.Login)
+        public LoginRequest(string userName, string password) : base($"{ApiUtils.Login}?username={userName}&password={password}")
         {
-            UserName = userName;
-            Password = password;
-        }
 
-        [JsonProperty("username")]
-        public string UserName { get; set; }
-        [JsonProperty("password")]
-        public string Password { get; set; }
+        }
     }
 }

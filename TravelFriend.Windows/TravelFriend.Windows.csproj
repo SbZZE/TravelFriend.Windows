@@ -7,15 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Add.png" />
     <None Remove="Resources\Close.png" />
-    <None Remove="Resources\Close_Green.png" />
     <None Remove="Resources\DefaultBigAvatar.png" />
     <None Remove="Resources\DropDown.png" />
     <None Remove="Resources\DropUp.png" />
+    <None Remove="Resources\Gray\Close.png" />
+    <None Remove="Resources\Gray\Max.png" />
+    <None Remove="Resources\Gray\Message.png" />
+    <None Remove="Resources\Gray\Min.png" />
+    <None Remove="Resources\Gray\NoMax.png" />
+    <None Remove="Resources\Gray\Search.png" />
+    <None Remove="Resources\Gray\Setting.png" />
+    <None Remove="Resources\Gray\ToggleDown.png" />
+    <None Remove="Resources\Gray\ToggleUp.png" />
+    <None Remove="Resources\Green\Home.png" />
+    <None Remove="Resources\Green\Logo.png" />
+    <None Remove="Resources\Green\Min.png" />
+    <None Remove="Resources\Green\Team.png" />
+    <None Remove="Resources\Green\Travel.png" />
+    <None Remove="Resources\Home.png" />
     <None Remove="Resources\LoginAccount.png" />
     <None Remove="Resources\LoginPassword.png" />
+    <None Remove="Resources\Logo.png" />
     <None Remove="Resources\Min.png" />
     <None Remove="Resources\Min_Green.png" />
+    <None Remove="Resources\Team.png" />
+    <None Remove="Resources\Travel.png" />
     <None Remove="Resources\zhangzhier.png" />
   </ItemGroup>
 
@@ -24,35 +42,87 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TravelFriend.Windows.Database\TravelFriend.Windows.Database.csproj" />
     <ProjectReference Include="..\TravelFriend.Windows.Http\TravelFriend.Windows.Http.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Close.png">
+    <Resource Include="Resources\Add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Close_Green.png">
+    <Resource Include="Resources\Close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\DefaultBigAvatar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\DropDown.png">
+    <Resource Include="Resources\Gray\Close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\DropUp.png">
+    <Resource Include="Resources\Gray\Max.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\LoginAccount.png">
+    <Resource Include="Resources\Gray\Message.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\LoginPassword.png">
+    <Resource Include="Resources\Gray\Min.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\NoMax.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\Search.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\Setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\ToggleDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\ToggleUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\DropDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\DropUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\LoginAccount.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\LoginPassword.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Min.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Team.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Travel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Min.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\Min_Green.png">
+    <Resource Include="Resources\Team.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Travel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\zhangzhier.png">
