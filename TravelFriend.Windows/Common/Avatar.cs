@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows.Common
@@ -16,21 +17,21 @@ namespace TravelFriend.Windows.Common
 
         }
 
-        public string UserName
+        public bool IsReloadAvatar
         {
-            get { return (string)GetValue(UserNameProperty); }
-            set { SetValue(UserNameProperty, value); }
+            get { return (bool)GetValue(IsReloadAvatarProperty); }
+            set { SetValue(IsReloadAvatarProperty, value); }
         }
 
-        public static readonly DependencyProperty UserNameProperty =
-            DependencyProperty.Register("UserName", typeof(string), typeof(Avatar), new PropertyMetadata("", OnUserNamePropertyChanged));
+        public static readonly DependencyProperty IsReloadAvatarProperty =
+            DependencyProperty.Register("IsReloadAvatar", typeof(bool), typeof(Avatar), new PropertyMetadata(false, OnIsReloadAvatarPropertyChanged));
 
-        private async static void OnUserNamePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private async static void OnIsReloadAvatarPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.NewValue != null)
+            if (e.NewValue != null && (bool)e.NewValue)
             {
                 var image = (Avatar)d;
-                var avatar = await ImageHelper.GetAvatarAsync((string)e.NewValue);
+                var avatar = await ImageHelper.GetAvatarAsync(AccountManager.Instance.Account);
                 if (avatar != null)
                 {
                     image.Source = avatar;

@@ -108,7 +108,7 @@ namespace TravelFriend.Windows
         /// <returns></returns>
         private User GetUser()
         {
-            return DatabaseManager.GetFirstUser();
+            return UserManager.GetFirstUser();
         }
     }
 }

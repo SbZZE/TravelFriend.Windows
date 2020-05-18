@@ -21,7 +21,7 @@ namespace TravelFriend.Windows.Common
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}"), ms);
+                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
                     ms.Position = 0;
                     BitmapImage result = new BitmapImage();
                     result.BeginInit();
@@ -49,7 +49,7 @@ namespace TravelFriend.Windows.Common
             //获取头像
             using (MemoryStream ms = new MemoryStream())
             {
-                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}"), ms);
+                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
                 ms.Position = 0;
                 BitmapImage result = new BitmapImage();
                 try
@@ -79,8 +79,9 @@ namespace TravelFriend.Windows.Common
                 bmp.BeginInit();
                 bmp.StreamSource = new MemoryStream(byteArray);
                 bmp.EndInit();
+                bmp.Freeze();
             }
-            catch
+            catch(Exception e)
             {
                 bmp = null;
             }

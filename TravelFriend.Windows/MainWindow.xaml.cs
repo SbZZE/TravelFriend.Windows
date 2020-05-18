@@ -18,7 +18,9 @@ using System.Windows.Shapes;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
+using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows
 {
@@ -39,17 +41,15 @@ namespace TravelFriend.Windows
             AccountManager.Instance.AccountChanged += AccountManager_AccountChanged;//监听账号变化
         }
 
-        private async void AccountManager_AccountChanged(object sender, EventArgs e)
+        private void AccountManager_AccountChanged(object sender, EventArgs e)
         {
             if (sender is AccountManager accountManager)
             {
-                GetViewModel.UserName = null;
-                GetViewModel.UserName = accountManager.Account;
-                var user = DatabaseManager.GetUserByUserName(GetViewModel.UserName);
+                var user = GetUserByUserName(accountManager.Account);
                 if (user != null)
                 {
-                    user.Avatar = await ImageHelper.GetAvatarByteAsync(GetViewModel.UserName);
-                    DatabaseManager.UpdateUser(user);
+                    GetViewModel.NickName = user.NickName;
+                    GetViewModel.Address = user.Address;
                 }
             }
         }
@@ -66,21 +66,31 @@ namespace TravelFriend.Windows
 
         }
 
-        private void MenuAvatar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private async void MenuAvatar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;
             dialog.Filter = "图片(*.jpg;*.jpg;*.jpeg;*.gif;*.png)|*.jpg;*.jpeg;*.gif;*.png";
             if (dialog.ShowDialog() == true)
             {
-                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.Avatar}?username=sbzhangzhier@qq.com", dialog.FileName));
+                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.Avatar}?username={AccountManager.Instance.Account}", dialog.FileName));
                 if (response.Ok)
                 {
-                    Toast.Show("成功");
-                    AccountManager_AccountChanged(AccountManager.Instance, null);
+                    Toast.Show(RStrings.UpdateSuccess);
+                    GetViewModel.IsReloadAvatar = false;
+                    GetViewModel.IsReloadAvatar = true;
+                    var user = GetUserByUserName(AccountManager.Instance.Account);
+                    if (user != null)
+                    {
+                        user.Avatar = await ImageHelper.GetAvatarByteAsync(AccountManager.Instance.Account);
+                        UserManager.UpdateUser(user);
+                    }
                 }
             }
         }
+
+        public User GetUserByUserName(string userName) => UserManager.GetUserByUserName(userName);
+
         public MainWindowViewModel GetViewModel => DataContext is MainWindowViewModel viewModel ? viewModel : null;
 
         #region 窗口相关

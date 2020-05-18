@@ -9,20 +9,20 @@ namespace TravelFriend.Windows
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private string _userName = AccountManager.Instance.Account;
+        private bool _isReloadAvatar;
         /// <summary>
-        /// 用户昵称
+        /// 是否重新加载头像资源
         /// </summary>
-        public string UserName
+        public bool IsReloadAvatar
         {
             get
             {
-                return _userName;
+                return _isReloadAvatar;
             }
             set
             {
-                _userName = value;
-                Change("UserName");
+                _isReloadAvatar = value;
+                Change("IsReloadAvatar");
             }
         }
 

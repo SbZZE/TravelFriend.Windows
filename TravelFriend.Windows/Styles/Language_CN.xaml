@@ -19,4 +19,5 @@
     <sys:String x:Key="AddTrend">添加动态</sys:String>
     <sys:String x:Key="Unlogin">未登录</sys:String>
     <sys:String x:Key="ClickToLogin">点击登录新的账号</sys:String>
+    <sys:String x:Key="UpdateSuccess">修改成功</sys:String>
 </ResourceDictionary>

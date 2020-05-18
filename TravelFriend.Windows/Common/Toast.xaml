@@ -7,6 +7,6 @@
              mc:Ignorable="d" VerticalAlignment="Center" HorizontalAlignment="Center"
              IsHitTestVisible="False" Visibility="Collapsed">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="Black">
-        <TextBlock x:Name="ToastText" Foreground="White" FontSize="16" Text="aaa" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock x:Name="ToastText" Foreground="White" FontSize="16" Text="aaa" Margin="20 15" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
     </Grid>
 </UserControl>

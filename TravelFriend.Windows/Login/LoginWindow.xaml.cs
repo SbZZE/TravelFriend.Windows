@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
@@ -92,22 +93,28 @@ namespace TravelFriend.Windows
                 mainWindow.Unlogin.Visibility = Visibility.Collapsed;
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
-            }
-            Task.Run(async () =>
-            {
-                //获取头像
-                byte[] avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
-                //获取个人资料
-                var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={LoginViewModel.UserName}"));
-                if (response.Ok)
+                Task.Run(async () =>
                 {
-                    var user = response.data;
-                    user.Avatar = avatar;
-                    user.Password = LoginViewModel.Password;
-                    //把最近登录的账号信息存到本地数据库
-                    DatabaseManager.AddUser(user);
-                }
-            });
+                    //获取个人资料
+                    var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={LoginViewModel.UserName}"));
+                    if (response.Ok)
+                    {
+                        var user = response.data;
+                        Dispatcher.Invoke(() =>
+                        {
+                            //重新加载头像
+                            mainWindow.GetViewModel.IsReloadAvatar = false;
+                            mainWindow.GetViewModel.IsReloadAvatar = true;
+                            mainWindow.GetViewModel.NickName = user.NickName;
+                            mainWindow.GetViewModel.Address = user.Address;
+                        });
+                        user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
+                        user.Password = LoginViewModel.Password;
+                        //把最近登录的账号信息存到本地数据库
+                        UserManager.UpdateUser(user);
+                    }
+                });
+            }
         }
     }
 }
