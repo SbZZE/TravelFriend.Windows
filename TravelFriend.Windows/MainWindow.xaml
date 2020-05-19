@@ -252,12 +252,12 @@
                         </Border>
                         <Image Grid.Column="1" Source="/Resources/Gray/ToggleDown.png" Width="12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
-                    <Image Grid.Column="3" Margin="20 0 20 0" Source="/Resources/Gray/Message.png" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
-                    <Image Grid.Column="4" Margin="0 0 20 0" Source="/Resources/Gray/Setting.png" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
+                    <Image Grid.Column="3" Margin="20 0 20 0" Source="/Resources/Gray/Message.png" Width="16" VerticalAlignment="Center" Cursor="Hand"/>
+                    <Image Grid.Column="4" Margin="0 0 20 0" Source="/Resources/Gray/Setting.png" Width="16" VerticalAlignment="Center" Cursor="Hand"/>
                     <Border Grid.Column="5" Margin="0 0 20 0" Width="1" Height="18" BorderThickness="1" BorderBrush="{StaticResource Gray}" VerticalAlignment="Center"/>
                     <Image x:Name="Min" MouseLeftButtonUp="Min_MouseLeftButtonUp" Grid.Column="6" Margin="0 0 20 0" Source="/Resources/Gray/Min.png" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
                     <Image x:Name="Max" MouseLeftButtonUp="Max_MouseLeftButtonUp" Grid.Column="7" Margin="0 0 20 0" Source="{Binding IsMax}" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
-                    <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Grid.Column="8" Margin="0 0 26 0" Source="/Resources/Gray/Close.png" Width="12" VerticalAlignment="Center" Cursor="Hand"/>
+                    <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Grid.Column="8" Margin="0 0 26 0" Source="/Resources/Gray/Close.png" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
                 </Grid>
             </Border>
             <home:HomePage Grid.Row="1" Grid.Column="1"/>
