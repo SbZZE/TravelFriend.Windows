@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows.Common
@@ -31,11 +32,18 @@ namespace TravelFriend.Windows.Common
             if (e.NewValue != null && (bool)e.NewValue)
             {
                 var image = (Avatar)d;
-                var avatar = await ImageHelper.GetAvatarAsync(AccountManager.Instance.Account);
-                if (avatar != null)
+
+                var user = UserManager.GetFirstUser();
+                if (user != null && !string.IsNullOrEmpty(user.UserName))
                 {
-                    image.Source = avatar;
+                    image.Source = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
                 }
+
+                //var avatar = await ImageHelper.GetAvatarAsync(AccountManager.Instance.Account);
+                //if (avatar != null)
+                //{
+                //    image.Source = avatar;
+                //}
             }
         }
     }

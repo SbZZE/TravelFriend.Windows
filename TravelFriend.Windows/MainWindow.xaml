@@ -7,6 +7,7 @@
         xmlns:team="clr-namespace:TravelFriend.Windows.Team"
         xmlns:home="clr-namespace:TravelFriend.Windows.Home"
         xmlns:common="clr-namespace:TravelFriend.Windows.Common"
+        xmlns:main="clr-namespace:TravelFriend.Windows.Main"
         xmlns:local="clr-namespace:TravelFriend.Windows"
         xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
@@ -262,6 +263,7 @@
             </Border>
             <home:HomePage Grid.Row="1" Grid.Column="1"/>
             <team:TeamPage Grid.Row="1" Grid.Column="1" Visibility="Collapsed"/>
+            <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
             <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Grid>
     </Border>

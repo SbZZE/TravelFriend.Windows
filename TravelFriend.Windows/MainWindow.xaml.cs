@@ -20,6 +20,7 @@ using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
+using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows
@@ -63,7 +64,7 @@ namespace TravelFriend.Windows
 
         private void PersonalData_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            PersonalDataPopup.IsOpen = PersonalDataPopup.IsOpen ? false : true;
         }
 
         private async void MenuAvatar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

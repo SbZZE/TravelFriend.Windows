@@ -21,9 +21,11 @@
     <None Remove="Resources\Gray\Setting.png" />
     <None Remove="Resources\Gray\ToggleDown.png" />
     <None Remove="Resources\Gray\ToggleUp.png" />
+    <None Remove="Resources\Green\Birthday.png" />
     <None Remove="Resources\Green\Home.png" />
     <None Remove="Resources\Green\Logo.png" />
     <None Remove="Resources\Green\Min.png" />
+    <None Remove="Resources\Green\Signature.png" />
     <None Remove="Resources\Green\Team.png" />
     <None Remove="Resources\Green\Travel.png" />
     <None Remove="Resources\Home.png" />
@@ -39,6 +41,7 @@
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
+    <PackageReference Include="System.Management" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +86,9 @@
     <Resource Include="Resources\Gray\ToggleUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Green\Birthday.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Green\DropDown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -102,6 +108,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\Min.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Signature.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\Team.png">
