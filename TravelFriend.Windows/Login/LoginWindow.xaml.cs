@@ -107,6 +107,7 @@ namespace TravelFriend.Windows
                             mainWindow.GetViewModel.IsReloadAvatar = true;
                             mainWindow.GetViewModel.NickName = user.NickName;
                             mainWindow.GetViewModel.Address = user.Address;
+                            mainWindow.GetViewModel.Gender = user.Gender;
                         });
                         user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
                         user.Password = LoginViewModel.Password;

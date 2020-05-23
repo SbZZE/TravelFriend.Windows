@@ -60,6 +60,23 @@ namespace TravelFriend.Windows
             }
         }
 
+        private string _gender = "0";
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public string Gender
+        {
+            get
+            {
+                return _gender;
+            }
+            set
+            {
+                _gender = value;
+                Change("Gender");
+            }
+        }
+
         private ImageSource _isMax = new BitmapImage(new Uri("/Resources/Gray/Max.png", UriKind.Relative));
         /// <summary>
         /// 是否最大化
