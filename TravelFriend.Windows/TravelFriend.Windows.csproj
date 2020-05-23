@@ -49,6 +49,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TravelFriend.Windows.Database\TravelFriend.Windows.Database.csproj" />
     <ProjectReference Include="..\TravelFriend.Windows.Http\TravelFriend.Windows.Http.csproj" />
+    <ProjectReference Include="..\TravelFriend.Windows.RabbitMQ\TravelFriend.Windows.RabbitMQ.csproj" />
   </ItemGroup>
 
   <ItemGroup>
