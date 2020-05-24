@@ -4,11 +4,19 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.RabbitMQ;
+using TravelFriend.Windows.RabbitMQ.Observe;
 
 namespace TravelFriend.Windows
 {
-    public class MainWindowViewModel : BaseViewModel
+    public class MainWindowViewModel : BaseViewModel, IObserver
     {
+        public MainWindowViewModel()
+        {
+            NotifyManager.UserInfoSubject.Add(this);//订阅头像变化
+        }
+
         private string _nickName = "隔壁的王王王";
         /// <summary>
         /// 用户昵称
@@ -77,20 +85,14 @@ namespace TravelFriend.Windows
             }
         }
 
-        private bool _isLogin;
-        /// <summary>
-        /// 是否已登录
-        /// </summary>
-        public bool IsLogin
+        public void Update()
         {
-            get
+            var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
+            if (user != null)
             {
-                return _isLogin;
-            }
-            set
-            {
-                _isLogin = value;
-                Change("IsLogin");
+                NickName = user.NickName;
+                Address = user.Address;
+                Gender = user.Gender;
             }
         }
     }

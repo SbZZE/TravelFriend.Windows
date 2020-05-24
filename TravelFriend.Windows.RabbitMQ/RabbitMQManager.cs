@@ -50,15 +50,17 @@ namespace TravelFriend.Windows.RabbitMQ
         {
             var messageStr = Encoding.UTF8.GetString(e.Body.Span);
             var message = JsonConvert.DeserializeObject<MessageModel>(messageStr);
-            switch (message.Type)
+            if (message.Account == AccountManager.Instance.Account)
             {
-                case MessageType.AVATAR:
-                    NotifyManager.UpdateAvatar(AccountManager.Instance.Account);
-                    break;
-                case MessageType.INFO:
-                    break;
-                default:
-                    break;
+                switch (message.Type)
+                {
+                    case MessageType.AVATAR:
+                        NotifyManager.UpdateAvatar(message.Account);
+                        break;
+                    case MessageType.INFO:
+                        NotifyManager.UpdateUserInfo(message.Account);
+                        break;
+                }
             }
             //返回消息确认
             Channel.BasicAck(e.DeliveryTag, true);

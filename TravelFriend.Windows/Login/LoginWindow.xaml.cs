@@ -71,9 +71,7 @@ namespace TravelFriend.Windows
             {
                 case 200:
                     //登录成功
-                    AccountManager.Instance.UserToken = response.token;
-                    AccountManager.Instance.Account = LoginViewModel.UserName;
-                    LoginSuccess();
+                    LoginSuccess(response.token);
                     break;
                 case 201:
                     break;
@@ -85,8 +83,10 @@ namespace TravelFriend.Windows
             }
         }
 
-        private void LoginSuccess()
+        private void LoginSuccess(string token)
         {
+            AccountManager.Instance.UserToken = token;
+            AccountManager.Instance.Account = LoginViewModel.UserName;
             Close();
             //主界面更新
             if (App.Current.MainWindow is MainWindow mainWindow)
