@@ -9,23 +9,6 @@ namespace TravelFriend.Windows
 {
     public class MainWindowViewModel : BaseViewModel
     {
-        private bool _isReloadAvatar;
-        /// <summary>
-        /// 是否重新加载头像资源
-        /// </summary>
-        public bool IsReloadAvatar
-        {
-            get
-            {
-                return _isReloadAvatar;
-            }
-            set
-            {
-                _isReloadAvatar = value;
-                Change("IsReloadAvatar");
-            }
-        }
-
         private string _nickName = "隔壁的王王王";
         /// <summary>
         /// 用户昵称

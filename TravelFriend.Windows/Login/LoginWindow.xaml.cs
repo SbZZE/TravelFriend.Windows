@@ -19,6 +19,7 @@ using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
+using TravelFriend.Windows.RabbitMQ;
 
 namespace TravelFriend.Windows
 {
@@ -93,6 +94,7 @@ namespace TravelFriend.Windows
                 mainWindow.Unlogin.Visibility = Visibility.Collapsed;
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
+                RabbitMQ.RabbitMQManager.Connection();
                 Task.Run(async () =>
                 {
                     //获取个人资料
@@ -102,9 +104,6 @@ namespace TravelFriend.Windows
                         var user = response.data;
                         Dispatcher.Invoke(() =>
                         {
-                            //重新加载头像
-                            mainWindow.GetViewModel.IsReloadAvatar = false;
-                            mainWindow.GetViewModel.IsReloadAvatar = true;
                             mainWindow.GetViewModel.NickName = user.NickName;
                             mainWindow.GetViewModel.Address = user.Address;
                             mainWindow.GetViewModel.Gender = user.Gender;
@@ -113,6 +112,7 @@ namespace TravelFriend.Windows
                         user.Password = LoginViewModel.Password;
                         //把最近登录的账号信息存到本地数据库
                         UserManager.UpdateUser(user);
+                        NotifyManager.UpdateAvatar(user.UserName);
                     }
                 });
             }

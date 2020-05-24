@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Common;
+using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 
 namespace TravelFriend.Windows.Main
@@ -29,7 +30,7 @@ namespace TravelFriend.Windows.Main
 
         private void PersonalDataPopup_Opened(object sender, EventArgs e)
         {
-            var user = UserManager.GetFirstUser();
+            var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
             if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
                 DataContext = user;

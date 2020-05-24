@@ -78,8 +78,6 @@ namespace TravelFriend.Windows
                 if (response.Ok)
                 {
                     Toast.Show(RStrings.UpdateSuccess);
-                    GetViewModel.IsReloadAvatar = false;
-                    GetViewModel.IsReloadAvatar = true;
                     var user = GetUserByUserName(AccountManager.Instance.Account);
                     if (user != null)
                     {

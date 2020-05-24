@@ -8,42 +8,27 @@ using System.Windows.Media.Imaging;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
+using TravelFriend.Windows.RabbitMQ;
+using TravelFriend.Windows.RabbitMQ.Observe;
 
 namespace TravelFriend.Windows.Common
 {
-    public class Avatar : Image
+    public class Avatar : Image, IObserver
     {
-        static Avatar()
+        public Avatar()
         {
-
+            NotifyManager.AvatarSubject.Add(this);//订阅头像变化
         }
 
-        public bool IsReloadAvatar
+        public void Update()
         {
-            get { return (bool)GetValue(IsReloadAvatarProperty); }
-            set { SetValue(IsReloadAvatarProperty, value); }
-        }
-
-        public static readonly DependencyProperty IsReloadAvatarProperty =
-            DependencyProperty.Register("IsReloadAvatar", typeof(bool), typeof(Avatar), new PropertyMetadata(false, OnIsReloadAvatarPropertyChanged));
-
-        private async static void OnIsReloadAvatarPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.NewValue != null && (bool)e.NewValue)
+            var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
+            if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
-                var image = (Avatar)d;
-
-                var user = UserManager.GetFirstUser();
-                if (user != null && !string.IsNullOrEmpty(user.UserName))
+                this.Dispatcher.Invoke(() =>
                 {
-                    image.Source = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
-                }
-
-                //var avatar = await ImageHelper.GetAvatarAsync(AccountManager.Instance.Account);
-                //if (avatar != null)
-                //{
-                //    image.Source = avatar;
-                //}
+                    this.Source = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
+                });
             }
         }
     }

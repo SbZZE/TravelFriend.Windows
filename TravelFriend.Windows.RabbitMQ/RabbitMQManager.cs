@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TravelFriend.Windows.Database;
 
 namespace TravelFriend.Windows.RabbitMQ
 {
@@ -52,6 +53,7 @@ namespace TravelFriend.Windows.RabbitMQ
             switch (message.Type)
             {
                 case MessageType.AVATAR:
+                    NotifyManager.UpdateAvatar(AccountManager.Instance.Account);
                     break;
                 case MessageType.USERINFO:
                     break;
