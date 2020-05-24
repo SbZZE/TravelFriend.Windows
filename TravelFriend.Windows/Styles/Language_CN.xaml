@@ -4,7 +4,7 @@
     <sys:String x:Key="AppName">旅朋友</sys:String>
     <sys:String x:Key="Login">登录</sys:String>
     <sys:String x:Key="ClickEdit">点击编辑详情</sys:String>
-    <sys:String x:Key="InputAccount">请输入账号</sys:String>
+    <sys:String x:Key="InputAccount">请输入用户名(邮箱或手机号)</sys:String>
     <sys:String x:Key="InputPassword">请输入密码</sys:String>
     <sys:String x:Key="RememberPassword">记住密码</sys:String>
     <sys:String x:Key="ForgetPassword">忘记密码</sys:String>
@@ -21,4 +21,15 @@
     <sys:String x:Key="ClickToLogin">点击登录新的账号</sys:String>
     <sys:String x:Key="UpdateSuccess">修改成功</sys:String>
     <sys:String x:Key="UpdatePersonalData">修改资料</sys:String>
+    <sys:String x:Key="Register">注册</sys:String>
+    <sys:String x:Key="WelcomeRegister">欢迎注册</sys:String>
+    <sys:String x:Key="ExistingAccount">已有帐号？</sys:String>
+    <sys:String x:Key="UserName">用户名</sys:String>
+    <sys:String x:Key="NickName">昵称</sys:String>
+    <sys:String x:Key="Password">密码</sys:String>
+    <sys:String x:Key="ConfirmPassword">确认密码</sys:String>
+    <sys:String x:Key="RegisterAccount">注册账号</sys:String>
+    <sys:String x:Key="InputNickName">请输入昵称</sys:String>
+    <sys:String x:Key="PleaseConfirmPassword">请确认密码</sys:String>
+    <sys:String x:Key="PasswordNotSame">密码不一致</sys:String>
 </ResourceDictionary>

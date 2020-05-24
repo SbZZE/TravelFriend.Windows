@@ -19,6 +19,7 @@ using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
+using TravelFriend.Windows.Login;
 using TravelFriend.Windows.RabbitMQ;
 
 namespace TravelFriend.Windows
@@ -116,6 +117,12 @@ namespace TravelFriend.Windows
                     }
                 });
             }
+        }
+
+        private void RegisterAccount_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var register = new Register();
+            register.ShowDialog();
         }
     }
 }

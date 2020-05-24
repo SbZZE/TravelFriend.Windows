@@ -1,0 +1,50 @@
+﻿<Window x:Class="TravelFriend.Windows.Login.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:TravelFriend.Windows.Login"
+        xmlns:common="clr-namespace:TravelFriend.Windows.Common"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent"
+        Title="{DynamicResource Register}" Height="400" Width="300">
+    <Border BorderThickness=".5" BorderBrush="{StaticResource Gray}" Margin="10">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity=".8"/>
+        </Border.Effect>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <materialDesign:PackIcon Grid.Column="1" Kind="WindowClose" Cursor="Hand" Background="Transparent" Foreground="{StaticResource MainGreen}" MouseLeftButtonUp="Close_MouseLeftButtonUp" Width="25" Height="25" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Name="Welcome" Text="{DynamicResource WelcomeRegister}" Margin="20,15,0,0" FontSize="26" FontWeight="Bold"/>
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="20,6,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="{DynamicResource ExistingAccount}" FontSize="12" HorizontalAlignment="Left"/>
+                <TextBlock Name="Login" Text="{DynamicResource Login}" FontSize="12" MouseLeftButtonUp="Close_MouseLeftButtonUp" Cursor="Hand" HorizontalAlignment="Left" Foreground="Blue" TextDecorations="Underline"/>
+            </StackPanel>
+            <TextBlock Grid.Row="3" Text="{DynamicResource UserName}" Margin="20 24 0 0" FontSize="14" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox x:Name="UserName" Grid.Row="3" Grid.Column="1" Height="30" Margin="0,20,20,0" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" materialDesign:HintAssist.Hint="{DynamicResource InputAccount}" Padding="5 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="12" Foreground="Black" BorderThickness="0.5"/>
+            <TextBlock Grid.Row="4" Text="{DynamicResource NickName}" Margin="20,31,0,0" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left"/>
+            <TextBox x:Name="NickName" Grid.Row="4" Grid.Column="1" Height="30" Margin="0,20,20,0" materialDesign:HintAssist.Hint="{DynamicResource InputNickName}" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" Padding="5 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="13" Foreground="Black" BorderThickness="0.5"/>
+            <TextBlock Grid.Row="5" Text="{DynamicResource Password}" Margin="20 31 0 0" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left"/>
+            <PasswordBox x:Name="Password" Grid.Row="5" Grid.Column="1" Height="30" Margin="0,20,20,0" materialDesign:HintAssist.Hint="{DynamicResource InputPassword}" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" Padding="5 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="12" Foreground="Black" BorderThickness="0.5"/>
+            <TextBlock Width="84" Grid.Row="6" Text="{DynamicResource ConfirmPassword}" Margin="20 30 0 0" FontSize="14" FontWeight="Normal" HorizontalAlignment="Left"/>
+            <PasswordBox x:Name="ConfirmPassword" Grid.Row="6" Grid.Column="1" Height="30" Margin="0,20,20,0" Padding="5 0" materialDesign:HintAssist.Hint="{DynamicResource PleaseConfirmPassword}" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontSize="12" Foreground="Black" BorderThickness="0.5"/>
+            <Button Grid.Row="7" Grid.ColumnSpan="2" Click="Register_Click" Content="{DynamicResource Register}" Height="32" Margin="20 20 20 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" FontWeight="Bold" Background="{StaticResource MainGreen}" BorderThickness="0"/>
+            <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="9"/>
+        </Grid>
+    </Border>
+</Window>

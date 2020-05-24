@@ -50,6 +50,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -92,6 +93,20 @@
                         <TextBlock Grid.Column="1" Text="{DynamicResource ForgetPassword}" Foreground="{StaticResource Gray}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
                     </Grid>
                     <Button Grid.Row="4" Content="{DynamicResource Login}" Click="Login_Click" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
+                    <TextBlock Grid.Row="4" MouseLeftButtonUp="RegisterAccount_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{DynamicResource RegisterAccount}" Margin="10 0 0 10" FontSize="14" Cursor="Hand">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                        <Setter Property="Foreground" Value="{StaticResource Gray}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
