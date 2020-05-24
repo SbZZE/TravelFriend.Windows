@@ -5,6 +5,7 @@ using System.Text;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
+using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.RabbitMQ.Observe;
 
 namespace TravelFriend.Windows.RabbitMQ
@@ -12,7 +13,12 @@ namespace TravelFriend.Windows.RabbitMQ
     public class NotifyManager
     {
         public static Subject AvatarSubject = new AvatarSubject();
+        public static Subject UserInfoSubject = new UserInfoSubject();
 
+        /// <summary>
+        /// 更新头像通知
+        /// </summary>
+        /// <param name="userName"></param>
         public async static void UpdateAvatar(string userName)
         {
             var user = UserManager.GetUserByUserName(userName);
@@ -32,6 +38,25 @@ namespace TravelFriend.Windows.RabbitMQ
                         UserManager.UpdateUser(user);
                     }
                     AvatarSubject.Notify();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新个人资料通知
+        /// </summary>
+        /// <param name="userName"></param>
+        public async static void UpdateUserInfo(string userName)
+        {
+
+            //获取个人资料
+            var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={userName}"));
+            if (response.Ok)
+            {
+                var user = UserManager.GetUserByUserName(userName);
+                if (user != null)
+                {
+                    
                 }
             }
         }

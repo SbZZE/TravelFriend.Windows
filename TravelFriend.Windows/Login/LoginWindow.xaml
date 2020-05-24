@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:TravelFriend.Windows" ResizeMode="NoResize"
         xmlns:styles="clr-namespace:TravelFriend.Windows.Styles"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        AllowsTransparency="True" Background="Transparent"
+        AllowsTransparency="True" Background="Transparent" Icon="/Resources/Green/Logo.png"
         Title="{DynamicResource AppName}" Height="400" Width="300">
     <Grid>
         <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}">

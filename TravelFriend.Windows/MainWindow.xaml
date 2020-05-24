@@ -11,8 +11,9 @@
         xmlns:local="clr-namespace:TravelFriend.Windows"
         xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Icon="/Resources/Green/Logo.png"
         AllowsTransparency="True" StateChanged="Window_StateChanged"
-        ResizeMode="CanResizeWithGrip" Title="MainWindow" Height="750" Width="1100">
+        ResizeMode="CanResizeWithGrip" Title="{DynamicResource AppName}" Height="750" Width="1100">
     <Window.Resources>
         <converter:BoolenToVisibilityConverter x:Key="VisibilityConverter"></converter:BoolenToVisibilityConverter>
         <converter:GenderToImageSourceConverter x:Key="GenderToImage"></converter:GenderToImageSourceConverter>

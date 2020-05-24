@@ -28,7 +28,14 @@ namespace TravelFriend.Windows.Database.Data
 
         public int Add<T>(T model)
         {
-            return db.Insert(model);
+            try
+            {
+                return db.Insert(model);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         public int Update<T>(T model)

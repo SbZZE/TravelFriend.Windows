@@ -9,7 +9,6 @@ namespace TravelFriend.Windows.RabbitMQ
         public string Id { get; set; }
         public MessageType Type { get; set; }
         public string Account { get; set; }
-        public MessageClient Client { get; set; }
         public string Content { get; set; }
     }
 }

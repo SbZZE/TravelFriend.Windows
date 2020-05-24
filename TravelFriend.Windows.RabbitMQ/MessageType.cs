@@ -7,6 +7,6 @@ namespace TravelFriend.Windows.RabbitMQ
     public enum MessageType
     {
         AVATAR,
-        USERINFO
+        INFO
     }
 }
