@@ -33,26 +33,12 @@ namespace TravelFriend.Windows
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
             Loaded += MainWindow_Loaded;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            AccountManager.Instance.AccountChanged += AccountManager_AccountChanged;//监听账号变化
-        }
-
-        private void AccountManager_AccountChanged(object sender, EventArgs e)
-        {
-            if (sender is AccountManager accountManager)
-            {
-                var user = GetUserByUserName(accountManager.Account);
-                if (user != null)
-                {
-                    GetViewModel.NickName = user.NickName;
-                    GetViewModel.Address = user.Address;
-                }
-            }
+            DataContext = new MainWindowViewModel();
         }
 
         private void Unlogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

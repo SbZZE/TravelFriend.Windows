@@ -24,7 +24,7 @@ namespace TravelFriend.Windows
                 UserName = user.UserName;
                 Password = user.Password;
                 NickName = user.NickName;
-                if (user.Avatar.Length != 8)
+                if (user.Avatar != null)
                 {
                     Avatar = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
                 }

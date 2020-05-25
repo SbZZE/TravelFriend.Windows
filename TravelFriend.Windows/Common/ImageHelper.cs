@@ -50,6 +50,10 @@ namespace TravelFriend.Windows.Common
             using (MemoryStream ms = new MemoryStream())
             {
                 var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
+                if (ms.Length == 0)
+                {
+                    return null;
+                }
                 ms.Position = 0;
                 BitmapImage result = new BitmapImage();
                 try
@@ -81,7 +85,7 @@ namespace TravelFriend.Windows.Common
                 bmp.EndInit();
                 bmp.Freeze();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 bmp = null;
             }

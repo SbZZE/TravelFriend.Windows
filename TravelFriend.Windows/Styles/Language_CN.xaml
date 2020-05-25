@@ -32,4 +32,6 @@
     <sys:String x:Key="InputNickName">请输入昵称</sys:String>
     <sys:String x:Key="PleaseConfirmPassword">请确认密码</sys:String>
     <sys:String x:Key="PasswordNotSame">密码不一致</sys:String>
+    <sys:String x:Key="UpdateDataEdit">修改资料编辑</sys:String>
+    <sys:String x:Key="China">中国 China</sys:String>
 </ResourceDictionary>

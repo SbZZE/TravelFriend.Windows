@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
+using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows.Main
 {
@@ -30,11 +32,11 @@ namespace TravelFriend.Windows.Main
 
         private void PersonalDataPopup_Opened(object sender, EventArgs e)
         {
-            var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
-            if (user != null && !string.IsNullOrEmpty(user.UserName))
-            {
-                DataContext = user;
-            }
+            //var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
+            //if (user != null && !string.IsNullOrEmpty(user.UserName))
+            //{
+            //    DataContext = user;
+            //}
         }
     }
 }

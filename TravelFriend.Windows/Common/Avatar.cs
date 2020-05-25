@@ -27,7 +27,7 @@ namespace TravelFriend.Windows.Common
             {
                 this.Dispatcher.Invoke(() =>
                 {
-                    this.Source = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
+                    this.Source = user.Avatar == null ? new BitmapImage(new Uri("/Resources/DefaultBigAvatar.png", UriKind.Relative)) : ImageHelper.ByteArrayToBitmapImage(user.Avatar);
                 });
             }
         }

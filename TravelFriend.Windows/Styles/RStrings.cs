@@ -15,5 +15,7 @@ namespace TravelFriend.Windows.Styles
         public static string InputNickName = (string)App.Current.Resources["InputNickName"];
         public static string PleaseConfirmPassword = (string)App.Current.Resources["PleaseConfirmPassword"];
         public static string PasswordNotSame = (string)App.Current.Resources["PasswordNotSame"];
+        public static string UpdateDataEdit = (string)App.Current.Resources["UpdateDataEdit"];
+        public static string China = (string)App.Current.Resources["China"];
     }
 }

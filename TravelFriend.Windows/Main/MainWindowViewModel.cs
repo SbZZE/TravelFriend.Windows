@@ -7,6 +7,7 @@ using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.RabbitMQ;
 using TravelFriend.Windows.RabbitMQ.Observe;
+using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows
 {
@@ -14,10 +15,10 @@ namespace TravelFriend.Windows
     {
         public MainWindowViewModel()
         {
-            NotifyManager.UserInfoSubject.Add(this);//订阅头像变化
+            NotifyManager.UserInfoSubject.Add(this);
         }
 
-        private string _nickName = "隔壁的王王王";
+        private string _nickName;
         /// <summary>
         /// 用户昵称
         /// </summary>
@@ -29,12 +30,12 @@ namespace TravelFriend.Windows
             }
             set
             {
-                _nickName = value;
+                _nickName = string.IsNullOrEmpty(value) ? AccountManager.Instance.Account : value;
                 Change("NickName");
             }
         }
 
-        private string _address = "中国 China";
+        private string _address = RStrings.China;
         /// <summary>
         /// 地址
         /// </summary>
@@ -46,7 +47,7 @@ namespace TravelFriend.Windows
             }
             set
             {
-                _address = value;
+                _address = string.IsNullOrEmpty(value) ? RStrings.China : value;
                 Change("Address");
             }
         }
@@ -63,8 +64,42 @@ namespace TravelFriend.Windows
             }
             set
             {
-                _gender = value;
+                _gender = value != "1" ? "0" : "1";
                 Change("Gender");
+            }
+        }
+
+        private string _birthday = "2020.12.31";
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public string Birthday
+        {
+            get
+            {
+                return _birthday;
+            }
+            set
+            {
+                _birthday = string.IsNullOrEmpty(value) ? "2020.12.31" : value;
+                Change("Birthday");
+            }
+        }
+
+        private string _signature = RStrings.UpdateDataEdit;
+        /// <summary>
+        /// 个签
+        /// </summary>
+        public string Signature
+        {
+            get
+            {
+                return _signature;
+            }
+            set
+            {
+                _signature = string.IsNullOrEmpty(value) ? RStrings.UpdateDataEdit : value;
+                Change("Signature");
             }
         }
 

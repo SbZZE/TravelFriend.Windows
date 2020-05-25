@@ -62,6 +62,7 @@ namespace TravelFriend.Windows.RabbitMQ
                 }
                 //把最近登录的账号信息存到本地数据库
                 UserManager.UpdateUser(newUser);
+                UserInfoSubject.Notify();
             }
         }
     }

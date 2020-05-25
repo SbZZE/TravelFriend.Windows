@@ -21,6 +21,7 @@ using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Login;
 using TravelFriend.Windows.RabbitMQ;
+using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows
 {
@@ -103,17 +104,13 @@ namespace TravelFriend.Windows
                     if (response.Ok)
                     {
                         var user = response.data;
-                        Dispatcher.Invoke(() =>
-                        {
-                            mainWindow.GetViewModel.NickName = user.NickName;
-                            mainWindow.GetViewModel.Address = user.Address;
-                            mainWindow.GetViewModel.Gender = user.Gender;
-                        });
+                        user.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
                         user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
                         user.Password = LoginViewModel.Password;
                         //把最近登录的账号信息存到本地数据库
                         UserManager.UpdateUser(user);
                         NotifyManager.UpdateAvatar(user.UserName);
+                        NotifyManager.UpdateUserInfo(user.UserName);
                     }
                 });
             }
