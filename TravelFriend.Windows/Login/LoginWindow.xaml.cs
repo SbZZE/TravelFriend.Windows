@@ -36,6 +36,12 @@ namespace TravelFriend.Windows
             InitializeComponent();
             DataContext = new LoginViewModel();
             LoginViewModel = DataContext as LoginViewModel;
+            Loaded += LoginWindow_Loaded;
+        }
+
+        private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Password.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -85,7 +91,7 @@ namespace TravelFriend.Windows
             }
         }
 
-        private void LoginSuccess(string token)
+        private async void LoginSuccess(string token)
         {
             AccountManager.Instance.UserToken = token;
             AccountManager.Instance.Account = LoginViewModel.UserName;
@@ -97,22 +103,24 @@ namespace TravelFriend.Windows
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
                 RabbitMQ.RabbitMQManager.Connection();
-                Task.Run(async () =>
+
+                //获取个人资料
+                var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={LoginViewModel.UserName}"));
+                if (response.Ok)
                 {
-                    //获取个人资料
-                    var response = await HttpManager.Instance.GetAsync<GetUserInfoResponse>(new HttpRequest($"{ApiUtils.UserInfo}?username={LoginViewModel.UserName}"));
-                    if (response.Ok)
+                    var user = response.data;
+                    if (LoginViewModel.IsRememberPassword)
                     {
-                        var user = response.data;
                         user.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
                         user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
-                        user.Password = LoginViewModel.Password;
+                        user.IsRememberPassword = LoginViewModel.IsRememberPassword;
+                        user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
                         //把最近登录的账号信息存到本地数据库
-                        UserManager.UpdateUser(user);
-                        NotifyManager.UpdateAvatar(user.UserName);
-                        NotifyManager.UpdateUserInfo(user.UserName);
+                        UserManager.SetUserToLast(user);
                     }
-                });
+                    NotifyManager.UpdateAvatar(user.UserName);
+                    NotifyManager.UpdateUserInfo(user.UserName);
+                }
             }
         }
 
@@ -120,6 +128,43 @@ namespace TravelFriend.Windows
         {
             var register = new Register();
             register.ShowDialog();
+        }
+
+        private void SelectAccount_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            List<UserNameModel> users = new List<UserNameModel>();
+            UserManager.GetAllUserName().ForEach(x => users.Add(new UserNameModel { UserName = x }));
+            AccountList.ItemsSource = users;
+            AccountPopup.IsOpen = true;
+        }
+
+        private void AccountList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AccountList.SelectedItem is UserNameModel userNameModel)
+            {
+                var user = UserManager.GetUserByUserName(userNameModel.UserName);
+                LoginViewModel.UserName = user.UserName;
+                LoginViewModel.Password = user.Password;
+                Password.Password = user.Password;
+                LoginViewModel.IsRememberPassword = user.IsRememberPassword;
+                AccountPopup.IsOpen = false;
+            }
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if ((sender as FrameworkElement).DataContext is UserNameModel userNameModel)
+            {
+                UserManager.DeleteUserByUserName(userNameModel.UserName);
+                if (userNameModel.UserName == LoginViewModel.UserName)
+                {
+                    LoginViewModel.UserName = string.Empty;
+                    LoginViewModel.Password = string.Empty;
+                    Password.Password = string.Empty;
+                    LoginViewModel.IsRememberPassword = false;
+                }
+                AccountPopup.IsOpen = false;
+            }
         }
     }
 }

@@ -8,9 +8,13 @@ namespace TravelFriend.Windows.Database.Model
     public class User
     {
         /// <summary>
-        /// 用户名
+        /// Id
         /// </summary>
         [PrimaryKey]
+        public int? Id { get; set; }
+        /// <summary>
+        /// 用户名
+        /// </summary>
         public string UserName { get; set; }
         /// <summary>
         /// 密码
@@ -40,5 +44,9 @@ namespace TravelFriend.Windows.Database.Model
         /// 头像
         /// </summary>
         public byte[] Avatar { get; set; }
+        /// <summary>
+        /// 是否记住密码
+        /// </summary>
+        public bool IsRememberPassword { get; set; } = false;
     }
 }

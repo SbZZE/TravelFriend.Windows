@@ -29,6 +29,7 @@ namespace TravelFriend.Windows
                     Avatar = ImageHelper.ByteArrayToBitmapImage(user.Avatar);
                 }
                 IsLoginEnable = true;
+                IsRememberPassword = user.IsRememberPassword;
             }
         }
 
@@ -99,6 +100,20 @@ namespace TravelFriend.Windows
             {
                 _isLoginEnable = value;
                 Change(nameof(IsLoginEnable));
+            }
+        }
+
+        private bool _isRememberPassword = false;
+        public bool IsRememberPassword
+        {
+            get
+            {
+                return _isRememberPassword;
+            }
+            set
+            {
+                _isRememberPassword = value;
+                Change(nameof(IsRememberPassword));
             }
         }
 
