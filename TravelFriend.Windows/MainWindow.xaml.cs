@@ -55,6 +55,8 @@ namespace TravelFriend.Windows
 
         private async void MenuAvatar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            if (string.IsNullOrEmpty(AccountManager.Instance.Account))
+                return;
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;
             dialog.Filter = "图片(*.jpg;*.jpg;*.jpeg;*.gif;*.png)|*.jpg;*.jpeg;*.gif;*.png";

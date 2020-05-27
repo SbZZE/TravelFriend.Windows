@@ -117,15 +117,15 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
                         <TextBlock Text="{DynamicResource Trend}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="10" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                        <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
                         <TextBlock Text="{DynamicResource Follow}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="130" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                        <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch">
                         <TextBlock Text="{DynamicResource Fan}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="15028" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="{StaticResource Gray}"/>
+                        <TextBlock Text="0" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="{StaticResource Gray}"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 70 0 0">
@@ -243,7 +243,7 @@
                         </Grid>
                     </Border>
                     <Button x:Name="AddTrend" Grid.Column="1" Margin="0 0 40 0" Height="30" Width="130" Style="{StaticResource AddTrendStyle}" BorderThickness="0" Cursor="Hand"/>
-                    <TextBlock x:Name="Unlogin" MouseLeftButtonUp="Unlogin_MouseLeftButtonUp" Grid.Column="2" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource Unlogin}" Style="{StaticResource UnderlineTextBlock}" FontSize="16"/>
+                    <TextBlock x:Name="Unlogin" MouseLeftButtonUp="Unlogin_MouseLeftButtonUp" Grid.Column="2" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource Unlogin}" Style="{StaticResource UnderlineTextBlock}" FontSize="14"/>
                     <Grid x:Name="PersonalData" Grid.Column="2" Visibility="Collapsed" MouseLeftButtonUp="PersonalData_MouseLeftButtonUp" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>

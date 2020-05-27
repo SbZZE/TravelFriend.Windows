@@ -35,7 +35,7 @@ namespace TravelFriend.Windows
             }
         }
 
-        private string _address = RStrings.China;
+        private string _address;
         /// <summary>
         /// 地址
         /// </summary>
@@ -52,7 +52,7 @@ namespace TravelFriend.Windows
             }
         }
 
-        private string _gender = "0";
+        private string _gender;
         /// <summary>
         /// 性别
         /// </summary>

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:TravelFriend.Windows" ResizeMode="NoResize"
+        xmlns:common="clr-namespace:TravelFriend.Windows.Common"
         xmlns:styles="clr-namespace:TravelFriend.Windows.Styles"
+        xmlns:register="clr-namespace:TravelFriend.Windows.Login"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
         AllowsTransparency="True" Background="Transparent" Icon="/Resources/Green/Logo.png"
         Title="{DynamicResource AppName}" Height="400" Width="300">
@@ -38,75 +40,74 @@
                             </styles:ImageButton.RenderTransform>
                         </styles:ImageButton>
                         <TextBlock Grid.Row="2" Text="{Binding NickName}" FontSize="16" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 0 0 40"/>
-                        <Button x:Name="Login" Click="Login_Click" Grid.Row="3" Content="{DynamicResource Login}" IsEnabled="{Binding IsLoginEnable}" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
+                        <Button Click="Login_Click" Grid.Row="3" Content="{DynamicResource Login}" IsEnabled="{Binding IsLoginEnable}" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
                     </Grid>
                 </Grid>
             </materialDesign:Flipper.FrontContent>
             <materialDesign:Flipper.BackContent>
-                <Grid Height="400" Width="300">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="35"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="260"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}" HorizontalAlignment="Left" VerticalAlignment="Center">
-                            <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" Foreground="{StaticResource MainGreen}" Cursor="Hand" Margin="10 0 0 0"/>
-                        </Button>
-                        <materialDesign:PackIcon Grid.Column="1" Kind="WindowClose" Cursor="Hand" Background="Transparent" Foreground="{StaticResource MainGreen}" MouseLeftButtonUp="Close_MouseLeftButtonUp" Width="25" Height="25" Margin="10 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                    <Border x:Name="Account" Grid.Row="1" Width="200" Height="30" Margin="0 65 0 0" BorderThickness="0 0 0 1" BorderBrush="{StaticResource MainGreen}">
-                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Green/LoginAccount.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20"/>
-                            <TextBox Grid.Column="1" Text="{Binding UserName}" materialDesign:HintAssist.Hint="{DynamicResource InputAccount}" FontSize="14" Padding="5 0 0 0" VerticalContentAlignment="Center" materialDesign:TextFieldAssist.UnderlineBrush="Transparent" BorderThickness="0"/>
-                            <Image x:Name="SelectAccount" Grid.Column="2" Source="/Resources/Green/DropDown.png" Cursor="Hand" MouseLeftButtonUp="SelectAccount_MouseLeftButtonUp" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16" Width="16"/>
+                <Grid>
+                    <Grid x:Name="Login" Height="400" Width="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}" Command="{x:Static materialDesign:Flipper.FlipCommand}" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="ArrowLeft" Height="25" Width="25" Foreground="{StaticResource MainGreen}" Cursor="Hand" Margin="10 0 0 0"/>
+                            </Button>
+                            <materialDesign:PackIcon Grid.Column="1" Kind="WindowClose" Cursor="Hand" Background="Transparent" Foreground="{StaticResource MainGreen}" MouseLeftButtonUp="Close_MouseLeftButtonUp" Width="25" Height="25" Margin="0 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
                         </Grid>
-                    </Border>
-                    <Border Grid.Row="2" Width="200" Height="30" Margin="0 40 0 0" BorderThickness="0 0 0 1" BorderBrush="{StaticResource MainGreen}">
-                        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Border x:Name="Account" Grid.Row="1" Width="200" Height="30" Margin="0 65 0 0" BorderThickness="0 0 0 1" BorderBrush="{StaticResource MainGreen}">
+                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Resources/Green/LoginAccount.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20"/>
+                                <TextBox Grid.Column="1" Text="{Binding UserName}" materialDesign:HintAssist.Hint="{DynamicResource InputAccount}" FontSize="14" Padding="5 0 0 0" VerticalContentAlignment="Center" materialDesign:TextFieldAssist.UnderlineBrush="Transparent" BorderThickness="0"/>
+                                <Image x:Name="SelectAccount" Grid.Column="2" Source="/Resources/Green/DropDown.png" Cursor="Hand" MouseLeftButtonUp="SelectAccount_MouseLeftButtonUp" HorizontalAlignment="Right" VerticalAlignment="Center" Height="16" Width="16"/>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="2" Width="200" Height="30" Margin="0 40 0 0" BorderThickness="0 0 0 1" BorderBrush="{StaticResource MainGreen}">
+                            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Resources/Green/LoginPassword.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20"/>
+                                <PasswordBox Grid.Column="1" x:Name="Password" materialDesign:HintAssist.Hint="{DynamicResource InputPassword}" FontSize="14" Padding="5 0 0 0" VerticalContentAlignment="Center" materialDesign:TextFieldAssist.UnderlineBrush="Transparent" BorderThickness="0"/>
+                            </Grid>
+                        </Border>
+                        <Grid Grid.Row="3" Margin="0 35 0 0" Width="200" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Green/LoginPassword.png" HorizontalAlignment="Left" VerticalAlignment="Center" Height="20" Width="20"/>
-                            <PasswordBox Grid.Column="1" x:Name="Password" materialDesign:HintAssist.Hint="{DynamicResource InputPassword}" FontSize="14" Padding="5 0 0 0" VerticalContentAlignment="Center" materialDesign:TextFieldAssist.UnderlineBrush="Transparent" BorderThickness="0"/>
+                            <CheckBox IsChecked="{Binding IsRememberPassword}" Content="{DynamicResource RememberPassword}" Foreground="{StaticResource Gray}" BorderBrush="{StaticResource Gray}" Padding="0 0 0 0" Background="{StaticResource MainGreen}" Style="{StaticResource MaterialDesignCheckBox}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>
+                            <TextBlock Grid.Column="1" Text="{DynamicResource ForgetPassword}" Foreground="{StaticResource Gray}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
                         </Grid>
-                    </Border>
-                    <Grid Grid.Row="3" Margin="0 35 0 0" Width="200" Height="16" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <CheckBox IsChecked="{Binding IsRememberPassword}" Content="{DynamicResource RememberPassword}" Foreground="{StaticResource Gray}" BorderBrush="{StaticResource Gray}" Padding="0 0 0 0" Background="{StaticResource MainGreen}" Style="{StaticResource MaterialDesignCheckBox}" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>
-                        <TextBlock Grid.Column="1" Text="{DynamicResource ForgetPassword}" Foreground="{StaticResource Gray}" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"/>
+                        <Button Grid.Row="4" Content="{DynamicResource Login}" Click="Login_Click" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
+                        <TextBlock Grid.Row="4" MouseLeftButtonUp="RegisterAccount_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{DynamicResource RegisterAccount}" Margin="10 0 0 10" FontSize="14" Cursor="Hand">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Foreground" Value="{StaticResource Gray}"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
                     </Grid>
-                    <Button Grid.Row="4" Content="{DynamicResource Login}" Click="Login_Click" Foreground="White" Background="{StaticResource DarkGreen}" Width="200" BorderThickness="0" VerticalAlignment="Bottom" Margin="0 0 0 60"/>
-                    <TextBlock Grid.Row="4" MouseLeftButtonUp="RegisterAccount_MouseLeftButtonUp" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="{DynamicResource RegisterAccount}" Margin="10 0 0 10" FontSize="14" Cursor="Hand">
-                        <TextBlock.Style>
-                            <Style TargetType="TextBlock">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="False">
-                                        <Setter Property="Foreground" Value="{StaticResource Gray}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBlock.Style>
-                    </TextBlock>
+                    <register:Register x:Name="Register" Visibility="Collapsed"/>
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
@@ -128,5 +129,6 @@
                 </ListBox>
             </Border>
         </Popup>
+        <common:Toast x:Name="Toast"/>
     </Grid>
 </Window>

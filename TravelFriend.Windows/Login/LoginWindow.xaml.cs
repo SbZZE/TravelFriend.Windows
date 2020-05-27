@@ -109,15 +109,12 @@ namespace TravelFriend.Windows
                 if (response.Ok)
                 {
                     var user = response.data;
-                    if (LoginViewModel.IsRememberPassword)
-                    {
-                        user.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
-                        user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
-                        user.IsRememberPassword = LoginViewModel.IsRememberPassword;
-                        user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
-                        //把最近登录的账号信息存到本地数据库
-                        UserManager.SetUserToLast(user);
-                    }
+                    user.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
+                    user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
+                    user.IsRememberPassword = LoginViewModel.IsRememberPassword;
+                    user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
+                    //把最近登录的账号信息存到本地数据库
+                    UserManager.SetUserToLast(user);
                     NotifyManager.UpdateAvatar(user.UserName);
                     NotifyManager.UpdateUserInfo(user.UserName);
                 }
@@ -126,8 +123,7 @@ namespace TravelFriend.Windows
 
         private void RegisterAccount_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            var register = new Register();
-            register.ShowDialog();
+            Register.Visibility = Visibility.Visible;
         }
 
         private void SelectAccount_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

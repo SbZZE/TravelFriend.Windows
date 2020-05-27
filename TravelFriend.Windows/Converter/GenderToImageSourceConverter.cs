@@ -13,6 +13,10 @@ namespace TravelFriend.Windows.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+            {
+                return null;
+            }
             if (System.Convert.ToInt32((string)value) == 0)
             {
                 return new BitmapImage(new Uri("/Resources/famale.png", UriKind.Relative));

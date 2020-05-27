@@ -17,5 +17,9 @@ namespace TravelFriend.Windows.Styles
         public static string PasswordNotSame = (string)App.Current.Resources["PasswordNotSame"];
         public static string UpdateDataEdit = (string)App.Current.Resources["UpdateDataEdit"];
         public static string China = (string)App.Current.Resources["China"];
+        public static string RegisterSuccess = (string)App.Current.Resources["RegisterSuccess"];
+        public static string UserExist = (string)App.Current.Resources["UserExist"];
+        public static string EmailPhoneError = (string)App.Current.Resources["EmailPhoneError"];
+        public static string RegisterFail = (string)App.Current.Resources["RegisterFail"];
     }
 }

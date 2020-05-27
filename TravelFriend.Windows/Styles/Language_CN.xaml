@@ -34,4 +34,8 @@
     <sys:String x:Key="PasswordNotSame">密码不一致</sys:String>
     <sys:String x:Key="UpdateDataEdit">修改资料编辑</sys:String>
     <sys:String x:Key="China">中国 China</sys:String>
+    <sys:String x:Key="RegisterSuccess">注册成功</sys:String>
+    <sys:String x:Key="UserExist">用户已存在</sys:String>
+    <sys:String x:Key="EmailPhoneError">邮箱或手机号不正确</sys:String>
+    <sys:String x:Key="RegisterFail">注册失败</sys:String>
 </ResourceDictionary>

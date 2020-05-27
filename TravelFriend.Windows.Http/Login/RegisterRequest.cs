@@ -7,12 +7,11 @@ namespace TravelFriend.Windows.Http.Login
 {
     public class RegisterRequest : HttpRequest
     {
-        public RegisterRequest(string userName, string password, string nickName ,string signature) : base(ApiUtils.Register)
+        public RegisterRequest(string userName, string password, string nickName) : base(ApiUtils.Register)
         {
             UserName = userName;
             Password = password;
             NickName = nickName;
-            Signature = signature;
         }
 
         [JsonProperty("username")]
@@ -21,7 +20,5 @@ namespace TravelFriend.Windows.Http.Login
         public string Password { get; set; }
         [JsonProperty("nickname")]
         public string NickName { get; set; }
-        [JsonProperty("signature")]
-        public string Signature { get; set; }
     }
 }
