@@ -268,6 +268,7 @@
             </Border>
             <home:HomePage Grid.Row="1" Grid.Column="1"/>
             <team:TeamPage Grid.Row="1" Grid.Column="1" Visibility="Collapsed"/>
+            <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
             <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Grid>

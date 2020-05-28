@@ -24,6 +24,7 @@
     <None Remove="Resources\Gray\ToggleDown.png" />
     <None Remove="Resources\Gray\ToggleUp.png" />
     <None Remove="Resources\Green\Birthday.png" />
+    <None Remove="Resources\Green\Close.png" />
     <None Remove="Resources\Green\Home.png" />
     <None Remove="Resources\Green\Logo.png" />
     <None Remove="Resources\Green\Min.png" />
@@ -97,6 +98,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\Birthday.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\DropDown.png">

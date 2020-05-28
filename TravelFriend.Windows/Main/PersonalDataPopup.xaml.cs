@@ -27,16 +27,13 @@ namespace TravelFriend.Windows.Main
         public PersonalDataPopup()
         {
             InitializeComponent();
-            Opened += PersonalDataPopup_Opened;
         }
 
-        private void PersonalDataPopup_Opened(object sender, EventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
-            //if (user != null && !string.IsNullOrEmpty(user.UserName))
-            //{
-            //    DataContext = user;
-            //}
+            this.IsOpen = false;
+            var mainWindow = (MainWindow)App.Current.MainWindow;
+            mainWindow.UpdatePersonalData.Visibility = Visibility.Visible;
         }
     }
 }

@@ -30,6 +30,7 @@
     <sys:String x:Key="ConfirmPassword">确认密码</sys:String>
     <sys:String x:Key="RegisterAccount">注册账号</sys:String>
     <sys:String x:Key="InputNickName">请输入昵称</sys:String>
+    <sys:String x:Key="InputSignature">请输入个性签名</sys:String>
     <sys:String x:Key="PleaseConfirmPassword">请确认密码</sys:String>
     <sys:String x:Key="PasswordNotSame">密码不一致</sys:String>
     <sys:String x:Key="UpdateDataEdit">修改资料编辑</sys:String>
@@ -38,4 +39,14 @@
     <sys:String x:Key="UserExist">用户已存在</sys:String>
     <sys:String x:Key="EmailPhoneError">邮箱或手机号不正确</sys:String>
     <sys:String x:Key="RegisterFail">注册失败</sys:String>
+    <sys:String x:Key="EditPersonalData">编辑个人资料</sys:String>
+    <sys:String x:Key="NickNameColon">昵称：</sys:String>
+    <sys:String x:Key="GenderColon">性别：</sys:String>
+    <sys:String x:Key="BirthdayColon">生日：</sys:String>
+    <sys:String x:Key="AddressColon">地区：</sys:String>
+    <sys:String x:Key="SignatureColon">签名：</sys:String>
+    <sys:String x:Key="Save">保存</sys:String>
+    <sys:String x:Key="Cancel">取消</sys:String>
+    <sys:String x:Key="Male">男</sys:String>
+    <sys:String x:Key="Famale">女</sys:String>
 </ResourceDictionary>

@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Main.UpdatePersonalData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:common="clr-namespace:TravelFriend.Windows.Common"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TravelFriend.Windows.Main"
+             VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="5 0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightGreen}"/>
+            <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource MainGreen}"/>
+        </Style>
+        <Style TargetType="DatePicker" BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}">
+            <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource MainGreen}"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="Black" Opacity="0.8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Border CornerRadius="10" Width="550" Height="400" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="Title">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{DynamicResource EditPersonalData}" FontSize="18" Margin="25 20 0 0" Foreground="{StaticResource MainGreen}" VerticalAlignment="Center"/>
+                    <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Cursor="Hand" Grid.Column="1" Source="/Resources/Green/Close.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="24" Margin="0 0 25 0"/>
+                </Grid>
+                <Border Grid.Row="1" Height="1" BorderBrush="{StaticResource Gray}" BorderThickness="1" Margin="25 10 25 0"/>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="55 20 55 0">
+                    <TextBlock Text="{DynamicResource NickNameColon}"/>
+                    <TextBox Width="250" Text="{Binding NickName}" materialDesign:HintAssist.Hint="{DynamicResource InputNickName}" materialDesign:HintAssist.Foreground="{StaticResource DarkGray}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="55 20 55 0">
+                    <TextBlock Text="{DynamicResource GenderColon}"/>
+                    <RadioButton Content="{DynamicResource Male}" IsChecked="{Binding IsMale}" Background="{StaticResource MainGreen}" FontSize="14" Padding="5 0" Style="{StaticResource MaterialDesignRadioButton}"/>
+                    <RadioButton Margin="20 0 0 0" Content="{DynamicResource Famale}" IsChecked="{Binding IsFamale}" Background="{StaticResource MainGreen}" FontSize="14" Padding="5 0" Style="{StaticResource MaterialDesignRadioButton}"/>
+                    <StackPanel Orientation="Horizontal" Margin="55 0 55 0">
+                        <TextBlock Text="{DynamicResource BirthdayColon}"/>
+                        <DatePicker Width="100" Text="{Binding Birthday}" Margin="0 -10 0 0" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" BorderBrush="{StaticResource MainGreen}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="55 20 55 0">
+                    <TextBlock Text="{DynamicResource AddressColon}"/>
+                    <ComboBox Width="150" Text="{Binding Address}" BorderBrush="{StaticResource MainGreen}" IsEditable="True" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" materialDesign:HintAssist.HintOpacity=".26"/>
+                    <ComboBox Margin="25 0 0 0" Text="{Binding Address}" Width="190" BorderBrush="{StaticResource MainGreen}" IsEditable="True" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" materialDesign:HintAssist.HintOpacity=".26"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="55 20 55 0">
+                    <TextBlock Text="{DynamicResource SignatureColon}" VerticalAlignment="Top" Margin="0 3 0 0"/>
+                    <TextBox Text="{Binding Signature}" materialDesign:HintAssist.Hint="{DynamicResource InputSignature}" VerticalContentAlignment="Top" materialDesign:HintAssist.Foreground="{StaticResource DarkGray}" Height="90" Width="390"/>
+                </StackPanel>
+                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
+                    <Button x:Name="Save" Height="30" Width="70" Click="Save_Click" Background="{StaticResource MainGreen}" Foreground="White" Content="{DynamicResource Save}" BorderThickness="0"/>
+                    <Button x:Name="Cancel" Height="30" Width="70" Background="White" Click="Cancel_Click" BorderThickness="1" BorderBrush="{StaticResource MainGreen}" Content="{DynamicResource Cancel}" Foreground="Black" Margin="50 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+    </Grid>
+</UserControl>
