@@ -53,6 +53,11 @@ namespace TravelFriend.Windows
             PersonalDataPopup.IsOpen = PersonalDataPopup.IsOpen ? false : true;
         }
 
+        private void Setting_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            SettingPopup.IsOpen = true;
+        }
+
         private async void MenuAvatar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (string.IsNullOrEmpty(AccountManager.Instance.Account))

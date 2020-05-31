@@ -57,8 +57,10 @@ namespace TravelFriend.Windows.RabbitMQ
                 var user = UserManager.GetUserByUserName(userName);
                 if (user != null)
                 {
+                    newUser.Id = user.Id;
                     newUser.Avatar = user.Avatar;
                     newUser.Password = user.Password;
+                    newUser.IsRememberPassword = user.IsRememberPassword;
                 }
                 //把最近登录的账号信息存到本地数据库
                 UserManager.UpdateUser(newUser);

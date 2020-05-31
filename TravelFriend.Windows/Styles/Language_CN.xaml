@@ -49,4 +49,5 @@
     <sys:String x:Key="Cancel">取消</sys:String>
     <sys:String x:Key="Male">男</sys:String>
     <sys:String x:Key="Famale">女</sys:String>
+    <sys:String x:Key="ChangeAccount">切换账号</sys:String>
 </ResourceDictionary>

@@ -61,7 +61,7 @@
                     <RadioButton Margin="20 0 0 0" Content="{DynamicResource Famale}" IsChecked="{Binding IsFamale}" Background="{StaticResource MainGreen}" FontSize="14" Padding="5 0" Style="{StaticResource MaterialDesignRadioButton}"/>
                     <StackPanel Orientation="Horizontal" Margin="55 0 55 0">
                         <TextBlock Text="{DynamicResource BirthdayColon}"/>
-                        <DatePicker Width="100" Text="{Binding Birthday}" Margin="0 -10 0 0" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" BorderBrush="{StaticResource MainGreen}"/>
+                        <DatePicker Width="100" DisplayDate="{Binding Birthday}" Margin="0 -10 0 0" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" BorderBrush="{StaticResource MainGreen}"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="55 20 55 0">

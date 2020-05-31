@@ -171,8 +171,19 @@ namespace TravelFriend.Windows.Http
             restRequest.AddHeader("token", AccountManager.Instance.UserToken);
             restRequest.AddFile("avatar", uploadRequest.FilePath);
             IRestResponse response = client.Execute(restRequest);
-            T result = JsonConvert.DeserializeObject<T>(response.Content);
-            return result;
+            try
+            {
+                T result = JsonConvert.DeserializeObject<T>(response.Content);
+                return result;
+            }
+            catch (Exception)
+            {
+                return new T
+                {
+                    code = (int)response.StatusCode,
+                    message = response.ErrorMessage
+                };
+            }
             //try
             //{
             //    Console.WriteLine("--------------");

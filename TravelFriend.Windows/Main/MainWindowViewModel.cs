@@ -128,6 +128,8 @@ namespace TravelFriend.Windows
                 NickName = user.NickName;
                 Address = user.Address;
                 Gender = user.Gender;
+                Birthday = user.Birthday;
+                Signature = user.Signature;
             }
         }
     }

@@ -18,7 +18,7 @@ namespace TravelFriend.Windows
     {
         public LoginViewModel()
         {
-            var user = GetUser();
+            var user = UserManager.GetFirstUser();
             if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
                 UserName = user.UserName;
@@ -115,15 +115,6 @@ namespace TravelFriend.Windows
                 _isRememberPassword = value;
                 Change(nameof(IsRememberPassword));
             }
-        }
-
-        /// <summary>
-        /// 获取本地数据库中的第一个用户
-        /// </summary>
-        /// <returns></returns>
-        private User GetUser()
-        {
-            return UserManager.GetFirstUser();
         }
     }
 }
