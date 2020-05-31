@@ -19,9 +19,11 @@ using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Database.Model;
+using TravelFriend.Windows.Home;
 using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Styles;
+using TravelFriend.Windows.Team;
 
 namespace TravelFriend.Windows
 {
@@ -39,6 +41,7 @@ namespace TravelFriend.Windows
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = new MainWindowViewModel();
+            Team.IsChecked = true;
         }
 
         private void Unlogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -118,5 +121,20 @@ namespace TravelFriend.Windows
             GetViewModel.IsMax = WindowState == WindowState.Maximized ? new BitmapImage(new Uri("/Resources/Gray/NoMax.png", UriKind.Relative)) : new BitmapImage(new Uri("/Resources/Gray/Max.png", UriKind.Relative));
         }
         #endregion
+
+        private void Home_Checked(object sender, RoutedEventArgs e)
+        {
+            PageContainer.Content = new HomePage();
+        }
+
+        private void Team_Checked(object sender, RoutedEventArgs e)
+        {
+            PageContainer.Content = new TeamPage();
+        }
+
+        private void Travel_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

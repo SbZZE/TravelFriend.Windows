@@ -6,7 +6,31 @@
              xmlns:local="clr-namespace:TravelFriend.Windows.Team"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="我是gaygay"/>
+    <Grid Background="White">
+        <TabControl Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="{StaticResource DarkGray}">
+            <TabItem Cursor="Hand" Header="{DynamicResource MyCreatedTeam}" Height="30" FontSize="16" HorizontalAlignment="Right" Margin="0 0 20 0">
+                <Grid>
+                    <StackPanel x:Name="CreateBlank" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/Resources/Gray/Team.png" Width="50" Opacity="0.3"/>
+                        <TextBlock Margin="0 5 0 0" FontSize="14" Text="{DynamicResource NoCreateAnyTeam}" Foreground="{StaticResource LightGray}"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0 20 0 0">
+                        <WrapPanel x:Name="CreatedTeamList"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Cursor="Hand" Header="{DynamicResource MyJoinedTeam}" Height="30" FontSize="16" HorizontalAlignment="Left" Margin="20 0 0 0">
+                <Grid>
+                    <StackPanel x:Name="JoinBlank" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="/Resources/Gray/Team.png" Width="50" Opacity="0.3"/>
+                        <TextBlock Margin="0 5 0 0" FontSize="14" Text="{DynamicResource NoJoinAnyTeam}" Foreground="{StaticResource LightGray}"/>
+                    </StackPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" Margin="0 20 0 0">
+                        <WrapPanel x:Name="JoinedTeamList"/>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button Content="{DynamicResource CreateTeam}" FontSize="12" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource MainGreen}" BorderThickness="0"/>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Database.Data;
 
 namespace TravelFriend.Windows.Team
 {
@@ -18,9 +20,45 @@ namespace TravelFriend.Windows.Team
     /// </summary>
     public partial class TeamPage : UserControl
     {
+        ObservableCollection<Database.Model.Team> CreatedTeam = new ObservableCollection<Database.Model.Team>();
+        ObservableCollection<Database.Model.Team> JoinedTeam = new ObservableCollection<Database.Model.Team>();
         public TeamPage()
         {
             InitializeComponent();
+            Loaded += TeamPage_Loaded;
+            Unloaded += TeamPage_Unloaded;
+        }
+
+        private void TeamPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            CreatedTeam = TeamManager.GetCreatedTeam();
+            JoinedTeam = TeamManager.GetJoinedTeam();
+            CreateBlank.Visibility = CreatedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            JoinBlank.Visibility = JoinedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            LoadTeamCard();
+        }
+
+        private void LoadTeamCard()
+        {
+            foreach (var team in CreatedTeam)
+            {
+                var card = new TeamCard() { DataContext = team };
+                card.MouseLeftButtonUp += Card_MouseLeftButtonUp;
+                CreatedTeamList.Children.Add(card);
+            }
+        }
+
+        private void Card_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void TeamPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            //辣鸡回收一波
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
     }
 }

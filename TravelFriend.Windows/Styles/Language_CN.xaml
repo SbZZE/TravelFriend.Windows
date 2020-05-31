@@ -50,4 +50,9 @@
     <sys:String x:Key="Male">男</sys:String>
     <sys:String x:Key="Famale">女</sys:String>
     <sys:String x:Key="ChangeAccount">切换账号</sys:String>
+    <sys:String x:Key="MyCreatedTeam">我创建的团队</sys:String>
+    <sys:String x:Key="MyJoinedTeam">我加入的团队</sys:String>
+    <sys:String x:Key="CreateTeam">创建团队</sys:String>
+    <sys:String x:Key="NoCreateAnyTeam">未创建任何团队</sys:String>
+    <sys:String x:Key="NoJoinAnyTeam">未加入任何团队</sys:String>
 </ResourceDictionary>

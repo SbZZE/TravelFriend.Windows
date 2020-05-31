@@ -129,7 +129,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 70 0 0">
-                    <RadioButton Cursor="Hand" IsChecked="True">
+                    <RadioButton x:Name="Home" Cursor="Hand" Checked="Home_Checked">
                         <RadioButton.Style>
                             <Style TargetType="RadioButton">
                                 <Setter Property="Template">
@@ -158,7 +158,7 @@
                             </Style>
                         </RadioButton.Style>
                     </RadioButton>
-                    <RadioButton Cursor="Hand">
+                    <RadioButton Name="Team" Cursor="Hand" Checked="Team_Checked">
                         <RadioButton.Style>
                             <Style TargetType="RadioButton">
                                 <Setter Property="Template">
@@ -187,7 +187,7 @@
                             </Style>
                         </RadioButton.Style>
                     </RadioButton>
-                    <RadioButton Cursor="Hand">
+                    <RadioButton x:Name="Travel" Cursor="Hand" Checked="Travel_Checked">
                         <RadioButton.Style>
                             <Style TargetType="RadioButton">
                                 <Setter Property="Template">
@@ -266,8 +266,7 @@
                     <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Grid.Column="8" Margin="0 0 26 0" Source="/Resources/Gray/Close.png" Width="14" VerticalAlignment="Center" Cursor="Hand"/>
                 </Grid>
             </Border>
-            <home:HomePage Grid.Row="1" Grid.Column="1"/>
-            <team:TeamPage Grid.Row="1" Grid.Column="1" Visibility="Collapsed"/>
+            <UserControl Grid.Row="1" Grid.Column="1" x:Name="PageContainer" Margin="30"/>
             <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
             <main:SettingPopup x:Name="SettingPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=Setting}" VerticalOffset="5" HorizontalOffset="-10" StaysOpen="False"/>
