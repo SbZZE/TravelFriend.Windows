@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TravelFriend.Windows.Team"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
+    <Grid Background="Transparent">
         <TabControl Background="Transparent" BorderBrush="Transparent" BorderThickness="0" Foreground="{StaticResource DarkGray}">
             <TabItem Cursor="Hand" Header="{DynamicResource MyCreatedTeam}" Height="30" FontSize="16" HorizontalAlignment="Right" Margin="0 0 20 0">
                 <Grid>
@@ -31,6 +31,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="{DynamicResource CreateTeam}" FontSize="12" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource MainGreen}" BorderThickness="0"/>
+        <Button Content="{DynamicResource CreateTeam}" Margin="0 5 5 0" FontSize="12" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource MainGreen}" BorderThickness="0"/>
+        <UserControl x:Name="DetailContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Database.Data;
+using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows.Team
 {
@@ -20,8 +21,8 @@ namespace TravelFriend.Windows.Team
     /// </summary>
     public partial class TeamPage : UserControl
     {
-        ObservableCollection<Database.Model.Team> CreatedTeam = new ObservableCollection<Database.Model.Team>();
-        ObservableCollection<Database.Model.Team> JoinedTeam = new ObservableCollection<Database.Model.Team>();
+        ObservableCollection<TeamModel> CreatedTeam = new ObservableCollection<Database.Model.Team>();
+        ObservableCollection<TeamModel> JoinedTeam = new ObservableCollection<Database.Model.Team>();
         public TeamPage()
         {
             InitializeComponent();
@@ -50,7 +51,11 @@ namespace TravelFriend.Windows.Team
 
         private void Card_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            if ((sender as FrameworkElement).DataContext is TeamModel team)
+            {
+                var detail = new TeamDetail(team.TeamId);
+                DetailContainer.Content = detail;
+            }
         }
 
         private void TeamPage_Unloaded(object sender, RoutedEventArgs e)

@@ -7,4 +7,5 @@
     <SolidColorBrush x:Key="Gray" Color="#9EA2A5"></SolidColorBrush>
     <SolidColorBrush x:Key="DarkGray" Color="#707070"></SolidColorBrush>
     <SolidColorBrush x:Key="LightGray" Color="#dbdbdb"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundGray" Color="#FAFAFA"></SolidColorBrush>
 </ResourceDictionary>

@@ -6,15 +6,15 @@
              xmlns:local="clr-namespace:TravelFriend.Windows.Team" 
              xmlns:common="clr-namespace:TravelFriend.Windows.Common"
              mc:Ignorable="d" Height="300" Width="220" Margin="10">
-    <Border x:Name="MainBorder" CornerRadius="5" Background="White" BorderThickness="1" BorderBrush="{StaticResource LightGray}" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Border x:Name="MainBorder" CornerRadius="10" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
         <Border.Style>
             <Style TargetType="Border">
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Margin" Value="5 5 15 15"/>
+                        <Setter Property="Margin" Value="10 5 10 10"/>
                         <Setter Property="Effect">
                             <Setter.Value>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="10" Color="Gray" Opacity=".5"/>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="Gray" Opacity=".5"/>
                             </Setter.Value>
                         </Setter>
                     </Trigger>
@@ -22,7 +22,7 @@
                         <Setter Property="Margin" Value="10"/>
                         <Setter Property="Effect">
                             <Setter.Value>
-                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="Gray" Opacity=".5"/>
+                                <DropShadowEffect BlurRadius="15" ShadowDepth="0" Color="Gray" Opacity=".2"/>
                             </Setter.Value>
                         </Setter>
                     </Trigger>

@@ -25,6 +25,8 @@ namespace TravelFriend.Windows.Database.Data
             db = new SQLiteConnection("travelfriend.db");
             db.CreateTable<User>();
             db.CreateTable<Team>();
+            db.CreateTable<TeamAlbum>();
+            db.CreateTable<TeamMember>();
         }
 
         public int Add<T>(T model)
@@ -56,8 +58,12 @@ namespace TravelFriend.Windows.Database.Data
         {
             db.DropTable<User>();
             db.DropTable<Team>();
+            db.DropTable<TeamAlbum>();
+            db.DropTable<TeamMember>();
             db.CreateTable<User>();
             db.CreateTable<Team>();
+            db.CreateTable<TeamAlbum>();
+            db.CreateTable<TeamMember>();
         }
     }
 }
