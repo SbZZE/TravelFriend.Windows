@@ -11,7 +11,7 @@
         xmlns:local="clr-namespace:TravelFriend.Windows"
         xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Icon="/Resources/Green/Logo.png"
+        Icon="/Resources/Green/Logo.png" MinWidth="1100" MinHeight="750"
         AllowsTransparency="True" StateChanged="Window_StateChanged"
         ResizeMode="CanResizeWithGrip" Title="{DynamicResource AppName}" Height="750" Width="1100">
     <Window.Resources>
@@ -58,7 +58,7 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Border BorderThickness="1" BorderBrush="{StaticResource Gray}">
+    <Border BorderThickness="1" BorderBrush="{StaticResource Gray}" Background="{StaticResource BackgroundGray}">
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -68,151 +68,156 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.RowSpan="2" Width="215" Background="White" VerticalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20 20 0 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Image HorizontalAlignment="Left" Width="24" Height="24" Source="/Resources/Green/Logo.png"/>
-                    <TextBlock Grid.Column="1" Foreground="{StaticResource MainGreen}" Text="{DynamicResource AppName_EN}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="18" FontStyle="Italic" FontWeight="Bold"/>
-                </Grid>
-                <Border Background="Transparent" MouseLeftButtonDown="TopArea_MouseLeftButtonDown"/>
-                <Grid x:Name="MenuAvatar" Grid.Row="1" MouseLeftButtonUp="MenuAvatar_MouseLeftButtonUp" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 40 0 0" Cursor="Hand">
-                    <Border Width="80" Height="80" CornerRadius="80" BorderThickness="1" BorderBrush="{StaticResource MainGreen}"/>
-                    <Border CornerRadius="66" BorderThickness="1" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Green" BlurRadius="15" ShadowDepth="0" Opacity=".8" />
-                        </Border.Effect>
-                        <common:Avatar x:Name="MenuAvatarImage" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
-                            <Image.Clip>
-                                <EllipseGeometry Center="33,33" RadiusX="33" RadiusY="33"/>
-                            </Image.Clip>
-                        </common:Avatar>
-                    </Border>
-                </Grid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
-                    <TextBlock x:Name="UserName" FontSize="14" Text="{Binding NickName}" TextTrimming="CharacterEllipsis" FontWeight="Bold"/>
-                    <Image Source="{Binding Gender,Converter={StaticResource GenderToImage}}" Width="14" Height="14" Margin="2 0 0 0" VerticalAlignment="Center"/>
-                </StackPanel>
-                <TextBlock Grid.Row="3" Text="{Binding Address}" Foreground="{StaticResource Gray}" Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
-                <Grid Grid.Row="4" HorizontalAlignment="Stretch" Margin="20 15 20 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
-                        <TextBlock Text="{DynamicResource Trend}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+            <Border Grid.RowSpan="2" Width="210" Background="White" VerticalAlignment="Stretch" Margin="0 0 15 0">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Color="Gray" Opacity="0.15"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20 20 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image HorizontalAlignment="Left" Width="24" Height="24" Source="/Resources/Green/Logo.png"/>
+                        <TextBlock Grid.Column="1" Foreground="{StaticResource MainGreen}" Text="{DynamicResource AppName_EN}" Margin="10 0 0 0" VerticalAlignment="Center" FontSize="18" FontStyle="Italic" FontWeight="Bold"/>
+                    </Grid>
+                    <Border Background="Transparent" MouseLeftButtonDown="TopArea_MouseLeftButtonDown"/>
+                    <Grid x:Name="MenuAvatar" Grid.Row="1" MouseLeftButtonUp="MenuAvatar_MouseLeftButtonUp" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 40 0 0" Cursor="Hand">
+                        <Border Width="80" Height="80" CornerRadius="80" BorderThickness="1" BorderBrush="{StaticResource MainGreen}"/>
+                        <Border CornerRadius="66" BorderThickness="1" BorderBrush="Transparent" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Green" BlurRadius="15" ShadowDepth="0" Opacity=".8" />
+                            </Border.Effect>
+                            <common:Avatar x:Name="MenuAvatarImage" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="33,33" RadiusX="33" RadiusY="33"/>
+                                </Image.Clip>
+                            </common:Avatar>
+                        </Border>
+                    </Grid>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
+                        <TextBlock x:Name="UserName" FontSize="14" Text="{Binding NickName}" TextTrimming="CharacterEllipsis" FontWeight="Bold"/>
+                        <Image Source="{Binding Gender,Converter={StaticResource GenderToImage}}" Width="14" Height="14" Margin="2 0 0 0" VerticalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
-                        <TextBlock Text="{DynamicResource Follow}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch">
-                        <TextBlock Text="{DynamicResource Fan}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-                        <TextBlock Text="0" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="{StaticResource Gray}"/>
+                    <TextBlock Grid.Row="3" Text="{Binding Address}" Foreground="{StaticResource Gray}" Margin="0 5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12" FontWeight="Bold"/>
+                    <Grid Grid.Row="4" HorizontalAlignment="Stretch" Margin="20 15 20 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                            <TextBlock Text="{DynamicResource Trend}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+                            <TextBlock Text="{DynamicResource Follow}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="0" Margin="0 5 0 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource Gray}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Stretch">
+                            <TextBlock Text="{DynamicResource Fan}" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="0" Margin="0 5 0 0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="{StaticResource Gray}"/>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 70 0 0">
+                        <RadioButton x:Name="Home" Cursor="Hand" Checked="Home_Checked">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="40 15">
+                                                        <Image x:Name="HomeImage" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{DynamicResource Home}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                    <Border Background="Transparent"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                                        <Setter TargetName="HomeImage" Property="Source" Value="/Resources/Green/Home.png"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="False">
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                        <Setter TargetName="HomeImage" Property="Source" Value="/Resources/Home.png"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                        <RadioButton Name="Team" Cursor="Hand" Checked="Team_Checked">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="40 15">
+                                                        <Image x:Name="TeamImage" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{DynamicResource Team}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                    <Border Background="Transparent"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                                        <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Green/Team.png"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="False">
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                        <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Team.png"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
+                        <RadioButton x:Name="Travel" Cursor="Hand" Checked="Travel_Checked">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="40 15">
+                                                        <Image x:Name="TravelImage" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{DynamicResource Travel}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                    <Border Background="Transparent"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                                        <Setter TargetName="TravelImage" Property="Source" Value="/Resources/Green/Travel.png"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="False">
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                        <Setter TargetName="TravelImage" Property="Source" Value="/Resources/Travel.png"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
                     </StackPanel>
                 </Grid>
-                <StackPanel Grid.Row="5" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0 70 0 0">
-                    <RadioButton x:Name="Home" Cursor="Hand" Checked="Home_Checked">
-                        <RadioButton.Style>
-                            <Style TargetType="RadioButton">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="RadioButton">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="40 15">
-                                                    <Image x:Name="HomeImage" Width="20" Height="20" HorizontalAlignment="Left"/>
-                                                    <TextBlock Text="{DynamicResource Home}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
-                                                </StackPanel>
-                                                <Border Background="Transparent"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
-                                                    <Setter TargetName="HomeImage" Property="Source" Value="/Resources/Green/Home.png"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="False">
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                    <Setter TargetName="HomeImage" Property="Source" Value="/Resources/Home.png"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </RadioButton.Style>
-                    </RadioButton>
-                    <RadioButton Name="Team" Cursor="Hand" Checked="Team_Checked">
-                        <RadioButton.Style>
-                            <Style TargetType="RadioButton">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="RadioButton">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="40 15">
-                                                    <Image x:Name="TeamImage" Width="20" Height="20" HorizontalAlignment="Left"/>
-                                                    <TextBlock Text="{DynamicResource Team}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
-                                                </StackPanel>
-                                                <Border Background="Transparent"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
-                                                    <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Green/Team.png"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="False">
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                    <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Team.png"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </RadioButton.Style>
-                    </RadioButton>
-                    <RadioButton x:Name="Travel" Cursor="Hand" Checked="Travel_Checked">
-                        <RadioButton.Style>
-                            <Style TargetType="RadioButton">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="RadioButton">
-                                            <Grid>
-                                                <StackPanel Orientation="Horizontal" Margin="40 15">
-                                                    <Image x:Name="TravelImage" Width="20" Height="20" HorizontalAlignment="Left"/>
-                                                    <TextBlock Text="{DynamicResource Travel}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
-                                                </StackPanel>
-                                                <Border Background="Transparent"/>
-                                            </Grid>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsChecked" Value="True">
-                                                    <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
-                                                    <Setter TargetName="TravelImage" Property="Source" Value="/Resources/Green/Travel.png"/>
-                                                </Trigger>
-                                                <Trigger Property="IsChecked" Value="False">
-                                                    <Setter Property="Foreground" Value="Black"/>
-                                                    <Setter TargetName="TravelImage" Property="Source" Value="/Resources/Travel.png"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </RadioButton.Style>
-                    </RadioButton>
-                </StackPanel>
-            </Grid>
+            </Border>
             <Border Grid.Column="1" Height="50" Background="{StaticResource BackgroundGray}">
                 <Grid x:Name="TopArea" Background="Transparent">
                     <Grid.ColumnDefinitions>
@@ -227,17 +232,23 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Border Grid.ColumnSpan="5" MouseLeftButtonDown="TopArea_MouseLeftButtonDown" Background="Transparent"/>
-                    <Border BorderThickness="0.2" BorderBrush="{StaticResource Gray}" Background="White" Height="30" CornerRadius="5" Width="260" Margin="65 0 0 0" HorizontalAlignment="Left">
+                    <Border BorderThickness="0.5" BorderBrush="{StaticResource LightGray}" Background="White" Height="30" CornerRadius="5" Width="260" Margin="65 0 0 0" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Resources/Gray/Search.png" Width="12" Margin="10 0" VerticalAlignment="Center"/>
-                            <TextBox x:Name="SearchInput" Grid.Column="1" materialDesign:HintAssist.Hint="{DynamicResource Search}" Foreground="{StaticResource DarkGray}" BorderThickness="0" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                            <TextBox x:Name="SearchInput" Grid.Column="1" Padding="5 0" materialDesign:TextFieldAssist.UnderlineBrush="{StaticResource MainGreen}" Foreground="{StaticResource DarkGray}" BorderThickness="0" FontSize="14" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center">
+                                <materialDesign:HintAssist.Hint>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Resources/Gray/Search.png" Width="12" VerticalAlignment="Center"/>
+                                        <TextBlock Margin="10 0 0 0" Text="{DynamicResource Search}"/>
+                                    </StackPanel>
+                                </materialDesign:HintAssist.Hint>
+                            </TextBox>
                         </Grid>
                     </Border>
-                    <Button x:Name="AddTrend" Grid.Column="1" Margin="0 0 40 0" Height="30" Width="130" Style="{StaticResource AddTrendStyle}" BorderThickness="0" Cursor="Hand"/>
+                    <Button x:Name="AddTrend" Grid.Column="1" Margin="0 0 40 0" Height="30" Width="130" VerticalAlignment="Center" Style="{StaticResource AddTrendStyle}" BorderThickness="0" Cursor="Hand"/>
                     <TextBlock x:Name="Unlogin" MouseLeftButtonUp="Unlogin_MouseLeftButtonUp" Grid.Column="2" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{DynamicResource Unlogin}" Style="{StaticResource UnderlineTextBlock}" FontSize="14"/>
                     <Grid x:Name="PersonalData" Grid.Column="2" Visibility="Collapsed" MouseLeftButtonUp="PersonalData_MouseLeftButtonUp" Cursor="Hand" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>

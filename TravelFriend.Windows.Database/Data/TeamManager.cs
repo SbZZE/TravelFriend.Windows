@@ -39,5 +39,16 @@ namespace TravelFriend.Windows.Database.Data
             var members = SqliteHelper.Instance.Query<TeamMember>($"Select * from TeamMember where TeamId='{teamId}'").OrderByDescending(x => x.IsLeader).ToList();
             return new ObservableCollection<TeamMember>(members);
         }
+
+        /// <summary>
+        /// 根据团队id获取团队相册
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        public static ObservableCollection<TeamAlbum> GetTeamAlbums(string teamId)
+        {
+            var albums = SqliteHelper.Instance.Query<TeamAlbum>($"Select * from TeamAlbum where TeamId='{teamId}'").ToList();
+            return new ObservableCollection<TeamAlbum>(albums);
+        }
     }
 }

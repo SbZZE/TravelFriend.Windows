@@ -36,6 +36,11 @@ namespace TravelFriend.Windows.Team
                 {
                     MemberList.Items.Add(new MemberCard() { DataContext = member });
                 }
+                var albums = TeamManager.GetTeamAlbums(TeamId);
+                foreach (var album in albums)
+                {
+                    AlbumList.Children.Add(new AlbumCard() { DataContext = album });
+                }
             }
         }
 

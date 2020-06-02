@@ -11,35 +11,6 @@ namespace TravelFriend.Windows.Common
     public class ImageHelper
     {
         /// <summary>
-        /// 异步获取头像
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <returns></returns>
-        public async static Task<BitmapImage> GetAvatarAsync(string userName)
-        {
-            try
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
-                    ms.Position = 0;
-                    BitmapImage result = new BitmapImage();
-                    result.BeginInit();
-                    result.CacheOption = BitmapCacheOption.OnLoad;
-                    result.StreamSource = ms;
-                    result.EndInit();
-                    result.Freeze();
-                    return result;
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return null;
-            }
-        }
-
-        /// <summary>
         /// 异步获取头像数组
         /// </summary>
         /// <param name="userName"></param>
@@ -50,22 +21,24 @@ namespace TravelFriend.Windows.Common
             using (MemoryStream ms = new MemoryStream())
             {
                 var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
-                if (ms.Length == 0)
-                {
-                    return null;
-                }
-                ms.Position = 0;
-                BitmapImage result = new BitmapImage();
+                byte[] byteArray = null;
                 try
                 {
-                    result.BeginInit();
-                    result.CacheOption = BitmapCacheOption.OnLoad;
-                    result.StreamSource = ms;
-                    result.EndInit();
-                    result.Freeze();
+                    if (ms != null && ms.Length > 0)
+                    {
+                        //很重要，因为Position经常位于Stream的末尾，导致下面读取到的长度为0。 
+                        ms.Position = 0;
+                        using (BinaryReader br = new BinaryReader(ms))
+                        {
+                            byteArray = br.ReadBytes((int)ms.Length);
+                        }
+                    }
                 }
-                catch { }
-                return ImageHelper.BitmapImageToByteArray(result);
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return byteArray;
             }
         }
 
@@ -91,35 +64,5 @@ namespace TravelFriend.Windows.Common
             }
             return bmp;
         }
-
-        /// <summary>
-        /// 图片资源转byte数组
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <returns></returns>
-        public static byte[] BitmapImageToByteArray(BitmapImage bmp)
-        {
-            byte[] byteArray = null;
-            try
-            {
-                Stream sMarket = bmp.StreamSource;
-                if (sMarket != null && sMarket.Length > 0)
-                {
-                    //很重要，因为Position经常位于Stream的末尾，导致下面读取到的长度为0。 
-                    sMarket.Position = 0;
-
-                    using (BinaryReader br = new BinaryReader(sMarket))
-                    {
-                        byteArray = br.ReadBytes((int)sMarket.Length);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return byteArray;
-        }
-
     }
 }

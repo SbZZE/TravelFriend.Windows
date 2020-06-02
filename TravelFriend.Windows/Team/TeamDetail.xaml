@@ -46,7 +46,6 @@
             <Button Grid.Column="2" x:Name="UpdateTeamInfo" Content="{DynamicResource UpdateTeamInfo}" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="White" BorderThickness="1" BorderBrush="{StaticResource MainGreen}" Foreground="{StaticResource MainGreen}"/>
             <Button Grid.Column="3" x:Name="CreateAlbum" Content="{DynamicResource CreateAlbum}" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{StaticResource MainGreen}" BorderThickness="0"/>
         </Grid>
-        <!--<TextBlock Grid.Row="1" Text="{DynamicResource TeamMember}" FontSize="18" Foreground="{StaticResource MainGreen}" Margin="20 40 0 0"/>-->
         <Grid Grid.Row="1" Margin="10 40 10 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -67,7 +66,7 @@
         </Grid>
         <Border Grid.Row="2" Margin="10 30" Height="1" BorderBrush="{StaticResource LightGray}" BorderThickness="1" Opacity=".8"/>
         <ScrollViewer Grid.Row="3">
-            
+            <WrapPanel x:Name="AlbumList"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
