@@ -12,5 +12,6 @@ namespace TravelFriend.Windows.Http
         public static string Login => BaseUrl + "/user/login";
         public static string Avatar => BaseUrl + "/user/avatar";
         public static string UserInfo => BaseUrl + "/user/userInfo";
+        public static string CreateTeam => BaseUrl + "/team/create";
     }
 }

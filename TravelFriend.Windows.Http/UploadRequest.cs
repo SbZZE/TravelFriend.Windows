@@ -6,16 +6,13 @@ using System.Text;
 
 namespace TravelFriend.Windows.Http
 {
-    public class UploadRequest
+    public class UploadRequest : HttpRequest
     {
-        public UploadRequest(string url, string filePath)
+        public UploadRequest(string url, string filePath) : base(url)
         {
-            Url = url;
             FilePath = filePath;
         }
 
-        [JsonIgnore]
-        public string Url { get; set; }
         [JsonIgnore]
         public string FilePath { get; set; }
     }

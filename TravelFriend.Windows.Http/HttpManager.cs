@@ -184,49 +184,6 @@ namespace TravelFriend.Windows.Http
                     message = response.ErrorMessage
                 };
             }
-            //try
-            //{
-            //    Console.WriteLine("--------------");
-            //    Console.WriteLine("request - " + request.Url);
-            //    string body = JsonConvert.SerializeObject(request);
-            //    Console.WriteLine("request body - " + body);
-            //    Console.WriteLine("--------------");
-            //    HttpWebRequest http = (HttpWebRequest)WebRequest.Create(request.Url);//15ms
-            //    MultipartFormDataContent multipart = new MultipartFormDataContent();
-            //    multipart.Add(new StreamContent(request.FileStream), "image");
-            //    http.Timeout = 600 * 1000;
-            //    http.Headers.Add("token", AccountManager.Instance.UserToken);
-            //    http.Method = "POST";
-            //    http.ContentType = multipart.Headers.ContentType.ToString();
-            //    http.ContentLength = multipart.Headers.ContentLength.Value;
-
-            //    var stream = await http.GetRequestStreamAsync();
-            //    await multipart.CopyToAsync(stream);
-
-            //    using (WebResponse response = await http.GetResponseAsync())
-            //    {
-            //        string json = string.Empty;
-            //        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            //        {
-            //            json = await reader.ReadToEndAsync();
-            //        }
-            //        Console.WriteLine("--------------");
-            //        Console.WriteLine("response from " + request.Url);
-            //        Console.WriteLine(json);
-            //        Console.WriteLine("--------------");
-            //        T result = JsonConvert.DeserializeObject<T>(json);
-            //        return result;
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    var error = new T
-            //    {
-            //        code = 100,
-            //        message = e.Message
-            //    };
-            //    return error;
-            //}
         }
     }
 }
