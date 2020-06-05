@@ -34,17 +34,18 @@ namespace TravelFriend.Windows.Common
 
         public void Update()
         {
-            if (!string.IsNullOrEmpty(TeamId))
+            this.Dispatcher.Invoke(() =>
             {
-                var team = TeamManager.GetTeamByTeamId(TeamId);
-                if (team != null)
+                if (!string.IsNullOrEmpty(TeamId))
                 {
-                    this.Dispatcher.Invoke(() =>
+                    var team = TeamManager.GetTeamByTeamId(TeamId);
+                    if (team != null)
                     {
+
                         this.Source = team.Avatar == null ? new BitmapImage(new Uri("/Resources/DefaultBigAvatar.png", UriKind.Relative)) : ImageHelper.ByteArrayToBitmapImage(team.Avatar);
-                    });
+                    }
                 }
-            }
+            });
         }
     }
 }

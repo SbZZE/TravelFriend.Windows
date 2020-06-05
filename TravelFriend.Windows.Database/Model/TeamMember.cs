@@ -17,6 +17,10 @@ namespace TravelFriend.Windows.Database.Model
         /// </summary>
         public string TeamId { get; set; }
         /// <summary>
+        /// 成员用户名
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
         /// 成员昵称
         /// </summary>
         public string Name { get; set; }

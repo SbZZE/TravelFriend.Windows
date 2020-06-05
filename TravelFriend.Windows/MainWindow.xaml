@@ -96,7 +96,7 @@
                             <Border.Effect>
                                 <DropShadowEffect Color="Green" BlurRadius="15" ShadowDepth="0" Opacity=".8" />
                             </Border.Effect>
-                            <common:UserAvatar x:Name="MenuAvatarImage" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
+                            <common:UserAvatar x:Name="MenuAvatarImage" UserName="{Binding UserName}" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
                                 <Image.Clip>
                                     <EllipseGeometry Center="33,33" RadiusX="33" RadiusY="33"/>
                                 </Image.Clip>
@@ -256,7 +256,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Border Margin="0 0 10 0" VerticalAlignment="Center" CornerRadius="30" BorderThickness="1" BorderBrush="Transparent">
-                            <common:UserAvatar x:Name="PersonaleDataImage" Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28" Stretch="UniformToFill">
+                            <common:UserAvatar x:Name="PersonaleDataImage" UserName="{Binding UserName}" Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28" Stretch="UniformToFill">
                                 <Image.Clip>
                                     <EllipseGeometry Center="14,14" RadiusX="14" RadiusY="14"/>
                                 </Image.Clip>

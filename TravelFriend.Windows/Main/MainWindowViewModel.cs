@@ -18,6 +18,21 @@ namespace TravelFriend.Windows
             NotifyManager.UserInfoSubject.Add(this);
         }
 
+        private string _userName;
+        public string UserName
+        {
+            get
+            {
+                return _userName;
+            }
+            set
+            {
+                _userName = value;
+                Change("UserName");
+            }
+        }
+
+
         private string _nickName;
         /// <summary>
         /// 用户昵称
@@ -125,6 +140,7 @@ namespace TravelFriend.Windows
             var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
             if (user != null)
             {
+                UserName = user.UserName;
                 NickName = user.NickName;
                 Address = user.Address;
                 Gender = user.Gender;

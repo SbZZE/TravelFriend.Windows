@@ -30,7 +30,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border x:Name="Avatar" VerticalAlignment="Center" CornerRadius="50" BorderThickness="1" BorderBrush="Transparent" Grid.RowSpan="2" HorizontalAlignment="Left">
-                    <common:UserAvatar x:Name="PersonaleDataImage" Source="{Binding Avatar}" Width="50" Height="50" Stretch="UniformToFill">
+                    <common:UserAvatar x:Name="PersonaleDataImage" UserName="{Binding UserName}" Source="{Binding Avatar}" Width="50" Height="50" Stretch="UniformToFill">
                         <Image.Clip>
                             <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"/>
                         </Image.Clip>

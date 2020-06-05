@@ -21,6 +21,12 @@ namespace TravelFriend.Windows.Team
         public MemberCard()
         {
             InitializeComponent();
+            Loaded += MemberCard_Loaded;
+        }
+
+        private void MemberCard_Loaded(object sender, RoutedEventArgs e)
+        {
+            Avatar.UpdateWithHttp();//请求获取头像
         }
     }
 }
