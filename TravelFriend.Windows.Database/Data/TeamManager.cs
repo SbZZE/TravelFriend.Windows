@@ -13,9 +13,9 @@ namespace TravelFriend.Windows.Database.Data
         /// 获取我创建的团队信息
         /// </summary>
         /// <returns></returns>
-        public static ObservableCollection<Team> GetCreatedTeam()
+        public static ObservableCollection<Team> GetCreatedTeam(string userName)
         {
-            var teams = SqliteHelper.Instance.Query<Team>($"Select * from Team").Where(x => x.IsLeader).ToList();
+            var teams = SqliteHelper.Instance.Query<Team>($"Select * from Team where UserName='{userName}'").Where(x => x.IsLeader).ToList();
             return new ObservableCollection<Team>(teams);
         }
 
@@ -23,9 +23,9 @@ namespace TravelFriend.Windows.Database.Data
         /// 获取我加入的团队信息
         /// </summary>
         /// <returns></returns>
-        public static ObservableCollection<Team> GetJoinedTeam()
+        public static ObservableCollection<Team> GetJoinedTeam(string userName)
         {
-            var teams = SqliteHelper.Instance.Query<Team>($"Select * from Team").Where(x => !x.IsLeader).ToList();
+            var teams = SqliteHelper.Instance.Query<Team>($"Select * from Team where UserName='{userName}'").Where(x => !x.IsLeader).ToList();
             return new ObservableCollection<Team>(teams);
         }
 
@@ -49,6 +49,26 @@ namespace TravelFriend.Windows.Database.Data
         {
             var albums = SqliteHelper.Instance.Query<TeamAlbum>($"Select * from TeamAlbum where TeamId='{teamId}'").ToList();
             return new ObservableCollection<TeamAlbum>(albums);
+        }
+
+        /// <summary>
+        /// 根据团队Id获取团队信息
+        /// </summary>
+        /// <param name="teamId"></param>
+        /// <returns></returns>
+        public static Team GetTeamByTeamId(string teamId)
+        {
+            return SqliteHelper.Instance.Query<Team>($"Select * from Team where TeamId='{teamId}'").FirstOrDefault();
+        }
+
+        /// <summary>
+        /// 更新团队
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public static int UpdateTeam(Team team)
+        {
+            return SqliteHelper.Instance.Update<Team>(team);
         }
     }
 }

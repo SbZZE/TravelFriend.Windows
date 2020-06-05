@@ -13,11 +13,11 @@ using TravelFriend.Windows.RabbitMQ.Observe;
 
 namespace TravelFriend.Windows.Common
 {
-    public class Avatar : Image, IObserver
+    public class UserAvatar : Image, IObserver
     {
-        public Avatar()
+        public UserAvatar()
         {
-            NotifyManager.AvatarSubject.Add(this);//订阅头像变化
+            NotifyManager.UserAvatarSubject.Add(this);//订阅头像变化
         }
 
         public void Update()

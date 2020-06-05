@@ -96,11 +96,11 @@
                             <Border.Effect>
                                 <DropShadowEffect Color="Green" BlurRadius="15" ShadowDepth="0" Opacity=".8" />
                             </Border.Effect>
-                            <common:Avatar x:Name="MenuAvatarImage" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
+                            <common:UserAvatar x:Name="MenuAvatarImage" Source="/Resources/DefaultBigAvatar.png" Width="66" Height="66" Stretch="UniformToFill">
                                 <Image.Clip>
                                     <EllipseGeometry Center="33,33" RadiusX="33" RadiusY="33"/>
                                 </Image.Clip>
-                            </common:Avatar>
+                            </common:UserAvatar>
                         </Border>
                     </Grid>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 0">
@@ -157,7 +157,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Name="Team" Cursor="Hand" Checked="Team_Checked">
+                        <RadioButton Name="Team" Cursor="Hand" Checked="Team_Checked" Visibility="Collapsed">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="Template">
@@ -256,11 +256,11 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <Border Margin="0 0 10 0" VerticalAlignment="Center" CornerRadius="30" BorderThickness="1" BorderBrush="Transparent">
-                            <common:Avatar x:Name="PersonaleDataImage" Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28" Stretch="UniformToFill">
+                            <common:UserAvatar x:Name="PersonaleDataImage" Source="/Resources/DefaultBigAvatar.png" Width="28" Height="28" Stretch="UniformToFill">
                                 <Image.Clip>
                                     <EllipseGeometry Center="14,14" RadiusX="14" RadiusY="14"/>
                                 </Image.Clip>
-                            </common:Avatar>
+                            </common:UserAvatar>
                         </Border>
                         <Image Grid.Column="1" Source="/Resources/Gray/ToggleDown.png" Width="12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>

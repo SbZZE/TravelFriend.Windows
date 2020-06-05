@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TravelFriend.Windows.Http.Team
+namespace TravelFriend.Windows.Http
 {
     public class CreateTeamRequest : HttpRequest
     {

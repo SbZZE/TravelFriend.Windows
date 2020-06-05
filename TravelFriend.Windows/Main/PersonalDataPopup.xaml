@@ -30,11 +30,11 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Border x:Name="Avatar" VerticalAlignment="Center" CornerRadius="50" BorderThickness="1" BorderBrush="Transparent" Grid.RowSpan="2" HorizontalAlignment="Left">
-                    <common:Avatar x:Name="PersonaleDataImage" Source="{Binding Avatar}" Width="50" Height="50" Stretch="UniformToFill">
+                    <common:UserAvatar x:Name="PersonaleDataImage" Source="{Binding Avatar}" Width="50" Height="50" Stretch="UniformToFill">
                         <Image.Clip>
                             <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"/>
                         </Image.Clip>
-                    </common:Avatar>
+                    </common:UserAvatar>
                 </Border>
                 <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Left">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="85" Margin="15,0,0,0">

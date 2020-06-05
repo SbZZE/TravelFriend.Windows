@@ -7,7 +7,7 @@ namespace TravelFriend.Windows.RabbitMQ.Observe
     /// <summary>
     /// 头像主题
     /// </summary>
-    public class AvatarSubject : Subject
+    public class UserAvatarSubject : Subject
     {
     }
 }

@@ -13,6 +13,10 @@ namespace TravelFriend.Windows.Database.Model
         [PrimaryKey]
         public int? Id { get; set; }
         /// <summary>
+        /// 所属用户
+        /// </summary>
+        public string UserName { get; set; }
+        /// <summary>
         /// 团队ID
         /// </summary>
         public string TeamId { get; set; }

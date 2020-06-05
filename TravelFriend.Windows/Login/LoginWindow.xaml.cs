@@ -101,6 +101,7 @@ namespace TravelFriend.Windows
             {
                 mainWindow.Unlogin.Visibility = Visibility.Collapsed;
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
+                mainWindow.Team.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
                 RabbitMQ.RabbitMQManager.Connection();
 
@@ -115,7 +116,7 @@ namespace TravelFriend.Windows
                     user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
                     //把最近登录的账号信息存到本地数据库
                     UserManager.SetUserToLast(user);
-                    NotifyManager.UpdateAvatar(user.UserName);
+                    NotifyManager.UpdateUserAvatar(user.UserName);
                     NotifyManager.UpdateUserInfo(user.UserName);
                 }
             }

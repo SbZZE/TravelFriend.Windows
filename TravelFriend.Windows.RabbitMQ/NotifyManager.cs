@@ -13,14 +13,15 @@ namespace TravelFriend.Windows.RabbitMQ
 {
     public class NotifyManager
     {
-        public static Subject AvatarSubject = new AvatarSubject();
+        public static Subject UserAvatarSubject = new UserAvatarSubject();
+        public static Subject TeamAvatarSubject = new TeamAvatarSubject();
         public static Subject UserInfoSubject = new UserInfoSubject();
 
         /// <summary>
         /// 更新头像通知
         /// </summary>
         /// <param name="userName"></param>
-        public async static void UpdateAvatar(string userName)
+        public async static void UpdateUserAvatar(string userName)
         {
             var user = UserManager.GetUserByUserName(userName);
             if (user != null)
@@ -28,7 +29,7 @@ namespace TravelFriend.Windows.RabbitMQ
                 //获取头像
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
+                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={userName}&isCompress=true"), ms);
                     if (ms != null && ms.Length > 0)
                     {
                         ms.Position = 0;
@@ -38,7 +39,35 @@ namespace TravelFriend.Windows.RabbitMQ
                         }
                         UserManager.UpdateUser(user);
                     }
-                    AvatarSubject.Notify();
+                    UserAvatarSubject.Notify();
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新团队头像通知
+        /// </summary>
+        /// <param name="userName"></param>
+        public async static void UpdateTeamAvatar(string teamId)
+        {
+            //查找本地数据库里的团队
+            var team = TeamManager.GetTeamByTeamId(teamId);
+            if (team != null)
+            {
+                //获取头像
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.TeamAvatar}?teamid={teamId}&isCompress=true"), ms);
+                    if (ms != null && ms.Length > 0)
+                    {
+                        ms.Position = 0;
+                        using (BinaryReader br = new BinaryReader(ms))
+                        {
+                            team.Avatar = br.ReadBytes((int)ms.Length);
+                        }
+                        TeamManager.UpdateTeam(team);
+                    }
+                    TeamAvatarSubject.Notify();
                 }
             }
         }

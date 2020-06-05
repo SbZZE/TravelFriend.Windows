@@ -20,7 +20,7 @@ namespace TravelFriend.Windows.Common
             //获取头像
             using (MemoryStream ms = new MemoryStream())
             {
-                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.Avatar}?username={userName}&isCompress=true"), ms);
+                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={userName}&isCompress=true"), ms);
                 byte[] byteArray = null;
                 try
                 {

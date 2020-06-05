@@ -55,7 +55,7 @@ namespace TravelFriend.Windows.RabbitMQ
                 switch (message.Type)
                 {
                     case MessageType.AVATAR:
-                        NotifyManager.UpdateAvatar(message.Account);
+                        NotifyManager.UpdateUserAvatar(message.Account);
                         break;
                     case MessageType.INFO:
                         NotifyManager.UpdateUserInfo(message.Account);

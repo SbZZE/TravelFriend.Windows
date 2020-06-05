@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -11,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Http;
 using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows.Team
@@ -21,32 +25,65 @@ namespace TravelFriend.Windows.Team
     /// </summary>
     public partial class TeamPage : UserControl
     {
-        ObservableCollection<TeamModel> CreatedTeam = new ObservableCollection<Database.Model.Team>();
-        ObservableCollection<TeamModel> JoinedTeam = new ObservableCollection<Database.Model.Team>();
+        ObservableCollection<TeamModel> CreatedTeam = new ObservableCollection<TeamModel>();
+        ObservableCollection<TeamModel> JoinedTeam = new ObservableCollection<TeamModel>();
         public TeamPage()
         {
             InitializeComponent();
+            CreatedTeam.CollectionChanged += CreatedTeam_CollectionChanged;
+            JoinedTeam.CollectionChanged += JoinedTeam_CollectionChanged;
             Loaded += TeamPage_Loaded;
             Unloaded += TeamPage_Unloaded;
         }
 
         private void TeamPage_Loaded(object sender, RoutedEventArgs e)
         {
-            CreatedTeam = TeamManager.GetCreatedTeam();
-            JoinedTeam = TeamManager.GetJoinedTeam();
-            CreateBlank.Visibility = CreatedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            JoinBlank.Visibility = JoinedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-            LoadTeamCard();
+            LoadTeams();
         }
 
-        private void LoadTeamCard()
+        private async void LoadTeams()
         {
-            foreach (var team in CreatedTeam)
+            //直接请求获取团队吧，暂时先不做本地数据库的缓存了
+            var response = await HttpManager.Instance.GetAsync<GetTeamsResponse>(new HttpRequest($"{ApiUtils.GetTeams}?username={AccountManager.Instance.Account}"));
+            if (response.Ok)
+            {
+                foreach (var team in response.Teams)
+                {
+                    if (team.IsLeader)
+                    {
+                        CreatedTeam.Add(team);
+                    }
+                    else
+                    {
+                        JoinedTeam.Add(team);
+                    }
+                }
+            }
+        }
+
+        private void JoinedTeam_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            JoinBlank.Visibility = JoinedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+            foreach (var team in e.NewItems)
             {
                 var card = new TeamCard() { DataContext = team };
                 card.MouseLeftButtonUp += Card_MouseLeftButtonUp;
-                CreatedTeamList.Children.Add(card);
+                JoinedTeamList.Children.Add(card);
             }
+        }
+
+        private void CreatedTeam_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                CreateBlank.Visibility = CreatedTeam.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+                foreach (var team in e.NewItems)
+                {
+                    var card = new TeamCard() { DataContext = team };
+                    card.MouseLeftButtonUp += Card_MouseLeftButtonUp;
+                    CreatedTeamList.Children.Add(card);
+                }
+            });
         }
 
         private void Card_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

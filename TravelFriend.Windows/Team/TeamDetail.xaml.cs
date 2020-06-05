@@ -31,11 +31,13 @@ namespace TravelFriend.Windows.Team
         {
             if (!string.IsNullOrEmpty(TeamId))
             {
+                //加载团队成员
                 var members = TeamManager.GetTeamMembers(TeamId);
                 foreach (var member in members)
                 {
                     MemberList.Items.Add(new MemberCard() { DataContext = member });
                 }
+                //加载团队相册
                 var albums = TeamManager.GetTeamAlbums(TeamId);
                 foreach (var album in albums)
                 {

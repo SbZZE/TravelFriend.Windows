@@ -41,7 +41,7 @@ namespace TravelFriend.Windows
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = new MainWindowViewModel();
-            Team.IsChecked = true;
+            Home.IsChecked = true;
         }
 
         private void Unlogin_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -70,7 +70,7 @@ namespace TravelFriend.Windows
             dialog.Filter = "图片(*.jpg;*.jpg;*.jpeg;*.gif;*.png)|*.jpg;*.jpeg;*.gif;*.png";
             if (dialog.ShowDialog() == true)
             {
-                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.Avatar}?username={AccountManager.Instance.Account}", dialog.FileName));
+                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.UserAvatar}?username={AccountManager.Instance.Account}", dialog.FileName));
                 if (response.Ok)
                 {
                     Toast.Show(RStrings.UpdateSuccess);
