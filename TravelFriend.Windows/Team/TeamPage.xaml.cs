@@ -44,7 +44,7 @@ namespace TravelFriend.Windows.Team
         private async void LoadTeams()
         {
             //直接请求获取团队吧，暂时先不做本地数据库的缓存了
-            var response = await HttpManager.Instance.GetAsync<GetTeamsResponse>(new HttpRequest($"{ApiUtils.GetTeams}?username={AccountManager.Instance.Account}"));
+            var response = await HttpManager.Instance.GetAsync<GetTeamsResponse>(new HttpRequest($"{ApiUtils.Teams}?username={AccountManager.Instance.Account}"));
             if (response.Ok)
             {
                 foreach (var team in response.Teams)

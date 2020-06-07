@@ -23,7 +23,7 @@ namespace TravelFriend.Windows.Database.Model
         /// <summary>
         /// 相册名称
         /// </summary>
-        public string Name { get; set; }
+        public string AlbumName { get; set; }
         /// <summary>
         /// 相册内容数量
         /// </summary>

@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows.Team
 {
@@ -27,21 +28,28 @@ namespace TravelFriend.Windows.Team
             Loaded += TeamDetail_Loaded;
         }
 
-        private void TeamDetail_Loaded(object sender, RoutedEventArgs e)
+        private async void TeamDetail_Loaded(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(TeamId))
             {
                 //加载团队成员
-                var members = TeamManager.GetTeamMembers(TeamId);
-                foreach (var member in members)
+                var memberResponse = await HttpManager.Instance.PostAsync<GetTeamMembersResponse>(new HttpRequest($"{ApiUtils.TeamMember}?teamid={TeamId}"));
+                if (memberResponse.Ok)
                 {
-                    MemberList.Items.Add(new MemberCard() { DataContext = member });
+                    foreach (var member in memberResponse.Members)
+                    {
+                        MemberList.Items.Add(new MemberCard() { DataContext = member });
+                    }
                 }
+
                 //加载团队相册
-                var albums = TeamManager.GetTeamAlbums(TeamId);
-                foreach (var album in albums)
+                var albumResponse = await HttpManager.Instance.PostAsync<GetTeamAlbumResponse>(new HttpRequest($"{ApiUtils.TeamAlbum}?teamid={TeamId}"));
+                if (albumResponse.Ok)
                 {
-                    AlbumList.Children.Add(new AlbumCard() { DataContext = album });
+                    foreach (var album in albumResponse.Albums)
+                    {
+                        AlbumList.Children.Add(new AlbumCard() { DataContext = album });
+                    }
                 }
             }
         }

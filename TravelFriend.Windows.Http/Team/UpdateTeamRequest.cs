@@ -5,17 +5,17 @@ using System.Text;
 
 namespace TravelFriend.Windows.Http
 {
-    public class CreateTeamRequest : HttpRequest
+    public class UpdateTeamRequest : HttpRequest
     {
-        public CreateTeamRequest(string userName, string teamName, string introduction) : base(ApiUtils.CreateTeam)
+        public UpdateTeamRequest(string teamId, string teamName, string introduction) : base(ApiUtils.UpdateTeam)
         {
-            UserName = userName;
+            TeamId = teamId;
             TeamName = teamName;
             Introduction = introduction;
         }
 
-        [JsonProperty("username")]
-        public string UserName { get; set; }
+        [JsonProperty("teamid")]
+        public string TeamId { get; set; }
         [JsonProperty("teamname")]
         public string TeamName { get; set; }
         [JsonProperty("introduction")]
