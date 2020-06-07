@@ -36,13 +36,13 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border Margin="0 10 0 0" VerticalAlignment="Top" CornerRadius="40" BorderThickness="1" Width="82" Height="82" BorderBrush="{StaticResource MainGreen}">
-                <common:TeamAvatar TeamId="{Binding TeamId}" Width="80" Height="80" Stretch="UniformToFill">
+                <common:TeamAvatar x:Name="Avatar" TeamId="{Binding TeamId}" Source="/Resources/DefaultTeamAvatar.png" Width="80" Height="80" Stretch="UniformToFill">
                     <Image.Clip>
                         <EllipseGeometry Center="40,40" RadiusX="40" RadiusY="40"/>
                     </Image.Clip>
                 </common:TeamAvatar>
             </Border>
-            <TextBlock Grid.Row="1" Text="{Binding Name}" Margin="20 20 20 0" FontSize="18" TextTrimming="CharacterEllipsis" Foreground="{StaticResource MainGreen}" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="{Binding TeamName}" Margin="20 20 20 0" FontSize="18" TextTrimming="CharacterEllipsis" Foreground="{StaticResource MainGreen}" HorizontalAlignment="Center"/>
             <TextBlock Grid.Row="2" Text="{Binding Introduction}" Margin="30 20" FontSize="14" TextWrapping="Wrap" Foreground="{StaticResource Gray}" HorizontalAlignment="Stretch"/>
         </Grid>
     </Border>

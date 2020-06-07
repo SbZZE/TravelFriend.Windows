@@ -23,7 +23,7 @@ namespace TravelFriend.Windows.Database.Model
         /// <summary>
         /// 团队名
         /// </summary>
-        public string Name { get; set; }
+        public string TeamName { get; set; }
         /// <summary>
         /// 团队简介
         /// </summary>

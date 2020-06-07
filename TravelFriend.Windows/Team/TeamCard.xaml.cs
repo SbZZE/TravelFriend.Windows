@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.RabbitMQ;
 
 namespace TravelFriend.Windows.Team
 {
@@ -21,6 +22,12 @@ namespace TravelFriend.Windows.Team
         public TeamCard()
         {
             InitializeComponent();
+            Loaded += TeamCard_Loaded;
+        }
+
+        private void TeamCard_Loaded(object sender, RoutedEventArgs e)
+        {
+            Avatar.UpdateWithHttp();
         }
     }
 }
