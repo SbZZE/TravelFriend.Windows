@@ -11,6 +11,36 @@ namespace TravelFriend.Windows.Common
     public class ImageHelper
     {
         /// <summary>
+        /// 获取头像
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public static BitmapImage GetAvatarAsync(Stream ms)
+        {
+            BitmapImage bmp = null;
+            try
+            {
+                if (ms != null && ms.Length > 0)
+                {
+                    ms.Position = 0;
+                    bmp = new BitmapImage();
+                    bmp.BeginInit();
+                    bmp.CacheOption = BitmapCacheOption.OnLoad;
+                    bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
+                    bmp.StreamSource = ms;
+                    bmp.EndInit();
+                    bmp.Freeze();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                bmp = null;
+            }
+            return bmp;
+        }
+
+        /// <summary>
         /// 异步获取头像数组
         /// </summary>
         /// <param name="userName"></param>
@@ -54,6 +84,8 @@ namespace TravelFriend.Windows.Common
             {
                 bmp = new BitmapImage();
                 bmp.BeginInit();
+                bmp.CacheOption = BitmapCacheOption.OnLoad;
+                bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                 bmp.StreamSource = new MemoryStream(byteArray);
                 bmp.EndInit();
                 bmp.Freeze();

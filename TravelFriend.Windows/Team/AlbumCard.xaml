@@ -43,7 +43,7 @@
                 </Border.Background>
             </Border>
             <TextBlock Text="{Binding Count}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 10 10" FontSize="24" FontWeight="Bold" Foreground="White"/>
-            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" Text="{Binding Name}" Margin="0 0 0 5" FontSize="16"/>
+            <TextBlock Grid.Row="1" VerticalAlignment="Bottom" Text="{Binding AlbumName}" Margin="0 0 0 5" FontSize="16"/>
         </Grid>
     </Border>
 </UserControl>

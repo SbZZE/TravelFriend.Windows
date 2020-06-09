@@ -33,7 +33,7 @@ namespace TravelFriend.Windows.Team
             if (!string.IsNullOrEmpty(TeamId))
             {
                 //加载团队成员
-                var memberResponse = await HttpManager.Instance.PostAsync<GetTeamMembersResponse>(new HttpRequest($"{ApiUtils.TeamMember}?teamid={TeamId}"));
+                var memberResponse = await HttpManager.Instance.GetAsync<GetTeamMembersResponse>(new HttpRequest($"{ApiUtils.TeamMember}?teamid={TeamId}"));
                 if (memberResponse.Ok)
                 {
                     foreach (var member in memberResponse.Members)
@@ -43,7 +43,7 @@ namespace TravelFriend.Windows.Team
                 }
 
                 //加载团队相册
-                var albumResponse = await HttpManager.Instance.PostAsync<GetTeamAlbumResponse>(new HttpRequest($"{ApiUtils.TeamAlbum}?teamid={TeamId}"));
+                var albumResponse = await HttpManager.Instance.GetAsync<GetTeamAlbumResponse>(new HttpRequest($"{ApiUtils.TeamAlbum}?teamid={TeamId}"));
                 if (albumResponse.Ok)
                 {
                     foreach (var album in albumResponse.Albums)

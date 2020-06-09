@@ -22,7 +22,15 @@ namespace TravelFriend.Windows.Common
 
         public TeamAvatar()
         {
+            Unloaded += TeamAvatar_Unloaded;
             NotifyManager.TeamAvatarSubject.Add(this);//订阅头像变化
+        }
+
+        private void TeamAvatar_Unloaded(object sender, RoutedEventArgs e)
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
 
         public static readonly DependencyProperty TeamIdProperty = DependencyProperty.Register(
@@ -43,7 +51,6 @@ namespace TravelFriend.Windows.Common
                     var team = TeamManager.GetTeamByTeamId(TeamId);
                     if (team != null)
                     {
-
                         this.Source = team.Avatar == null ? new BitmapImage(new Uri("/Resources/DefaultTeamAvatar.png", UriKind.Relative)) : ImageHelper.ByteArrayToBitmapImage(team.Avatar);
                     }
                 }
@@ -56,17 +63,11 @@ namespace TravelFriend.Windows.Common
             using (MemoryStream ms = new MemoryStream())
             {
                 var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.TeamAvatar}?teamid={TeamId}&isCompress=true"), ms);
-                if (ms != null && ms.Length > 0)
+                await Dispatcher.InvokeAsync(() =>
                 {
-                    ms.Position = 0;
-                    using (BinaryReader br = new BinaryReader(ms))
-                    {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            this.Source = ImageHelper.ByteArrayToBitmapImage(br.ReadBytes((int)ms.Length));
-                        });
-                    }
-                }
+                    var image = ImageHelper.GetAvatarAsync(ms);
+                    this.Source = image == null ? new BitmapImage(new Uri("/Resources/DefaultTeamAvatar.png", UriKind.Relative)) : image;
+                });
             }
         }
     }

@@ -59,4 +59,6 @@
     <sys:String x:Key="TeamMember">团队成员</sys:String>
     <sys:String x:Key="UpdateTeamInfo">修改团队信息</sys:String>
     <sys:String x:Key="CreateAlbum">新建相册</sys:String>
+    <sys:String x:Key="Leader">队长</sys:String>
+    <sys:String x:Key="Member">队员</sys:String>
 </ResourceDictionary>

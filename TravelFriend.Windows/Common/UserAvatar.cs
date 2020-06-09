@@ -22,7 +22,15 @@ namespace TravelFriend.Windows.Common
 
         public UserAvatar()
         {
+            Unloaded += UserAvatar_Unloaded;
             NotifyManager.UserAvatarSubject.Add(this);//订阅头像变化
+        }
+
+        private void UserAvatar_Unloaded(object sender, RoutedEventArgs e)
+        {
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            GC.Collect();
         }
 
         public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register(
@@ -48,21 +56,15 @@ namespace TravelFriend.Windows.Common
 
         public async void UpdateWithHttp()
         {
-            //请求获取
+            //获取头像
             using (MemoryStream ms = new MemoryStream())
             {
-                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={UserName}&isCompress=true"), ms);
-                if (ms != null && ms.Length > 0)
+                await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={UserName}&isCompress=true"), ms);
+                await Dispatcher.InvokeAsync(() =>
                 {
-                    ms.Position = 0;
-                    using (BinaryReader br = new BinaryReader(ms))
-                    {
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            this.Source = ImageHelper.ByteArrayToBitmapImage(br.ReadBytes((int)ms.Length));
-                        });
-                    }
-                }
+                    var image = ImageHelper.GetAvatarAsync(ms);
+                    this.Source = image == null ? new BitmapImage(new Uri("/Resources/DefaultBigAvatar.png", UriKind.Relative)) : image;
+                });
             }
         }
     }

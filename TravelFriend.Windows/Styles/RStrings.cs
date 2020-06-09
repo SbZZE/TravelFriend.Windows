@@ -21,5 +21,7 @@ namespace TravelFriend.Windows.Styles
         public static string UserExist = (string)App.Current.Resources["UserExist"];
         public static string EmailPhoneError = (string)App.Current.Resources["EmailPhoneError"];
         public static string RegisterFail = (string)App.Current.Resources["RegisterFail"];
+        public static string Leader = (string)App.Current.Resources["Leader"];
+        public static string Member = (string)App.Current.Resources["Member"];
     }
 }
