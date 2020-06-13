@@ -61,4 +61,6 @@
     <sys:String x:Key="CreateAlbum">新建相册</sys:String>
     <sys:String x:Key="Leader">队长</sys:String>
     <sys:String x:Key="Member">队员</sys:String>
+    <sys:String x:Key="InputSendMessage">请输入要发送的消息</sys:String>
+    <sys:String x:Key="Send">发送</sys:String>
 </ResourceDictionary>

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using TravelFriend.Windows.Chat;
 
 namespace TravelFriend.Windows
 {
@@ -17,6 +18,12 @@ namespace TravelFriend.Windows
         {
             base.OnStartup(e);
             this.DispatcherUnhandledException += new System.Windows.Threading.DispatcherUnhandledExceptionEventHandler(App_DispatcherUnhandledException);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            ChatManager.Instance.Logout();
+            base.OnExit(e);
         }
 
         /// <summary>

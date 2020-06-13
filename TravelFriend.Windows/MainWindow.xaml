@@ -9,7 +9,7 @@
         xmlns:common="clr-namespace:TravelFriend.Windows.Common"
         xmlns:main="clr-namespace:TravelFriend.Windows.Main"
         xmlns:local="clr-namespace:TravelFriend.Windows"
-        xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
+        xmlns:converter="clr-namespace:TravelFriend.Windows.Converter" xmlns:chat="clr-namespace:TravelFriend.Windows.Chat"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Icon="/Resources/Green/Logo.png" MinWidth="1100" MinHeight="750"
         AllowsTransparency="True" StateChanged="Window_StateChanged"
@@ -80,6 +80,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20 20 0 0">
                         <Grid.ColumnDefinitions>
@@ -216,6 +217,15 @@
                             </RadioButton.Style>
                         </RadioButton>
                     </StackPanel>
+                    <ScrollViewer x:Name="Scroll" Grid.Row="6" Height="50" Margin="10 0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
+                        <ListBox x:Name="TeamAvatarList">
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                        </ListBox>
+                    </ScrollViewer>
                 </Grid>
             </Border>
             <Border Grid.Column="1" Height="50" Background="{StaticResource BackgroundGray}">
@@ -276,9 +286,10 @@
             <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource BackgroundGray}">
                 <UserControl x:Name="PageContainer" Margin="30"/>
             </Border>
-            <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
+            <chat:ChatPopup x:Name="ChatPopup" Visibility="Collapsed" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
             <main:SettingPopup x:Name="SettingPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=Setting}" VerticalOffset="5" HorizontalOffset="-10" StaysOpen="False"/>
+            <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Grid>
     </Border>

@@ -38,5 +38,9 @@ namespace TravelFriend.Windows.Database
                 _account = value;
             }
         }
+        /// <summary>
+        /// 用户昵称
+        /// </summary>
+        public string NickName { get; set; }
     }
 }

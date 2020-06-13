@@ -27,6 +27,7 @@
     <None Remove="Resources\Gray\NoMax.png" />
     <None Remove="Resources\Gray\Right.png" />
     <None Remove="Resources\Gray\Search.png" />
+    <None Remove="Resources\Gray\Send.png" />
     <None Remove="Resources\Gray\Setting.png" />
     <None Remove="Resources\Gray\Team.png" />
     <None Remove="Resources\Gray\ToggleDown.png" />
@@ -39,6 +40,7 @@
     <None Remove="Resources\Green\Min.png" />
     <None Remove="Resources\Green\Return.png" />
     <None Remove="Resources\Green\Right.png" />
+    <None Remove="Resources\Green\Send.png" />
     <None Remove="Resources\Green\Signature.png" />
     <None Remove="Resources\Green\Team.png" />
     <None Remove="Resources\Green\Travel.png" />
@@ -57,6 +59,7 @@
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.5" />
     <PackageReference Include="System.Management" Version="4.7.0" />
   </ItemGroup>
 
@@ -109,6 +112,9 @@
     <Resource Include="Resources\Gray\Search.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Gray\Send.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Gray\Setting.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -155,6 +161,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\Right.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Send.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Green\Signature.png">

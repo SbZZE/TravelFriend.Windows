@@ -1,7 +1,9 @@
 ﻿using MaterialDesignThemes.Wpf;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Chat;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
@@ -24,6 +27,7 @@ using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Styles;
 using TravelFriend.Windows.Team;
+using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows
 {
@@ -32,10 +36,13 @@ namespace TravelFriend.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+        ObservableCollection<TeamChatAvatar> TeamsList = new ObservableCollection<TeamChatAvatar>();
+
         public MainWindow()
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            TeamsList.CollectionChanged += TeamsList_CollectionChanged;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -134,7 +141,37 @@ namespace TravelFriend.Windows
 
         private void Travel_Checked(object sender, RoutedEventArgs e)
         {
-
         }
+
+        #region Chat
+        private void TeamsList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            TeamAvatarList.ItemsSource = TeamsList;
+        }
+
+        public void InsertToFirst(TeamChatAvatar teamChatAvatar)
+        {
+            var index = TeamsList.IndexOf(teamChatAvatar);
+            TeamsList.Move(index, 0);
+        }
+
+        public async void ReloadTeams()
+        {
+            if (TeamsList != null && TeamsList.Count != 0)
+            {
+                TeamsList.Clear();
+            }
+            //直接请求获取团队吧，暂时先不做本地数据库的缓存了
+            var response = await HttpManager.Instance.GetAsync<GetTeamsResponse>(new HttpRequest($"{ApiUtils.Teams}?username={AccountManager.Instance.Account}"));
+            if (response.Ok)
+            {
+                foreach (var team in response.Teams)
+                {
+                    var teamChatAvatar = new TeamChatAvatar() { DataContext = team };
+                    TeamsList.Add(teamChatAvatar);
+                }
+            }
+        }
+        #endregion
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TravelFriend.Windows.Chat;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
@@ -111,6 +112,7 @@ namespace TravelFriend.Windows
                 {
                     var user = response.data;
                     user.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
+                    AccountManager.Instance.NickName = string.IsNullOrEmpty(user.NickName) ? user.UserName : user.NickName;
                     user.Avatar = await ImageHelper.GetAvatarByteAsync(LoginViewModel.UserName);
                     user.IsRememberPassword = LoginViewModel.IsRememberPassword;
                     user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
@@ -119,6 +121,8 @@ namespace TravelFriend.Windows
                     NotifyManager.UpdateUserAvatar(user.UserName);
                     NotifyManager.UpdateUserInfo(user.UserName);
                 }
+                mainWindow.ReloadTeams();
+                ChatManager.Instance.ConnectChat();
             }
         }
 

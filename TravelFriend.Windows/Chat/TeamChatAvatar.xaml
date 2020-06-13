@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Chat.TeamChatAvatar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelFriend.Windows.Chat" xmlns:common="clr-namespace:TravelFriend.Windows.Common"
+             MouseLeftButtonUp="UserControl_MouseLeftButtonUp"
+             mc:Ignorable="d" Width="48" Height="28">
+    <Grid Cursor="Hand">
+        <common:TeamAvatar x:Name="Avatar" TeamId="{Binding TeamId}" ToolTip="{Binding TeamName}" Width="28" Height="28" Stretch="UniformToFill" Margin="10 0">
+            <common:TeamAvatar.Clip>
+                <EllipseGeometry Center="14,14" RadiusX="14" RadiusY="14"/>
+            </common:TeamAvatar.Clip>
+        </common:TeamAvatar>
+    </Grid>
+</UserControl>
