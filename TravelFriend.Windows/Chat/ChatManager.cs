@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.RabbitMQ.Observe;
+using TravelFriend.Windows.Styles;
 
 namespace TravelFriend.Windows.Chat
 {
@@ -29,6 +30,7 @@ namespace TravelFriend.Windows.Chat
         public async void ConnectChat()
         {
             connection = new HubConnectionBuilder()
+               //.WithUrl("http://localhost:5000/ChatHub")
                .WithUrl("http://47.106.139.187:5005/ChatHub")
                .Build();
 
@@ -38,11 +40,20 @@ namespace TravelFriend.Windows.Chat
                 await connection.StartAsync();
             };
 
-            connection.On<string, string>("Login", (userName, teamId) =>
+            connection.On<string, string, string>("Login", (userName, nickName, teamId) =>
             {
-                Console.WriteLine(teamId);
-                Console.WriteLine(userName);
+                Message = new Message()
+                {
+                    TeamId = teamId,
+                    UserName = userName,
+                    NickName = nickName,
+                    Content = RStrings.Logined,
+                    IsSendByMe = false,
+                    Type = MessageType.Tip
+                };
+                MessageSubject.Notify();
             });
+
             connection.On<string, string>("Logout", (userName, teamId) =>
             {
                 Console.WriteLine(teamId);
@@ -64,7 +75,8 @@ namespace TravelFriend.Windows.Chat
                     NickName = nickName,
                     SendTime = sendTime,
                     Content = content,
-                    IsSendByMe = isSendByMe
+                    IsSendByMe = isSendByMe,
+                    Type = MessageType.Message
                 };
                 MessageSubject.Notify();
             });
@@ -72,9 +84,12 @@ namespace TravelFriend.Windows.Chat
             try
             {
                 await connection.StartAsync();
+                await connection.SendAsync("UserLogin", AccountManager.Instance.Account, AccountManager.Instance.NickName);
             }
-            catch {}
-            await connection.SendAsync("UserLogin", AccountManager.Instance.Account);
+            catch (Exception e)
+            {
+
+            }
         }
 
         /// <summary>
@@ -90,7 +105,10 @@ namespace TravelFriend.Windows.Chat
 
         public async void Logout()
         {
-            await connection.SendAsync("UserLogout");
+            if (connection != null)
+            {
+                await connection.SendAsync("UserLogout");
+            }
         }
     }
 }

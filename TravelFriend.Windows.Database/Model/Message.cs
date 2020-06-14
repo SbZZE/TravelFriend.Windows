@@ -30,5 +30,15 @@ namespace TravelFriend.Windows.Database.Model
         /// 是否为我发送的
         /// </summary>
         public bool IsSendByMe { get; set; }
+        /// <summary>
+        /// 消息类型
+        /// </summary>
+        public MessageType Type { get; set; }
+    }
+
+    public enum MessageType
+    {
+        Tip,
+        Message
     }
 }

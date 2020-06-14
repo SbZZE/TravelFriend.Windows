@@ -8,6 +8,16 @@
              xmlns:common="clr-namespace:TravelFriend.Windows.Common"
              Width="470" Height="470">
     <UserControl.Resources>
+        <DataTemplate x:Key="Tip">
+            <Grid Margin="0 5 0 0" Width="430">
+                <Border CornerRadius="10" Background="{StaticResource LightGray}" MaxWidth="300" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel Margin="15 5" Orientation="Horizontal">
+                        <TextBlock Text="{Binding NickName}" FontSize="12" Foreground="{StaticResource LightGreen}"/>
+                        <TextBlock Text="{Binding Content}" FontSize="12" Foreground="{StaticResource Gray}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </DataTemplate>
         <DataTemplate x:Key="LeftMessage">
             <Grid Margin="0 5 0 0" Width="430">
                 <Grid.RowDefinitions>
@@ -83,7 +93,8 @@
                 <ListBox x:Name="Message" Grid.Row="1" HorizontalAlignment="Stretch">
                     <ListBox.ItemTemplateSelector>
                         <local:ChatMessageDataTemplateSelector LeftMessageTemplate="{StaticResource LeftMessage}"
-                                                                RightMessageTemplate="{StaticResource RightMessage}">
+                                                               RightMessageTemplate="{StaticResource RightMessage}"
+                                                               TipTemplate="{StaticResource Tip}">
                         </local:ChatMessageDataTemplateSelector>
                     </ListBox.ItemTemplateSelector>
                 </ListBox>

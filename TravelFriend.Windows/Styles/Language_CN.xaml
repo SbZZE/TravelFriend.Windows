@@ -63,4 +63,6 @@
     <sys:String x:Key="Member">队员</sys:String>
     <sys:String x:Key="InputSendMessage">请输入要发送的消息</sys:String>
     <sys:String x:Key="Send">发送</sys:String>
+    <sys:String x:Key="Logined">已上线</sys:String>
+    <sys:String x:Key="Logouted">已下线</sys:String>
 </ResourceDictionary>

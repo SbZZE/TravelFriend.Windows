@@ -23,5 +23,7 @@ namespace TravelFriend.Windows.Styles
         public static string RegisterFail = (string)App.Current.Resources["RegisterFail"];
         public static string Leader = (string)App.Current.Resources["Leader"];
         public static string Member = (string)App.Current.Resources["Member"];
+        public static string Logined = (string)App.Current.Resources["Logined"];
+        public static string Logouted = (string)App.Current.Resources["Logouted"];
     }
 }

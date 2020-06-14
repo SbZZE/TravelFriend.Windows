@@ -11,19 +11,29 @@ namespace TravelFriend.Windows.Chat
     {
         public DataTemplate LeftMessageTemplate { get; set; }
         public DataTemplate RightMessageTemplate { get; set; }
+        public DataTemplate TipTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             Message message = item as Message; //CombinedEnity为绑定数据对象
-            bool isSendByMe = message.IsSendByMe;
-            if (isSendByMe)
+            switch (message.Type)
             {
-                return RightMessageTemplate;
+                case MessageType.Tip:
+                    return TipTemplate;
+                case MessageType.Message:
+                    bool isSendByMe = message.IsSendByMe;
+                    if (isSendByMe)
+                    {
+                        return RightMessageTemplate;
+                    }
+                    else
+                    {
+                        return LeftMessageTemplate;
+                    }
+                default:
+                    return null;
             }
-            else
-            {
-                return LeftMessageTemplate;
-            }
+
         }
     }
 }
