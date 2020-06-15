@@ -20,26 +20,23 @@ namespace TravelFriend.Windows.Chat
     /// <summary>
     /// ChatPopup.xaml 的交互逻辑
     /// </summary>
-    public partial class ChatPopup : UserControl, IObserver
+    public partial class ChatPopup : Popup, IObserver
     {
         public ChatPopup()
         {
             InitializeComponent();
-            IsVisibleChanged += ChatPopup_IsVisibleChanged;
+            Opened += ChatPopup_Opened;
             ChatManager.Instance.MessageSubject.Add(this);//订阅头像变化
         }
 
-        private void ChatPopup_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void ChatPopup_Opened(object sender, EventArgs e)
         {
-            if (IsVisible)
-            {
-                TeamAvatar.UpdateWithHttp();
-            }
+            TeamAvatar.UpdateWithHttp();
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            IsOpen = false;
         }
 
         public void Update()
@@ -51,7 +48,7 @@ namespace TravelFriend.Windows.Chat
 
         private void Send_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            if ((sender as FrameworkElement).DataContext is TeamModel teamModel)
+            if (!string.IsNullOrEmpty(Input.Text) && (sender as FrameworkElement).DataContext is TeamModel teamModel)
             {
                 ChatManager.Instance.SendMessage(teamModel.TeamId, AccountManager.Instance.NickName, DateTime.Now.ToString("hh:MM"), Input.Text);
                 Input.Text = string.Empty;

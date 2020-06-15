@@ -149,12 +149,6 @@ namespace TravelFriend.Windows
             TeamAvatarList.ItemsSource = TeamsList;
         }
 
-        public void InsertToFirst(TeamChatAvatar teamChatAvatar)
-        {
-            var index = TeamsList.IndexOf(teamChatAvatar);
-            TeamsList.Move(index, 0);
-        }
-
         public async void ReloadTeams()
         {
             if (TeamsList != null && TeamsList.Count != 0)

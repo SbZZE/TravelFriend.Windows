@@ -35,9 +35,14 @@ namespace TravelFriend.Windows.Chat
             //主界面更新
             if (App.Current.MainWindow is MainWindow mainWindow)
             {
-                mainWindow.InsertToFirst(this);
+                mainWindow.ChatPopup.IsOpen = false;
+                mainWindow.ChatPopup.Message.Items.Clear();
+                mainWindow.ChatPopup.PlacementTarget = this;
+                mainWindow.ChatPopup.Placement = System.Windows.Controls.Primitives.PlacementMode.Top;
+                mainWindow.ChatPopup.VerticalOffset = 50;
+                mainWindow.ChatPopup.HorizontalOffset = -10;
                 mainWindow.ChatPopup.DataContext = (sender as FrameworkElement).DataContext;
-                mainWindow.ChatPopup.Visibility = Visibility.Visible;
+                mainWindow.ChatPopup.IsOpen = true;
             }
         }
     }
