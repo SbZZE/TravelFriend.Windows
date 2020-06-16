@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Team.CreateTeam"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelFriend.Windows.Team"
+             xmlns:common="clr-namespace:TravelFriend.Windows.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="320" d:DesignWidth="450">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="创建团队" Margin="34 16 275 0" FontSize="22" VerticalAlignment="Center" Foreground="{StaticResource MainGreen}"/>
+                <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Source="/Resources/Green/Close.png" VerticalAlignment="Center"  Margin="0 16 0 0"/>
+            </StackPanel>
+            <Border BorderBrush="{DynamicResource Gray}" BorderThickness="0.5" Margin="34 8 26 0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBlock Text="{StaticResource TeamName}" Margin="33 29 19 0" FontSize="14"/>
+            <TextBox x:Name="TeamName" Width="280" Height="30" VerticalAlignment="Top" BorderBrush="{StaticResource MainGreen}" BorderThickness="1.5" Margin="0 24 0 0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBlock Text="{StaticResource TeamProfile}" Margin="33 40 19 0" FontSize="14"/>
+            <TextBox x:Name="TeamProfile" Width="280" Height="114" VerticalAlignment="Top" BorderBrush="{StaticResource MainGreen}" BorderThickness="1.5" Margin="0 30 0 0" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button x:Name="Determine" Click="Determine_Click" Width="70" Height="30" Content="{StaticResource Determine}" Background="{StaticResource MainGreen}" BorderThickness="0" Margin="156 16 42 0" VerticalAlignment="Top"/>
+            <Button x:Name="Cancel" Click="Cancel_Click" Width="70" Height="30" Content="{StaticResource Cancel}" Background="Transparent" BorderBrush="{StaticResource MainGreen}" BorderThickness="1" Margin="0 16 0 0" VerticalAlignment="Top" Foreground="Black"/>
+        </StackPanel>
+        <common:Toast x:Name="Toast" Grid.RowSpan="4"/>
+    </Grid>
+</UserControl>
