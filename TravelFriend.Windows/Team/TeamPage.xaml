@@ -31,6 +31,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <!--CodeReview这里加点击事件，然后在事件里面写mainWindow里面的你命名的那个你的CreateTeam的控件展示，还有逻辑什么的-->
         <Button x:Name="CreateTeam" Content="{DynamicResource CreateTeam}" Margin="0 5 5 0" FontSize="12" Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Background="{StaticResource MainGreen}" BorderThickness="0"/>
         <UserControl x:Name="DetailContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>

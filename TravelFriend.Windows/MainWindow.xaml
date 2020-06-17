@@ -289,6 +289,7 @@
             <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
             <chat:ChatPopup x:Name="ChatPopup" Grid.ColumnSpan="2" Grid.RowSpan="2" StaysOpen="False"/>
             <main:SettingPopup x:Name="SettingPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=Setting}" VerticalOffset="5" HorizontalOffset="-10" StaysOpen="False"/>
+            <!--CodeReview这里模仿加上你的创建团队，先隐藏，在你要展示的时候再设置成Visible，要写Name-->
             <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Grid>

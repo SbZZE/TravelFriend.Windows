@@ -48,7 +48,8 @@ namespace TravelFriend.Windows.Team
             if (response.Ok)
             {
                 Visibility = Visibility.Collapsed;
-                var window = (MainWindow)App.Current.MainWindow;
+                var window = (MainWindow)App.Current.MainWindow;//CodeReview这里用if(App.Current.MainWindow is MainWindow window){  }，这样强转失败不会报错
+                                                                //，会先判断前面那个是不是 MainWindow类型，是的话命名为window，以后最好都这样写
                 window.Toast.Show(response.message);
             }
             else

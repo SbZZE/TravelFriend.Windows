@@ -7,6 +7,7 @@
              xmlns:common="clr-namespace:TravelFriend.Windows.Common"
              mc:Ignorable="d" 
              d:DesignHeight="320" d:DesignWidth="450">
+    <!--CodeReview这里参考UpdatePersonalData界面的做一个背景黑色透明的33行-->
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,6 +17,7 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <StackPanel Orientation="Horizontal">
+                <!--CodeReview中文全都写到CN里面-->
                 <TextBlock Text="创建团队" Margin="34 16 275 0" FontSize="22" VerticalAlignment="Center" Foreground="{StaticResource MainGreen}"/>
                 <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Source="/Resources/Green/Close.png" VerticalAlignment="Center"  Margin="0 16 0 0"/>
             </StackPanel>
