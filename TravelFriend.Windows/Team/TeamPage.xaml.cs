@@ -103,5 +103,18 @@ namespace TravelFriend.Windows.Team
             GC.WaitForPendingFinalizers();
             GC.Collect();
         }
+
+        /// <summary>
+        /// 展示CreateTeam控件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateTeam_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.Current.MainWindow is MainWindow mainwindow)
+            {
+                mainwindow.CreateTeam.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
