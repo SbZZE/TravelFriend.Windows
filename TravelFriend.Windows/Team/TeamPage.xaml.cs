@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
@@ -102,19 +101,6 @@ namespace TravelFriend.Windows.Team
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
-        }
-
-        /// <summary>
-        /// 展示CreateTeam控件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CreateTeam_Click(object sender, RoutedEventArgs e)
-        {
-            if (App.Current.MainWindow is MainWindow mainwindow)
-            {
-                mainwindow.CreateTeam.Visibility = Visibility.Visible;
-            }
         }
     }
 }

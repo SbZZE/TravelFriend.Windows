@@ -50,7 +50,7 @@ namespace TravelFriend.Windows.Login
                 Toast.Show(RStrings.PasswordNotSame);
                 return;
             }
-            
+
             //注册逻辑
             var response = await HttpManager.Instance.PostAsync<HttpResponse>(new RegisterRequest(UserName.Text, Password.Password, NickName.Text));
             if (response.Ok)

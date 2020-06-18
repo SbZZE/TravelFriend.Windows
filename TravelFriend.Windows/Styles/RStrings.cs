@@ -25,7 +25,5 @@ namespace TravelFriend.Windows.Styles
         public static string Member = (string)App.Current.Resources["Member"];
         public static string Logined = (string)App.Current.Resources["Logined"];
         public static string Logouted = (string)App.Current.Resources["Logouted"];
-        public static string InputTeamName = (string)App.Current.Resources["InputTeamName"];   
-        public static string InputTeamProfile = (string)App.Current.Resources["InputTeamProfile"];
     }
 }
