@@ -26,7 +26,6 @@ namespace TravelFriend.Windows.Team
         public UpdateTeamData()
         {
             InitializeComponent();
-            DataContext = new TeamModel();
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -44,7 +43,7 @@ namespace TravelFriend.Windows.Team
             var data = (sender as FrameworkElement).DataContext;
             if(data is TeamModel teamModel)
             {
-                var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateTeamRequest(teamModel.TeamId, teamModel.TeamName, teamModel.Introduction));
+                var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateTeamRequest(teamModel.TeamId, TeamName.Text, TeamProfile.Text));
                 if (response.Ok)
                 {
                     Visibility = Visibility.Collapsed;

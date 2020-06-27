@@ -12,6 +12,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Http;
+using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows.Team
 {
@@ -73,6 +74,10 @@ namespace TravelFriend.Windows.Team
         {
             if (App.Current.MainWindow is MainWindow mainWindow)
             {
+                mainWindow.UpdateTeamData.DataContext = new TeamModel()
+                {
+                    TeamId = TeamId
+                };
                 mainWindow.UpdateTeamData.Visibility = Visibility.Visible;
             }
         }
