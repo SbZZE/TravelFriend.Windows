@@ -62,7 +62,7 @@ namespace TravelFriend.Windows.Main
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
             int gender = ViewModel.Gender == "0" ? 0 : 1;
-            var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateUserInfoRequest(AccountManager.Instance.Account, ViewModel.NickName, ViewModel.Gender, ViewModel.Birthday, ViewModel.Address, ViewModel.Signature));
+            var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateUserInfoRequest(AccountManager. Instance.Account, ViewModel.NickName, ViewModel.Gender, ViewModel.Birthday, ViewModel.Address, ViewModel.Signature));
             if (response.Ok)
             {
                 Visibility = Visibility.Collapsed;

@@ -68,5 +68,13 @@ namespace TravelFriend.Windows.Team
         {
             Scroll.ScrollToHorizontalOffset(Scroll.HorizontalOffset + 220);
         }
+
+        private void UpdateTeamInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.UpdateTeamData.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
