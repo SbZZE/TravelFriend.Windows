@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Album.AlbumPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelFriend.Windows.Album"
+             mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Background="{StaticResource BackgroundGray}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" Margin="10 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image x:Name="Return" MouseLeftButtonUp="Return_MouseLeftButtonUp" Cursor="Hand" Source="/Resources/Green/Return.png" Width="24" Height="24" HorizontalAlignment="Left" SnapsToDevicePixels="True"/>
+            <TextBlock Grid.Column="1" Text="{DynamicResource Return}" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Foreground="{StaticResource MainGreen}" Margin="5 0 0 0" FontWeight="Bold" MouseLeftButtonUp="Return_MouseLeftButtonUp"/>
+        </Grid>
+        <Button Grid.Row="1" Width="200" Height="30" Content="shangchuan" Click="Button_Click">
+            
+        </Button>
+    </Grid>
+</UserControl>

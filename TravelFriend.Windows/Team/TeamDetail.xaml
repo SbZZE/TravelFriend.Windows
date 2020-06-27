@@ -68,5 +68,6 @@
         <ScrollViewer Grid.Row="3">
             <WrapPanel x:Name="AlbumList"/>
         </ScrollViewer>
+        <UserControl Grid.RowSpan="4" x:Name="AlbumDetailContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>
