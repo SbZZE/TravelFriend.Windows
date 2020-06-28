@@ -14,6 +14,7 @@ using TravelFriend.Windows.Album;
 using TravelFriend.Windows.Database.Data;
 using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
+using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows.Team
 {
@@ -82,6 +83,18 @@ namespace TravelFriend.Windows.Team
         private void Right_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Scroll.ScrollToHorizontalOffset(Scroll.HorizontalOffset + 220);
+        }
+
+        private void UpdateTeamInfo_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.UpdateTeamData.DataContext = new TeamModel()
+                {
+                    TeamId = TeamId
+                };
+                mainWindow.UpdateTeamData.Visibility = Visibility.Visible;
+            }
         }
     }
 }
