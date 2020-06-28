@@ -43,7 +43,7 @@
             </Grid.ColumnDefinitions>
             <Image x:Name="Return" MouseLeftButtonUp="Return_MouseLeftButtonUp" Cursor="Hand" Source="/Resources/Green/Return.png" Width="24" Height="24" HorizontalAlignment="Left" SnapsToDevicePixels="True"/>
             <TextBlock Grid.Column="1" Text="{DynamicResource Return}" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Foreground="{StaticResource MainGreen}" Margin="5 0 0 0" FontWeight="Bold" MouseLeftButtonUp="Return_MouseLeftButtonUp"/>
-            <Button Grid.Column="2" x:Name="UpdateTeamInfo" Content="{DynamicResource UpdateTeamInfo}" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="White" BorderThickness="1" BorderBrush="{StaticResource MainGreen}" Foreground="{StaticResource MainGreen}"/>
+            <Button Grid.Column="2" x:Name="UpdateTeamInfo" Click="UpdateTeamInfo_Click" Content="{DynamicResource UpdateTeamInfo}" Margin="0 0 20 0" HorizontalAlignment="Right" VerticalAlignment="Center" Background="White" BorderThickness="1" BorderBrush="{StaticResource MainGreen}" Foreground="{StaticResource MainGreen}"/>
             <Button Grid.Column="3" x:Name="CreateAlbum" Content="{DynamicResource CreateAlbum}" HorizontalAlignment="Right" VerticalAlignment="Center" Background="{StaticResource MainGreen}" BorderThickness="0"/>
         </Grid>
         <Grid Grid.Row="1" Margin="10 40 10 0">

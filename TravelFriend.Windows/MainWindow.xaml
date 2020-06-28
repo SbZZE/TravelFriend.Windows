@@ -290,6 +290,7 @@
             <chat:ChatPopup x:Name="ChatPopup" Grid.ColumnSpan="2" Grid.RowSpan="2" StaysOpen="False"/>
             <main:SettingPopup x:Name="SettingPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=Setting}" VerticalOffset="5" HorizontalOffset="-10" StaysOpen="False"/>
             <team:CreateTeam x:Name="CreateTeam" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
+            <team:UpdateTeamData x:Name="UpdateTeamData" Grid.RowSpan="2" Grid.ColumnSpan="2" Visibility="Collapsed"/>
             <main:UpdatePersonalData x:Name="UpdatePersonalData" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed"/>
             <common:Toast x:Name="Toast" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         </Grid>
