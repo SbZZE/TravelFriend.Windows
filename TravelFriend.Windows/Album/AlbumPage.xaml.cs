@@ -23,7 +23,7 @@ namespace TravelFriend.Windows.Album
         private readonly string teamId;
         private readonly string albumId;
 
-        public AlbumPage(string teamId,string albumId)
+        public AlbumPage(string teamId, string albumId)
         {
             InitializeComponent();
             this.teamId = teamId;
@@ -41,8 +41,15 @@ namespace TravelFriend.Windows.Album
             if (fileDialog.ShowDialog() == true)
             {
                 var filePath = fileDialog.FileName;
-                BreakPointManager.BreakPointUpload(teamId, albumId, Http.Album.AlbumType.TEAM, filePath);
+                var breakPointManager = new BreakPointManager();
+                breakPointManager.UploadStart += BreakPointManager_UploadStart;
+                breakPointManager.UploadAsync(teamId, albumId, Http.Album.AlbumType.TEAM, filePath);
             }
+        }
+
+        private void BreakPointManager_UploadStart()
+        {
+            
         }
     }
 }

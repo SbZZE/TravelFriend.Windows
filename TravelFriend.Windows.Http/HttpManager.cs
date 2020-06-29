@@ -195,89 +195,39 @@ namespace TravelFriend.Windows.Http
         /// <typeparam name="T">返回值类型</typeparam>
         /// <param name="request">上传请求</param>
         /// <returns></returns>
-        public async Task<T> BreakPointUpload<T>(UploadAlbumFileRequest request, byte[] fileChunk) where T : HttpResponse, new()
+        public async Task<T> BreakPointUploadAsync<T>(UploadAlbumFileRequest request, byte[] fileChunk) where T : HttpResponse, new()
         {
+            var client = new RestClient(request.Url);
+            client.Timeout = -1;
+            var restRequest = new RestRequest(Method.POST);
+            restRequest.AddHeader("token", AccountManager.Instance.UserToken);
+            restRequest.AddParameter("targetid", request.TargetId);
+            restRequest.AddParameter("albumid", request.AlbumId);
+            restRequest.AddParameter("albumtype", (int)request.AlbumType);
+            restRequest.AddParameter("filename", request.FileName);
+            restRequest.AddParameter("filetype", (int)request.FileType);
+            restRequest.AddParameter("identifier", request.Identifier);
+            restRequest.AddParameter("totalsize", request.TotalSize);
+            restRequest.AddParameter("totalchunks", request.TotalChunks);
+            restRequest.AddParameter("chunknumber", request.ChunkNumber);
+            restRequest.AddParameter("chunksize", request.ChunkSize);
+            restRequest.AddParameter("currentchunksize", request.CurrentChunkSize);
+            //restRequest.AddJsonBody(JsonConvert.SerializeObject(request));
+            restRequest.AddFileBytes("file", fileChunk, request.FileName);
+            IRestResponse response = await client.ExecuteAsync(restRequest);
             try
             {
-                string body = JsonConvert.SerializeObject(request);
-                HttpWebRequest http = (HttpWebRequest)WebRequest.Create(request.Url);
-                http.Method = "POST";
-                http.Headers.Add("token", AccountManager.Instance.UserToken);
-                // 组装文件上传表单
-                MultipartFormDataContent multipart = new MultipartFormDataContent
-                {
-                    { new StringContent(body) },
-                    // 文件
-                    { new ByteArrayContent(fileChunk), "filechunk"}
-                };
-                //http.Timeout = 5 * 1000;
-                //byte[] data = Encoding.UTF8.GetBytes(body);
-                //这里必须用表单的ContentType，附带boundary
-                http.ContentType = multipart.Headers.ContentType.ToString();
-                http.ContentLength = multipart.Headers.ContentLength.Value;
-                var stream = await http.GetRequestStreamAsync();
-                await multipart.CopyToAsync(stream);
-                stream.Close();
-                //await stream.WriteAsync(data, 0, data.Length);
-
-                using (WebResponse response = await http.GetResponseAsync())
-                {
-                    string json = string.Empty;
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        json = await reader.ReadToEndAsync();
-                    }
-                    Console.WriteLine(json);
-                    T result = JsonConvert.DeserializeObject<T>(json);
-                    return result;
-                }
+                T result = JsonConvert.DeserializeObject<T>(response.Content);
+                return result;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine("--------------");
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-                Console.WriteLine("--------------");
-                var error = new T
+                return new T
                 {
-                    code = 100,
-                    message = e.Message
+                    code = (int)response.StatusCode,
+                    message = response.ErrorMessage
                 };
-                return error;
             }
-
-            //var client = new RestClient(request.Url);
-            //client.Timeout = -1;
-            //var restRequest = new RestRequest(Method.POST);
-            //restRequest.AddHeader("token", AccountManager.Instance.UserToken);
-            //restRequest.AddParameter("targetid", request.TargetId);
-            //restRequest.AddParameter("albumid", request.AlbumId);
-            //restRequest.AddParameter("albumtype", 1);
-            //restRequest.AddParameter("filename", request.FileName);
-            //restRequest.AddParameter("filetype", 1);
-            //restRequest.AddParameter("identifier", request.Identifier);
-            //restRequest.AddParameter("totalsize", request.TotalSize);
-            //restRequest.AddParameter("totalchunks", request.TotalChunks);
-            //restRequest.AddParameter("chunknumber", request.ChunkNumber);
-            //restRequest.AddParameter("chunksize", request.ChunkSize);
-            //restRequest.AddParameter("currentchunksize", request.CurrentChunkSize);
-            ////restRequest.AddJsonBody(JsonConvert.SerializeObject(request));
-            ////restRequest.AddFile("filechunk", fileChunk, request.FileName);
-            //IRestResponse response = client.Execute(restRequest);
-            //try
-            //{
-            //    T result = JsonConvert.DeserializeObject<T>(response.Content);
-            //    return result;
-            //}
-            //catch (Exception)
-            //{
-            //    return new T
-            //    {
-            //        code = (int)response.StatusCode,
-            //        message = response.ErrorMessage
-            //    };
-            //}
-
         }
     }
 }
