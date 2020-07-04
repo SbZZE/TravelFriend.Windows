@@ -10,7 +10,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Album;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows.Team
@@ -48,9 +50,20 @@ namespace TravelFriend.Windows.Team
                 {
                     foreach (var album in albumResponse.Albums)
                     {
-                        AlbumList.Children.Add(new AlbumCard() { DataContext = album });
+                        var albumCard = new AlbumCard() { DataContext = album };
+                        albumCard.MouseLeftButtonUp += AlbumCard_MouseLeftButtonUp;
+                        AlbumList.Children.Add(albumCard);
                     }
                 }
+            }
+        }
+
+        private void AlbumCard_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if ((sender as FrameworkElement).DataContext is TeamAlbum teamAlbum)
+            {
+                var album = new AlbumPage(TeamId, teamAlbum.AlbumId);
+                AlbumDetailContainer.Content = album;
             }
         }
 

@@ -70,4 +70,5 @@
     <sys:String x:Key="InputTeamProfile">请输入团队简介</sys:String>
     <sys:String x:Key="InputTeamName">请输入团队名称</sys:String>
     <sys:String x:Key="Determine">确定</sys:String>
+    <sys:String x:Key="Transport">传输</sys:String>
 </ResourceDictionary>

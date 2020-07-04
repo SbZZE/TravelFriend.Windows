@@ -25,6 +25,8 @@
     <None Remove="Resources\Gray\Message.png" />
     <None Remove="Resources\Gray\Min.png" />
     <None Remove="Resources\Gray\NoMax.png" />
+    <None Remove="Resources\Gray\Pause.png" />
+    <None Remove="Resources\Gray\Play.png" />
     <None Remove="Resources\Gray\Right.png" />
     <None Remove="Resources\Gray\Search.png" />
     <None Remove="Resources\Gray\Send.png" />
@@ -38,13 +40,17 @@
     <None Remove="Resources\Green\Left.png" />
     <None Remove="Resources\Green\Logo.png" />
     <None Remove="Resources\Green\Min.png" />
+    <None Remove="Resources\Green\Pause.png" />
+    <None Remove="Resources\Green\Play.png" />
     <None Remove="Resources\Green\Return.png" />
     <None Remove="Resources\Green\Right.png" />
     <None Remove="Resources\Green\Send.png" />
     <None Remove="Resources\Green\Signature.png" />
     <None Remove="Resources\Green\Team.png" />
+    <None Remove="Resources\Green\Transport.png" />
     <None Remove="Resources\Green\Travel.png" />
     <None Remove="Resources\Home.png" />
+    <None Remove="Resources\Image.png" />
     <None Remove="Resources\LoginAccount.png" />
     <None Remove="Resources\LoginPassword.png" />
     <None Remove="Resources\Logo.png" />
@@ -52,7 +58,9 @@
     <None Remove="Resources\Min.png" />
     <None Remove="Resources\Min_Green.png" />
     <None Remove="Resources\Team.png" />
+    <None Remove="Resources\Transport.png" />
     <None Remove="Resources\Travel.png" />
+    <None Remove="Resources\Video.png" />
     <None Remove="Resources\zhangzhier.png" />
     <None Remove="Team\TeamDetail" />
   </ItemGroup>
@@ -106,6 +114,12 @@
     <Resource Include="Resources\Gray\NoMax.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Gray\Pause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\Play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Gray\Right.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -157,6 +171,12 @@
     <Resource Include="Resources\Green\Min.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Green\Pause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Green\Play.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Green\Return.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -172,10 +192,16 @@
     <Resource Include="Resources\Green\Team.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Green\Transport.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Green\Travel.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Image.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Logo.png">
@@ -190,7 +216,13 @@
     <Resource Include="Resources\Team.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Transport.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Travel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Video.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\zhangzhier.png">

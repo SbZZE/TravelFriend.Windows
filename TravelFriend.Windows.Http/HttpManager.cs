@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Http.Album;
+using TravelFriend.Windows.Http.BreakPoint;
 
 namespace TravelFriend.Windows.Http
 {
@@ -156,7 +159,6 @@ namespace TravelFriend.Windows.Http
             }
         }
 
-
         /// <summary>
         /// 上传文件
         /// </summary>
@@ -172,6 +174,47 @@ namespace TravelFriend.Windows.Http
             restRequest.AddJsonBody(JsonConvert.SerializeObject(uploadRequest));
             restRequest.AddFile(uploadRequest.FileKey, uploadRequest.FilePath);
             IRestResponse response = client.Execute(restRequest);
+            try
+            {
+                T result = JsonConvert.DeserializeObject<T>(response.Content);
+                return result;
+            }
+            catch (Exception)
+            {
+                return new T
+                {
+                    code = (int)response.StatusCode,
+                    message = response.ErrorMessage
+                };
+            }
+        }
+
+        /// <summary>
+        /// 断点上传文件
+        /// </summary>
+        /// <typeparam name="T">返回值类型</typeparam>
+        /// <param name="request">上传请求</param>
+        /// <returns></returns>
+        public async Task<T> BreakPointUploadAsync<T>(UploadAlbumFileRequest request, byte[] fileChunk) where T : HttpResponse, new()
+        {
+            var client = new RestClient(request.Url);
+            client.Timeout = -1;
+            var restRequest = new RestRequest(Method.POST);
+            restRequest.AddHeader("token", AccountManager.Instance.UserToken);
+            restRequest.AddParameter("targetid", request.TargetId);
+            restRequest.AddParameter("albumid", request.AlbumId);
+            restRequest.AddParameter("albumtype", (int)request.AlbumType);
+            restRequest.AddParameter("filename", request.FileName);
+            restRequest.AddParameter("filetype", (int)request.FileType);
+            restRequest.AddParameter("identifier", request.Identifier);
+            restRequest.AddParameter("totalsize", request.TotalSize);
+            restRequest.AddParameter("totalchunks", request.TotalChunks);
+            restRequest.AddParameter("chunknumber", request.ChunkNumber);
+            restRequest.AddParameter("chunksize", request.ChunkSize);
+            restRequest.AddParameter("currentchunksize", request.CurrentChunkSize);
+            //restRequest.AddJsonBody(JsonConvert.SerializeObject(request));
+            restRequest.AddFileBytes("file", fileChunk, request.FileName);
+            IRestResponse response = await client.ExecuteAsync(restRequest);
             try
             {
                 T result = JsonConvert.DeserializeObject<T>(response.Content);
