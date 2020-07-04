@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Common;
+using TravelFriend.Windows.Http.Album;
 using TravelFriend.Windows.Http.BreakPoint;
+using TravelFriend.Windows.Transport;
 
 namespace TravelFriend.Windows.Album
 {
@@ -20,14 +24,20 @@ namespace TravelFriend.Windows.Album
     /// </summary>
     public partial class AlbumPage : UserControl
     {
-        private readonly string teamId;
-        private readonly string albumId;
+        private string TeamId;
+        private string AlbumId;
+        private string TeamName;
+        private string AlbumName;
+        private AlbumType AlbumType;
 
-        public AlbumPage(string teamId, string albumId)
+        public AlbumPage(string teamId, string albumId, string teamName, string albumName, AlbumType albumType)
         {
             InitializeComponent();
-            this.teamId = teamId;
-            this.albumId = albumId;
+            TeamId = teamId;
+            AlbumId = albumId;
+            TeamName = teamName;
+            AlbumName = albumName;
+            AlbumType = albumType;
         }
 
         private void Return_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -35,21 +45,28 @@ namespace TravelFriend.Windows.Album
             this.Visibility = Visibility.Collapsed;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog();
+            var fileDialog = new OpenFileDialog()
+            {
+                Multiselect = true,
+                Filter = FileHelper.FileFileter
+            };
             if (fileDialog.ShowDialog() == true)
             {
-                var filePath = fileDialog.FileName;
-                var breakPointManager = new BreakPointManager();
-                breakPointManager.UploadProgressChanged += BreakPointManager_UploadProgressChanged;
-                await breakPointManager.UploadAsync(teamId, albumId, Http.Album.AlbumType.TEAM, filePath);
+                var filePaths = fileDialog.FileNames;
+                foreach (var filePath in filePaths)
+                {
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    if (App.Current.MainWindow is MainWindow mainWindow)
+                    {
+                        
+                        var uploadBlock = new UploadBlock(fileInfo.Name, ((double)fileInfo.Length / 1024 / 1024).ToString("0.00"), FileHelper.GetFileType(fileInfo.Extension), $"{TeamName}/{AlbumName}");
+                        mainWindow.TransportContainer.UploadList.Items.Add(uploadBlock);
+                        uploadBlock.StartUpload(TeamId, AlbumId, AlbumType, filePath);
+                    }
+                }
             }
-        }
-
-        private void BreakPointManager_UploadProgressChanged(double progress)
-        {
-            Progress.Value = progress;
         }
     }
 }

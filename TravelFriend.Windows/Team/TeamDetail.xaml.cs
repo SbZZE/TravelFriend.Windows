@@ -23,10 +23,12 @@ namespace TravelFriend.Windows.Team
     public partial class TeamDetail : UserControl
     {
         private string TeamId;
-        public TeamDetail(string teamId)
+        private string TeamName;
+        public TeamDetail(string teamId, string teamName)
         {
             InitializeComponent();
             TeamId = teamId;
+            TeamName = teamName;
             Loaded += TeamDetail_Loaded;
         }
 
@@ -62,7 +64,7 @@ namespace TravelFriend.Windows.Team
         {
             if ((sender as FrameworkElement).DataContext is TeamAlbum teamAlbum)
             {
-                var album = new AlbumPage(TeamId, teamAlbum.AlbumId);
+                var album = new AlbumPage(TeamId, teamAlbum.AlbumId, TeamName, teamAlbum.AlbumName, Http.Album.AlbumType.TEAM);
                 AlbumDetailContainer.Content = album;
             }
         }

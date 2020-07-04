@@ -27,9 +27,9 @@ namespace TravelFriend.Windows.Http.BreakPoint
         /// </summary>
         public event Action<String, String> UploadFileCompleted;
         /// <summary>
-        /// 上传进度事件(参数:文件路径,文件总大小，上传速度,已上传的字节数,已耗费时间,已上传百分比)
+        /// 上传进度事件(参数:已上传百分比,剩余时间，速度)
         /// </summary>
-        public event Action<Double> UploadProgressChanged;
+        public event Action<double, int, double> UploadProgressChanged;
         /// <summary>
         /// 上传失败事件(参数:文件路径,错误原因)
         /// </summary>
@@ -45,21 +45,12 @@ namespace TravelFriend.Windows.Http.BreakPoint
         #endregion
 
         private const int CHUNKSIZE = 1 * 1024 * 1024;
-        //图片文件所以可能的扩展名
-        static string[] Images = { ".bmp", ".dib", ".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".gif", ".tif", ".tiff" };
-        //视频文件所以可能的扩展名
-        static string[] Videos = { ".mp4", ".avi", ".mkv" };
 
-        public async Task UploadAsync(string targetId, string albumId, AlbumType albumType, string filePath)
+        public async Task UploadAsync(string targetId, string albumId, AlbumType albumType, FileType fileType, string filePath)
         {
             string fileName = Path.GetFileName(filePath);
             string fileExtension = Path.GetExtension(filePath);
             string lastModified = new FileInfo(filePath).LastWriteTime.ToString();
-            FileType fileType = FileType.UNKNOWN;
-            if (Images.Contains(fileExtension))
-                fileType = FileType.IMAGE;
-            if (Videos.Contains(fileExtension))
-                fileType = FileType.VIDEO;
 
             if (fileType != FileType.UNKNOWN)
             {
@@ -67,6 +58,7 @@ namespace TravelFriend.Windows.Http.BreakPoint
                 using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
                     var buffer = new byte[CHUNKSIZE];
+                    double uploadedTime = 0;
                     int uploadedLength = 0;
                     int chunkNumber = 0;
                     int totalSize = (int)fileStream.Length;
@@ -76,6 +68,8 @@ namespace TravelFriend.Windows.Http.BreakPoint
                     //UploadStart();
                     while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
                     {
+                        //开始时间
+                        var startTime = DateTime.Now.Millisecond;
                         //byte转换
                         var finalBuffer = new byte[bytesRead];
                         Buffer.BlockCopy(buffer, 0, finalBuffer, 0, bytesRead);
@@ -88,9 +82,17 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         {
                             break;
                         }
+                        //结束时间
+                        var endTime = DateTime.Now.Millisecond;
+                        //速度计算m/s
+                        var speed = (double)1 / ((double)Math.Abs(endTime - startTime) / 1000);
+                        uploadedTime += ((double)Math.Abs(endTime - startTime) / 1000);
+                        //计算剩余时间
+                        var time = ((double)totalSize / 1024 / 1024) / speed - uploadedTime;
+
                         //当前分片上传成功，上传进度通知
                         uploadedLength += bytesRead;
-                        UploadProgressChanged(Convert.ToDouble((uploadedLength / (Double)totalSize) * 100));
+                        UploadProgressChanged(Convert.ToDouble((uploadedLength / (Double)totalSize) * 100), (int)time, speed);
                         if (response.data != null)
                         {
 

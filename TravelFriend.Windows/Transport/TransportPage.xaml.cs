@@ -27,12 +27,7 @@ namespace TravelFriend.Windows.Transport
 
         private void TransportPage_Loaded(object sender, RoutedEventArgs e)
         {
-            UploadList.Items.Add(new UploadBlock());
-            UploadList.Items.Add(new UploadBlock());
-            UploadList.Items.Add(new UploadBlock());
-            UploadList.Items.Add(new UploadBlock());
-            UploadList.Items.Add(new UploadBlock());
-            UploadList.Items.Add(new UploadBlock());
+            
         }
     }
 }
