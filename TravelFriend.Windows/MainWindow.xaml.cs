@@ -27,6 +27,7 @@ using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Styles;
 using TravelFriend.Windows.Team;
+using TravelFriend.Windows.Transport;
 using TeamModel = TravelFriend.Windows.Database.Model.Team;
 
 namespace TravelFriend.Windows
@@ -131,16 +132,24 @@ namespace TravelFriend.Windows
 
         private void Home_Checked(object sender, RoutedEventArgs e)
         {
+            TransportContainer.Visibility = Visibility.Collapsed;
             PageContainer.Content = new HomePage();
         }
 
         private void Team_Checked(object sender, RoutedEventArgs e)
         {
+            TransportContainer.Visibility = Visibility.Collapsed;
             PageContainer.Content = new TeamPage();
         }
 
         private void Travel_Checked(object sender, RoutedEventArgs e)
         {
+            TransportContainer.Visibility = Visibility.Collapsed;
+        }
+
+        private void Transport_Checked(object sender, RoutedEventArgs e)
+        {
+            TransportContainer.Visibility = Visibility.Visible;
         }
 
         #region Chat

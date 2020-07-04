@@ -9,7 +9,7 @@
         xmlns:common="clr-namespace:TravelFriend.Windows.Common"
         xmlns:main="clr-namespace:TravelFriend.Windows.Main"
         xmlns:local="clr-namespace:TravelFriend.Windows"
-        xmlns:converter="clr-namespace:TravelFriend.Windows.Converter" xmlns:chat="clr-namespace:TravelFriend.Windows.Chat"
+        xmlns:converter="clr-namespace:TravelFriend.Windows.Converter" xmlns:chat="clr-namespace:TravelFriend.Windows.Chat" xmlns:transport="clr-namespace:TravelFriend.Windows.Transport"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" WindowStyle="None"
         Icon="/Resources/Green/Logo.png" MinWidth="1100" MinHeight="750"
         AllowsTransparency="True" StateChanged="Window_StateChanged"
@@ -216,6 +216,35 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
+                        <RadioButton Name="Transport" Cursor="Hand" Checked="Transport_Checked">
+                            <RadioButton.Style>
+                                <Style TargetType="RadioButton">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Grid>
+                                                    <StackPanel Orientation="Horizontal" Margin="40 15">
+                                                        <Image x:Name="TeamImage" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                                        <TextBlock Text="{DynamicResource Transport}" VerticalAlignment="Center" Margin="25 0 0 0" FontSize="14" FontWeight="Bold"/>
+                                                    </StackPanel>
+                                                    <Border Background="Transparent"/>
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter Property="Foreground" Value="{StaticResource MainGreen}"/>
+                                                        <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Green/Transport.png"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="False">
+                                                        <Setter Property="Foreground" Value="Black"/>
+                                                        <Setter TargetName="TeamImage" Property="Source" Value="/Resources/Transport.png"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </RadioButton.Style>
+                        </RadioButton>
                     </StackPanel>
                     <ScrollViewer x:Name="Scroll" Grid.Row="6" Height="50" Margin="10 0" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden">
                         <ListBox x:Name="TeamAvatarList">
@@ -283,9 +312,10 @@
                 </Grid>
             </Border>
             <Border Grid.Column="1" Height="50" BorderBrush="{StaticResource LightGray}" BorderThickness="0 0 0 0.5" Margin="30 0" Opacity="0.5"/>
-            <Border Grid.Row="1" Grid.Column="1" Background="{StaticResource BackgroundGray}">
+            <Grid Grid.Row="1" Grid.Column="1" Background="{StaticResource BackgroundGray}">
                 <UserControl x:Name="PageContainer" Margin="30"/>
-            </Border>
+                <transport:TransportPage x:Name="TransportContainer" Margin="30" Visibility="Collapsed"/>
+            </Grid>
             <main:PersonalDataPopup x:Name="PersonalDataPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=PersonalData}" VerticalOffset="5" StaysOpen="False"/>
             <chat:ChatPopup x:Name="ChatPopup" Grid.ColumnSpan="2" Grid.RowSpan="2" StaysOpen="False"/>
             <main:SettingPopup x:Name="SettingPopup" Placement="Bottom" PlacementTarget="{Binding ElementName=Setting}" VerticalOffset="5" HorizontalOffset="-10" StaysOpen="False"/>

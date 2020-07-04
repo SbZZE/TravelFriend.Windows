@@ -35,21 +35,21 @@ namespace TravelFriend.Windows.Album
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var fileDialog = new OpenFileDialog();
             if (fileDialog.ShowDialog() == true)
             {
                 var filePath = fileDialog.FileName;
                 var breakPointManager = new BreakPointManager();
-                breakPointManager.UploadStart += BreakPointManager_UploadStart;
-                breakPointManager.UploadAsync(teamId, albumId, Http.Album.AlbumType.TEAM, filePath);
+                breakPointManager.UploadProgressChanged += BreakPointManager_UploadProgressChanged;
+                await breakPointManager.UploadAsync(teamId, albumId, Http.Album.AlbumType.TEAM, filePath);
             }
         }
 
-        private void BreakPointManager_UploadStart()
+        private void BreakPointManager_UploadProgressChanged(double progress)
         {
-            
+            Progress.Value = progress;
         }
     }
 }

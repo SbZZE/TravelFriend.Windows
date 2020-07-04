@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Http.Album;
 
@@ -28,7 +29,7 @@ namespace TravelFriend.Windows.Http.BreakPoint
         /// <summary>
         /// 上传进度事件(参数:文件路径,文件总大小，上传速度,已上传的字节数,已耗费时间,已上传百分比)
         /// </summary>
-        public event Action<String, Int64, Int64, Int64, Double, Double> UploadProgressChanged;
+        public event Action<Double> UploadProgressChanged;
         /// <summary>
         /// 上传失败事件(参数:文件路径,错误原因)
         /// </summary>
@@ -43,13 +44,13 @@ namespace TravelFriend.Windows.Http.BreakPoint
         public event Action<String, String> DeleteFileCompleted;
         #endregion
 
-        private const int CHUNKSIZE = 5 * 1024 * 1024;
+        private const int CHUNKSIZE = 1 * 1024 * 1024;
         //图片文件所以可能的扩展名
         static string[] Images = { ".bmp", ".dib", ".jpg", ".jpeg", ".jpe", ".jfif", ".png", ".gif", ".tif", ".tiff" };
         //视频文件所以可能的扩展名
         static string[] Videos = { ".mp4", ".avi", ".mkv" };
 
-        public async void UploadAsync(string targetId, string albumId, AlbumType albumType, string filePath)
+        public async Task UploadAsync(string targetId, string albumId, AlbumType albumType, string filePath)
         {
             string fileName = Path.GetFileName(filePath);
             string fileExtension = Path.GetExtension(filePath);
@@ -66,17 +67,30 @@ namespace TravelFriend.Windows.Http.BreakPoint
                 using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
                 {
                     var buffer = new byte[CHUNKSIZE];
+                    int uploadedLength = 0;
                     int chunkNumber = 0;
                     int totalSize = (int)fileStream.Length;
                     int totalChunks = (int)Math.Ceiling((double)totalSize / CHUNKSIZE);
                     int bytesRead = 0;
+                    //开始上传事件通知
+                    //UploadStart();
                     while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
                     {
-                        Console.WriteLine(bytesRead);
+                        //byte转换
+                        var finalBuffer = new byte[bytesRead];
+                        Buffer.BlockCopy(buffer, 0, finalBuffer, 0, bytesRead);
+                        //上传一个分片
                         var response = await HttpManager.Instance.BreakPointUploadAsync<BreakPointUploadResponse>(
-                                new UploadAlbumFileRequest(targetId, albumId, albumType, fileName, fileType, identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), buffer
+                                new UploadAlbumFileRequest(targetId, albumId, albumType, fileName, fileType, identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
                             );
-
+                        //当前分片上传失败
+                        if (!response.Ok)
+                        {
+                            break;
+                        }
+                        //当前分片上传成功，上传进度通知
+                        uploadedLength += bytesRead;
+                        UploadProgressChanged(Convert.ToDouble((uploadedLength / (Double)totalSize) * 100));
                         if (response.data != null)
                         {
 
