@@ -57,12 +57,12 @@ namespace TravelFriend.Windows.Common
             });
         }
 
-        public async void UpdateWithHttp()
+        public async void UpdateWithHttp(int width, int height)
         {
             //请求获取
             using (MemoryStream ms = new MemoryStream())
             {
-                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.TeamAvatar}?teamid={TeamId}&isCompress=true"), ms);
+                var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.TeamAvatar}?teamid={TeamId}&isCompress=true&width={width}&height={height}"), ms);
                 await Dispatcher.InvokeAsync(() =>
                 {
                     var image = ImageHelper.GetAvatarAsync(ms);

@@ -31,7 +31,7 @@ namespace TravelFriend.Windows.Chat
 
         private void ChatPopup_Opened(object sender, EventArgs e)
         {
-            TeamAvatar.UpdateWithHttp();
+            TeamAvatar.UpdateWithHttp(30, 30);
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -60,7 +60,7 @@ namespace TravelFriend.Windows.Chat
         {
             if (sender is TravelFriend.Windows.Common.UserAvatar avatar)
             {
-                avatar.UpdateWithHttp();
+                avatar.UpdateWithHttp(30, 30);
             }
         }
     }

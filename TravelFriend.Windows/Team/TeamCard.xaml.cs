@@ -27,7 +27,7 @@ namespace TravelFriend.Windows.Team
 
         private void TeamCard_Loaded(object sender, RoutedEventArgs e)
         {
-            Avatar.UpdateWithHttp();
+            Avatar.UpdateWithHttp(80, 80);
         }
     }
 }

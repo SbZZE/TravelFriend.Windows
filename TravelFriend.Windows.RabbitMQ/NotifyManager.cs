@@ -29,7 +29,7 @@ namespace TravelFriend.Windows.RabbitMQ
                 //获取头像
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={userName}&isCompress=true"), ms);
+                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={userName}&isCompress=true&width=100&height=100"), ms);
                     if (ms != null && ms.Length > 0)
                     {
                         ms.Position = 0;

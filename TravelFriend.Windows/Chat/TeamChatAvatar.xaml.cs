@@ -27,7 +27,7 @@ namespace TravelFriend.Windows.Chat
 
         private void TeamChatAvatar_Loaded(object sender, RoutedEventArgs e)
         {
-            Avatar.UpdateWithHttp();
+            Avatar.UpdateWithHttp(30, 30);
         }
 
         private void UserControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
