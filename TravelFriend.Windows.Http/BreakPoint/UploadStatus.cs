@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TravelFriend.Windows.Transport
+namespace TravelFriend.Windows.Http.BreakPoint
 {
     public enum UploadStatus
     {
-        Loading,
-        Pause,
+        Uploading,
+        Pause
     }
 }

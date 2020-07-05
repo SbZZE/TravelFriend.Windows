@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TravelFriend.Windows.Transport"
+             xmlns:local="clr-namespace:TravelFriend.Windows.Transport" xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
              mc:Ignorable="d" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <converter:UploadStatusConverter x:Key="UploadStatusConverter"/>
+    </UserControl.Resources>
     <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource LightGray}" Background="White" Height="40" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
             <Grid.ColumnDefinitions>
@@ -42,7 +45,7 @@
                 <TextBlock x:Name="Timestamp" Grid.Row="1" Text="{Binding Timestamp}" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{StaticResource DarkGray}"/>
                 <TextBlock x:Name="Speed" Grid.Row="1" Grid.Column="1" Text="{Binding Speed}" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="{StaticResource DarkGray}"/>
                 <ProgressBar Height="10" Grid.ColumnSpan="2" Style="{StaticResource MyProgressBar}" VerticalAlignment="Center" Value="{Binding Progress}" BorderThickness="0"/>
-                <Image Grid.Column="2" Grid.RowSpan="2" Margin="10 0 0 0" Source="/Resources/Gray/Pause.png" Width="12" VerticalAlignment="Center"/>
+                <Image x:Name="Pause" Grid.Column="2" Grid.RowSpan="2" Margin="10 0 0 0" Source="{Binding UploadStatus,Converter={StaticResource UploadStatusConverter}}" Width="12" VerticalAlignment="Center" MouseLeftButtonUp="Pause_MouseLeftButtonUp" Cursor="Hand"/>
                 <Image Grid.Column="3" Grid.RowSpan="2" Margin="10 0" Source="/Resources/Gray/Close.png" Width="12" VerticalAlignment="Center"/>
             </Grid>
         </Grid>

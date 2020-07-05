@@ -6,68 +6,104 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http.Album;
 
 namespace TravelFriend.Windows.Http.BreakPoint
 {
     public class BreakPointManager
     {
-        public BreakPointManager()
-        {
-
-        }
-
         #region 事件
         /// <summary>
         /// 上传开始事件(参数:文件路径)
         /// </summary>
-        public event Action UploadStart;
+        public event Action OnUploadStart;
         /// <summary>
-        /// 上传完成事件(参数:文件路径,返回参数)
+        /// 上传完成事件
         /// </summary>
-        public event Action<String, String> UploadFileCompleted;
+        public event Action OnUploadCompleted;
         /// <summary>
         /// 上传进度事件(参数:已上传百分比,剩余时间，速度)
         /// </summary>
-        public event Action<double, int, double> UploadProgressChanged;
+        public event Action<double, int, double> OnUploadProgressChanged;
         /// <summary>
-        /// 上传失败事件(参数:文件路径,错误原因)
+        /// 上传失败事件
         /// </summary>
-        public event Action<String, String> UploadFailure;
-        /// <summary>
-        /// 上传被取消事件(参数:被取消的文件路径)
-        /// </summary>
-        public event Action<String> UploadCancel;
-        /// <summary>
-        /// 已删除未上传完成的文件事件(参数:资源文件名称,返回结果)
-        /// </summary>
-        public event Action<String, String> DeleteFileCompleted;
+        public event Action OnUploadFailure;
         #endregion
-
         private const int CHUNKSIZE = 1 * 1024 * 1024;
+        private UploadStatus UploadStatus = UploadStatus.Pause;
 
-        public async Task UploadAsync(string targetId, string albumId, AlbumType albumType, FileType fileType, string filePath)
+        /// <summary>
+        /// 准备上传
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="targetId"></param>
+        /// <param name="albumId"></param>
+        public void UploadPrepare(string targetId, string albumId, AlbumType albumType, FileType fileType, string filePath)
         {
-            string fileName = Path.GetFileName(filePath);
-            string fileExtension = Path.GetExtension(filePath);
+            FileInfo fileInfo = new FileInfo(filePath);
+            string fileName = fileInfo.Name;
             string lastModified = new FileInfo(filePath).LastWriteTime.ToString();
-
-            if (fileType != FileType.UNKNOWN)
+            var identifier = GenerateMD5($"{AccountManager.Instance.Account}{fileName}{filePath}{lastModified}");
+            Upload uploader;
+            var isUploading = IsUploading(targetId, albumId, identifier);
+            //校验是否在正在上传列表
+            if (isUploading.Item1)
             {
-                var identifier = GenerateMD5($"{AccountManager.Instance.Account}{fileName}{filePath}{lastModified}");
-                using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+                uploader = isUploading.Item2;
+            }
+            else
+            {
+                UploadManager.AddUploader(new Upload()
+                {
+                    UserName = AccountManager.Instance.Account,
+                    FileName = fileName,
+                    FileSize = (int)fileInfo.Length,
+                    FileType = (int)fileType,
+                    TargetId = targetId,
+                    AlbumId = albumId,
+                    AlbumType = (int)albumType,
+                    Progress = 0,
+                    Identifier = identifier,
+                    ChunkNumber = 0,
+                    FilePath = filePath
+                });
+                uploader = UploadManager.GetUploader(targetId, albumId, identifier);
+            }
+            //开始上传
+            UploadStart(uploader);
+        }
+
+        /// <summary>
+        /// 开始上传
+        /// </summary>
+        /// <param name="upload"></param>
+        public async void UploadStart(Upload upload)
+        {
+            UploadStatus = UploadStatus.Uploading;
+            if (upload != null && upload.FileType != (int)FileType.UNKNOWN)
+            {
+                using (FileStream fileStream = new FileStream(upload.FilePath, FileMode.Open, FileAccess.Read))
                 {
                     var buffer = new byte[CHUNKSIZE];
                     double uploadedTime = 0;
-                    int uploadedLength = 0;
-                    int chunkNumber = 0;
-                    int totalSize = (int)fileStream.Length;
+                    int chunkNumber = upload.ChunkNumber;
+                    int totalSize = upload.FileSize;
                     int totalChunks = (int)Math.Ceiling((double)totalSize / CHUNKSIZE);
                     int bytesRead = 0;
-                    //开始上传事件通知
-                    //UploadStart();
+                    int offset = chunkNumber * CHUNKSIZE;
+                    int uploadedLength = offset;
+                    fileStream.Seek((long)offset, SeekOrigin.Begin);
+
                     while ((bytesRead = fileStream.Read(buffer, 0, buffer.Length)) != 0)
                     {
+                        //如果暂停了
+                        if (UploadStatus == UploadStatus.Pause)
+                        {
+                            break;
+                        }
                         //开始时间
                         var startTime = DateTime.Now.Millisecond;
                         //byte转换
@@ -75,13 +111,27 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         Buffer.BlockCopy(buffer, 0, finalBuffer, 0, bytesRead);
                         //上传一个分片
                         var response = await HttpManager.Instance.BreakPointUploadAsync<BreakPointUploadResponse>(
-                                new UploadAlbumFileRequest(targetId, albumId, albumType, fileName, fileType, identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
+                                new UploadAlbumFileRequest(upload.TargetId, upload.AlbumId, (AlbumType)upload.AlbumType, upload.FileName, (FileType)upload.FileType, upload.Identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
                             );
                         //当前分片上传失败
                         if (!response.Ok)
                         {
+                            OnUploadFailure();
                             break;
                         }
+                        //上传完成
+                        if (response.data != null && chunkNumber + 1 == totalChunks)
+                        {
+                            OnUploadCompleted();
+                            UploadManager.DeleteUploader(upload);
+                            break;
+                        }
+                        var progress = Convert.ToDouble((uploadedLength / (Double)totalSize) * 100);
+                        //当前分片上传成功
+                        upload.Progress = progress;
+                        upload.ChunkNumber = chunkNumber;
+                        var a = UploadManager.UpdateUploader(upload);
+                        chunkNumber++;//文件块序号+1
                         //结束时间
                         var endTime = DateTime.Now.Millisecond;
                         //速度计算m/s
@@ -89,18 +139,29 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         uploadedTime += ((double)Math.Abs(endTime - startTime) / 1000);
                         //计算剩余时间
                         var time = ((double)totalSize / 1024 / 1024) / speed - uploadedTime;
-
-                        //当前分片上传成功，上传进度通知
                         uploadedLength += bytesRead;
-                        UploadProgressChanged(Convert.ToDouble((uploadedLength / (Double)totalSize) * 100), (int)time, speed);
-                        if (response.data != null)
-                        {
-
-                        }
-
-                        chunkNumber++;//文件块序号+1
+                        //上传进度通知
+                        OnUploadProgressChanged(progress, (int)time, speed);
                     }
                 }
+            }
+        }
+
+        public void UploadPause()
+        {
+            UploadStatus = UploadStatus.Pause;
+        }
+
+        private (bool, Upload) IsUploading(string targetId, string albumId, string identifier)
+        {
+            var uploader = UploadManager.GetUploader(targetId, albumId, identifier);
+            if (uploader != null)
+            {
+                return (true, uploader);
+            }
+            else
+            {
+                return (false, null);
             }
         }
 
@@ -109,7 +170,7 @@ namespace TravelFriend.Windows.Http.BreakPoint
         /// </summary>
         /// <param name="txt"></param>
         /// <returns>加密后字符串</returns>
-        public static string GenerateMD5(string txt)
+        public string GenerateMD5(string txt)
         {
             using (MD5 mi = MD5.Create())
             {

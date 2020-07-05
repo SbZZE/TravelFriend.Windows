@@ -60,10 +60,9 @@ namespace TravelFriend.Windows.Album
                     FileInfo fileInfo = new FileInfo(filePath);
                     if (App.Current.MainWindow is MainWindow mainWindow)
                     {
-                        
                         var uploadBlock = new UploadBlock(fileInfo.Name, ((double)fileInfo.Length / 1024 / 1024).ToString("0.00"), FileHelper.GetFileType(fileInfo.Extension), $"{TeamName}/{AlbumName}");
                         mainWindow.TransportContainer.UploadList.Items.Add(uploadBlock);
-                        uploadBlock.StartUpload(TeamId, AlbumId, AlbumType, filePath);
+                        uploadBlock.UploadPrepare(TeamId, AlbumId, AlbumType, filePath);
                     }
                 }
             }

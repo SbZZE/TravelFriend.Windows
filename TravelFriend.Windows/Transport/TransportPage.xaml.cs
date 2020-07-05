@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Database.Data;
 
 namespace TravelFriend.Windows.Transport
 {
@@ -27,7 +29,7 @@ namespace TravelFriend.Windows.Transport
 
         private void TransportPage_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            //UploadList.ItemsSource = UploadManager.GetAllUploader(AccountManager.Instance.Account);
         }
     }
 }

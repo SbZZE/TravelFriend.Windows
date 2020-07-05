@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
+using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Http.BreakPoint;
 
 namespace TravelFriend.Windows.Common
@@ -23,6 +26,35 @@ namespace TravelFriend.Windows.Common
                 return FileType.VIDEO;
             else
                 return FileType.UNKNOWN;
+        }
+
+        public static string GetIdentifier(string filePath)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            string fileName = fileInfo.Name;
+            string lastModified = new FileInfo(filePath).LastWriteTime.ToString();
+            return GenerateMD5($"{AccountManager.Instance.Account}{fileName}{filePath}{lastModified}");
+        }
+
+        /// <summary>
+        /// MD5字符串加密
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <returns>加密后字符串</returns>
+        public static string GenerateMD5(string txt)
+        {
+            using (MD5 mi = MD5.Create())
+            {
+                byte[] buffer = Encoding.Default.GetBytes(txt);
+                //开始加密
+                byte[] newBuffer = mi.ComputeHash(buffer);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < newBuffer.Length; i++)
+                {
+                    sb.Append(newBuffer[i].ToString("x2"));
+                }
+                return sb.ToString();
+            }
         }
     }
 }

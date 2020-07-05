@@ -27,6 +27,7 @@ namespace TravelFriend.Windows.Database.Data
             db.CreateTable<Team>();
             db.CreateTable<TeamAlbum>();
             db.CreateTable<TeamMember>();
+            db.CreateTable<Upload>();
         }
 
         public int Add<T>(T model)
@@ -60,10 +61,12 @@ namespace TravelFriend.Windows.Database.Data
             db.DropTable<Team>();
             db.DropTable<TeamAlbum>();
             db.DropTable<TeamMember>();
+            db.DropTable<Upload>();
             db.CreateTable<User>();
             db.CreateTable<Team>();
             db.CreateTable<TeamAlbum>();
             db.CreateTable<TeamMember>();
+            db.CreateTable<Upload>();
         }
     }
 }

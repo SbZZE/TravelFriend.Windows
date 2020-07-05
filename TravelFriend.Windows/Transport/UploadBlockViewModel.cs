@@ -85,12 +85,15 @@ namespace TravelFriend.Windows.Transport
                     int hour = value / 3600;
                     int min = (value - hour * 3600) / 60;
                     int sen = value - hour * 3600 - min * 60;
-                    Timestamp = $"{hour}:{min}:{sen}";
+                    string hourStr = hour > 10 ? hour.ToString() : $"0{hour}";
+                    string minStr = min > 10 ? min.ToString() : $"0{min}";
+                    string senStr = sen > 10 ? sen.ToString() : $"0{sen}";
+                    Timestamp = $"{hourStr}:{minStr}:{senStr}";
                 }
             }
         }
 
-        private string _timestamp = "--.--";
+        private string _timestamp;
         /// <summary>
         /// 剩余时间戳
         /// </summary>
@@ -102,12 +105,12 @@ namespace TravelFriend.Windows.Transport
             }
             set
             {
-                _timestamp = value;
+                _timestamp = string.IsNullOrEmpty(value) ? "--.--" : value;
                 Change(nameof(Timestamp));
             }
         }
 
-        private string _speed = "--.--";
+        private string _speed;
         /// <summary>
         /// 速度
         /// </summary>
@@ -119,7 +122,7 @@ namespace TravelFriend.Windows.Transport
             }
             set
             {
-                _speed = value;
+                _speed = string.IsNullOrEmpty(value) ? "--.--" : value;
                 Change(nameof(Speed));
             }
         }
@@ -140,5 +143,35 @@ namespace TravelFriend.Windows.Transport
                 Change(nameof(Progress));
             }
         }
+
+        private UploadStatus _uploadStatus = UploadStatus.Uploading;
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public UploadStatus UploadStatus
+        {
+            get
+            {
+                return _uploadStatus;
+            }
+            set
+            {
+                _uploadStatus = value;
+                Change(nameof(UploadStatus));
+            }
+        }
+
+        /// <summary>
+        /// 目标
+        /// </summary>
+        public string TargetId { get; set; }
+        /// <summary>
+        /// 相册
+        /// </summary>
+        public string AlbumId { get; set; }
+        /// <summary>
+        /// 唯一标识
+        /// </summary>
+        public string Identifier { get; set; }
     }
 }
