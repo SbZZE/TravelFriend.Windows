@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -88,7 +89,6 @@ namespace TravelFriend.Windows.Http.BreakPoint
                 using (FileStream fileStream = new FileStream(upload.FilePath, FileMode.Open, FileAccess.Read))
                 {
                     var buffer = new byte[CHUNKSIZE];
-                    double uploadedTime = 0;
                     int chunkNumber = upload.ChunkNumber;
                     int totalSize = upload.FileSize;
                     int totalChunks = (int)Math.Ceiling((double)totalSize / CHUNKSIZE);
@@ -105,7 +105,8 @@ namespace TravelFriend.Windows.Http.BreakPoint
                             break;
                         }
                         //开始时间
-                        var startTime = DateTime.Now.Millisecond;
+                        var watch = new Stopwatch();
+                        watch.Start();
                         //byte转换
                         var finalBuffer = new byte[bytesRead];
                         Buffer.BlockCopy(buffer, 0, finalBuffer, 0, bytesRead);
@@ -133,15 +134,14 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         var a = UploadManager.UpdateUploader(upload);
                         chunkNumber++;//文件块序号+1
                         //结束时间
-                        var endTime = DateTime.Now.Millisecond;
-                        //速度计算m/s
-                        var speed = (double)1 / ((double)Math.Abs(endTime - startTime) / 1000);
-                        uploadedTime += ((double)Math.Abs(endTime - startTime) / 1000);
-                        //计算剩余时间
-                        var time = ((double)totalSize / 1024 / 1024) / speed - uploadedTime;
+                        watch.Stop();
                         uploadedLength += bytesRead;
+                        //速度计算byte/s
+                        var speed = CHUNKSIZE * 1000L / watch.ElapsedMilliseconds;
+                        //计算剩余时间
+                        var time = (totalSize - uploadedLength) / speed;
                         //上传进度通知
-                        OnUploadProgressChanged(progress, (int)time, speed);
+                        OnUploadProgressChanged(progress, (int)time, speed / 1024);
                     }
                 }
             }

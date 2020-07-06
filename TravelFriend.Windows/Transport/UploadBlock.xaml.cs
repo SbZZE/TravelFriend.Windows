@@ -57,7 +57,14 @@ namespace TravelFriend.Windows.Transport
         {
             _uploadBlockViewModel.Progress = (int)progress;
             _uploadBlockViewModel.Time = time;
-            _uploadBlockViewModel.Speed = speed.ToString("0.00") + "m/s";
+            if (speed >= 1000)
+            {
+                _uploadBlockViewModel.Speed = (speed / 1000).ToString("0.0") + "m/s";
+            }
+            else
+            {
+                _uploadBlockViewModel.Speed = speed.ToString() + "kb/s";
+            }
         }
 
         private void BreakPointManager_OnUploadFailure()
