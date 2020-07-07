@@ -216,7 +216,7 @@
                                 </Style>
                             </RadioButton.Style>
                         </RadioButton>
-                        <RadioButton Name="Transport" Cursor="Hand" Checked="Transport_Checked">
+                        <RadioButton Name="Transport" Cursor="Hand" Checked="Transport_Checked" Visibility="Collapsed">
                             <RadioButton.Style>
                                 <Style TargetType="RadioButton">
                                     <Setter Property="Template">

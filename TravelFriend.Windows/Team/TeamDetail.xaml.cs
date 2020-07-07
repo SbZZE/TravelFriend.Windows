@@ -48,7 +48,7 @@ namespace TravelFriend.Windows.Team
                 }
 
                 //加载团队相册
-                var albumResponse = await HttpManager.Instance.GetAsync<GetTeamAlbumResponse>(new HttpRequest($"{ApiUtils.TeamAlbum}?teamid={TeamId}"));
+                var albumResponse = await HttpManager.Instance.GetAsync<GetTeamAlbumResponse>(new HttpRequest($"{ApiUtils.AlbumList}?targetid={TeamId}&target=1"));
                 if (albumResponse.Ok)
                 {
                     foreach (var album in albumResponse.Albums)

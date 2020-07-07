@@ -17,8 +17,9 @@ namespace TravelFriend.Windows.Http
         public static string TeamAvatar => BaseUrl + "/team/avatar";
         public static string UpdateTeam => BaseUrl + "/team/teaminfo";
         public static string TeamMember => BaseUrl + "/team/member";
-        public static string TeamAlbum => BaseUrl + "/team/album";
-        public static string TeamAlbumCover => BaseUrl + "/team/album/cover";
+        public static string CreateAlbum => BaseUrl + "/album/create";
+        public static string AlbumList => BaseUrl + "/album/list";
+        public static string AlbumCover => BaseUrl + "/album/cover";
         public static string BreakPointUpload => BaseUrl + "/breakpoint/upload";
     }
 }

@@ -31,7 +31,7 @@ namespace TravelFriend.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private LoginViewModel LoginViewModel;
+        public LoginViewModel LoginViewModel;
         public LoginWindow()
         {
             InitializeComponent();
@@ -103,6 +103,7 @@ namespace TravelFriend.Windows
                 mainWindow.Unlogin.Visibility = Visibility.Collapsed;
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.Team.Visibility = Visibility.Visible;
+                mainWindow.Transport.Visibility = Visibility.Visible;
                 mainWindow.WindowState = WindowState.Normal;
                 RabbitMQ.RabbitMQManager.Connection();
 
