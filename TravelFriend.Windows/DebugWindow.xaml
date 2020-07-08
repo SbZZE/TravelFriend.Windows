@@ -1,0 +1,23 @@
+﻿<Window x:Class="TravelFriend.Windows.DebugWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelFriend.Windows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        AllowsTransparency="True" WindowStyle="None" Cursor="Hand"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" Topmost="True"
+        Title="DebugWindow" Height="330" Width="400" MouseMove="Window_MouseMove">
+    <Grid x:Name="grid">
+        <Image Source="/DEBUG.jpg" Stretch="UniformToFill" Opacity=".8"/>
+        <TextBlock Text="锤三下张之二头确定" Foreground="White" Height="20" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 30"/>
+        
+        <Image x:Name="chuizi" Source="/锤子.png" Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Image.LayoutTransform>
+                <RotateTransform x:Name="Rotate" Angle="-90"/>
+            </Image.LayoutTransform>
+        </Image>
+        <Border Height="100" Width="160" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="40 0 0 0" Background="Transparent" BorderThickness="0" MouseLeftButtonUp="Border_MouseLeftButtonUp" MouseLeftButtonDown="Border_MouseLeftButtonDown"/>
+        <TextBox x:Name="ip" materialDesign:HintAssist.Hint="自己输入ip(只要ip)" VerticalContentAlignment="Center" Padding="5 0" Height="30" Background="White" Width="200" VerticalAlignment="Bottom" HorizontalAlignment="Center" Cursor="IBeam"/>
+    </Grid>
+</Window>

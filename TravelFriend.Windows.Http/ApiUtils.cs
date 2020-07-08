@@ -6,7 +6,18 @@ namespace TravelFriend.Windows.Http
 {
     public class ApiUtils
     {
-        private static string BaseUrl => "http://47.106.139.187:8081/api";
+        private static string baseUrl = "47.106.139.187";
+        public static string BaseUrl
+        {
+            get
+            {
+                return $"http://{baseUrl}:8081/api";
+            }
+            set
+            {
+                baseUrl = string.IsNullOrEmpty(value) ? "47.106.139.187" : value;
+            }
+        }
 
         public static string Register => BaseUrl + "/user/register";
         public static string Login => BaseUrl + "/user/login";

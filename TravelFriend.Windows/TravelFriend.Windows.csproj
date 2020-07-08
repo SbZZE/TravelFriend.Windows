@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DEBUG.jpg" />
     <None Remove="Resources\Add.png" />
     <None Remove="Resources\Close.png" />
     <None Remove="Resources\DefaultBigAvatar.png" />
@@ -63,6 +64,7 @@
     <None Remove="Resources\Video.png" />
     <None Remove="Resources\zhangzhier.png" />
     <None Remove="Team\TeamDetail" />
+    <None Remove="锤子.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,6 +80,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="DEBUG.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -226,6 +231,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\zhangzhier.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="锤子.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -48,6 +48,8 @@ namespace TravelFriend.Windows
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            var debug = new DebugWindow();
+            debug.ShowDialog();
             DataContext = new MainWindowViewModel();
             Home.IsChecked = true;
         }
