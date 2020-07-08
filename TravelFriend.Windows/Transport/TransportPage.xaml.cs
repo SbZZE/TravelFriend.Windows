@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Http.Album;
+using TravelFriend.Windows.Http.BreakPoint;
 
 namespace TravelFriend.Windows.Transport
 {
@@ -24,12 +26,19 @@ namespace TravelFriend.Windows.Transport
         public TransportPage()
         {
             InitializeComponent();
-            Loaded += TransportPage_Loaded;
         }
 
-        private void TransportPage_Loaded(object sender, RoutedEventArgs e)
+        public void LoadTransportList()
         {
-            //UploadList.ItemsSource = UploadManager.GetAllUploader(AccountManager.Instance.Account);
+            var uploaders = UploadManager.GetAllUploader(AccountManager.Instance.Account);
+            foreach (var uploader in uploaders)
+            {
+                var fileSize = ((double)uploader.FileSize / 1024 / 1024).ToString("0.00");
+                var uploadBlock = new UploadBlock(uploader.FileName, fileSize, (FileType)uploader.FileType, uploader.Target);
+                uploadBlock._uploadBlockViewModel.Progress = (int)uploader.Progress;
+                UploadList.Items.Add(uploadBlock);
+                uploadBlock.UploadPrepare(uploader.TargetId, uploader.AlbumId, (AlbumType)uploader.AlbumType, uploader.FilePath);
+            }
         }
     }
 }

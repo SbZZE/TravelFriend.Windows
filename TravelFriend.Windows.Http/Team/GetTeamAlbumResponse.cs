@@ -7,6 +7,6 @@ namespace TravelFriend.Windows.Http
 {
     public class GetTeamAlbumResponse : HttpResponse
     {
-        public List<TeamAlbum> Albums { get; set; }
+        public List<TeamAlbum> Data { get; set; }
     }
 }

@@ -42,7 +42,7 @@ namespace TravelFriend.Windows.Http.BreakPoint
         /// <param name="filePath"></param>
         /// <param name="targetId"></param>
         /// <param name="albumId"></param>
-        public void UploadPrepare(string targetId, string albumId, AlbumType albumType, FileType fileType, string filePath)
+        public Upload UploadPrepare(string targetId, string albumId, AlbumType albumType, FileType fileType, string target, string filePath)
         {
             FileInfo fileInfo = new FileInfo(filePath);
             string fileName = fileInfo.Name;
@@ -69,12 +69,12 @@ namespace TravelFriend.Windows.Http.BreakPoint
                     Progress = 0,
                     Identifier = identifier,
                     ChunkNumber = 0,
-                    FilePath = filePath
+                    FilePath = filePath,
+                    Target = target
                 });
                 uploader = UploadManager.GetUploader(targetId, albumId, identifier);
             }
-            //开始上传
-            UploadStart(uploader);
+            return uploader;
         }
 
         /// <summary>
@@ -115,13 +115,13 @@ namespace TravelFriend.Windows.Http.BreakPoint
                                 new UploadAlbumFileRequest(upload.TargetId, upload.AlbumId, (AlbumType)upload.AlbumType, upload.FileName, (FileType)upload.FileType, upload.Identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
                             );
                         //当前分片上传失败
-                        if (!response.Ok)
+                        if (response.code == 202)
                         {
                             OnUploadFailure();
                             break;
                         }
                         //上传完成
-                        if (response.data != null && chunkNumber + 1 == totalChunks)
+                        if (response.Ok)
                         {
                             OnUploadCompleted();
                             UploadManager.DeleteUploader(upload);

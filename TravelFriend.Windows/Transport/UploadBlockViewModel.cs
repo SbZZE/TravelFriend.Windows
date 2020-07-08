@@ -85,15 +85,15 @@ namespace TravelFriend.Windows.Transport
                     int hour = value / 3600;
                     int min = (value - hour * 3600) / 60;
                     int sen = value - hour * 3600 - min * 60;
-                    string hourStr = hour > 10 ? hour.ToString() : $"0{hour}";
-                    string minStr = min > 10 ? min.ToString() : $"0{min}";
-                    string senStr = sen > 10 ? sen.ToString() : $"0{sen}";
+                    string hourStr = hour >= 10 ? hour.ToString() : $"0{hour}";
+                    string minStr = min >= 10 ? min.ToString() : $"0{min}";
+                    string senStr = sen >= 10 ? sen.ToString() : $"0{sen}";
                     Timestamp = $"{hourStr}:{minStr}:{senStr}";
                 }
             }
         }
 
-        private string _timestamp;
+        private string _timestamp = "--.--";
         /// <summary>
         /// 剩余时间戳
         /// </summary>
@@ -110,7 +110,7 @@ namespace TravelFriend.Windows.Transport
             }
         }
 
-        private string _speed;
+        private string _speed = "--.--";
         /// <summary>
         /// 速度
         /// </summary>
@@ -144,7 +144,7 @@ namespace TravelFriend.Windows.Transport
             }
         }
 
-        private UploadStatus _uploadStatus = UploadStatus.Uploading;
+        private UploadStatus _uploadStatus = UploadStatus.Pause;
         /// <summary>
         /// 状态
         /// </summary>

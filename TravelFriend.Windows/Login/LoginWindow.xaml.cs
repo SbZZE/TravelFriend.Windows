@@ -23,6 +23,7 @@ using TravelFriend.Windows.Http.UserInfo;
 using TravelFriend.Windows.Login;
 using TravelFriend.Windows.RabbitMQ;
 using TravelFriend.Windows.Styles;
+using TravelFriend.Windows.Transport;
 
 namespace TravelFriend.Windows
 {
@@ -104,6 +105,7 @@ namespace TravelFriend.Windows
                 mainWindow.PersonalData.Visibility = Visibility.Visible;
                 mainWindow.Team.Visibility = Visibility.Visible;
                 mainWindow.Transport.Visibility = Visibility.Visible;
+                mainWindow.TransportContainer.LoadTransportList();
                 mainWindow.WindowState = WindowState.Normal;
                 RabbitMQ.RabbitMQManager.Connection();
 

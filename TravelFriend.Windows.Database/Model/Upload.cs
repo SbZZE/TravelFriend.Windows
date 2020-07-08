@@ -56,5 +56,9 @@ namespace TravelFriend.Windows.Database.Model
         /// 文件路径
         /// </summary>
         public string FilePath { get; set; }
+        /// <summary>
+        /// 目标
+        /// </summary>
+        public string Target { get; set; }
     }
 }

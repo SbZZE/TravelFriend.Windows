@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using TravelFriend.Windows.Common;
 using TravelFriend.Windows.Database;
 using TravelFriend.Windows.Database.Data;
+using TravelFriend.Windows.Database.Model;
 using TravelFriend.Windows.Http.Album;
 using TravelFriend.Windows.Http.BreakPoint;
 
@@ -25,7 +26,7 @@ namespace TravelFriend.Windows.Transport
     public partial class UploadBlock : UserControl
     {
         private BreakPointManager _breakPointManager;
-        private UploadBlockViewModel _uploadBlockViewModel;
+        public UploadBlockViewModel _uploadBlockViewModel;
 
         public UploadBlock(string fileName, string fileSize, FileType fileType, string target)
         {
@@ -40,17 +41,22 @@ namespace TravelFriend.Windows.Transport
             _breakPointManager = new BreakPointManager();
             _breakPointManager.OnUploadProgressChanged += BreakPointManager_OnUploadProgressChanged;
             _breakPointManager.OnUploadCompleted += BreakPointManager_OnUploadCompleted;
-            _breakPointManager.OnUploadFailure += BreakPointManager_OnUploadFailure;
             DataContext = _uploadBlockViewModel;
             Unloaded += UploadBlock_Unloaded;
         }
 
-        public void UploadPrepare(string targetId, string albumId, AlbumType albumType, string filePath)
+        public Upload UploadPrepare(string targetId, string albumId, AlbumType albumType, string filePath)
         {
             _uploadBlockViewModel.TargetId = targetId;
             _uploadBlockViewModel.AlbumId = albumId;
             _uploadBlockViewModel.Identifier = FileHelper.GetIdentifier(filePath);
-            _breakPointManager.UploadPrepare(targetId, albumId, albumType, _uploadBlockViewModel.FileType, filePath);
+            return _breakPointManager.UploadPrepare(targetId, albumId, albumType, _uploadBlockViewModel.FileType, _uploadBlockViewModel.Target, filePath);
+        }
+
+        public void UploadStart(Upload uploader)
+        {
+            _uploadBlockViewModel.UploadStatus = UploadStatus.Uploading;
+            _breakPointManager.UploadStart(uploader);
         }
 
         private void BreakPointManager_OnUploadProgressChanged(double progress, int time, double speed)
@@ -67,11 +73,6 @@ namespace TravelFriend.Windows.Transport
             }
         }
 
-        private void BreakPointManager_OnUploadFailure()
-        {
-
-        }
-
         private void BreakPointManager_OnUploadCompleted()
         {
             _uploadBlockViewModel.Progress = 100;
@@ -83,7 +84,6 @@ namespace TravelFriend.Windows.Transport
         {
             _breakPointManager.OnUploadProgressChanged -= BreakPointManager_OnUploadProgressChanged;
             _breakPointManager.OnUploadCompleted -= BreakPointManager_OnUploadCompleted;
-            _breakPointManager.OnUploadFailure -= BreakPointManager_OnUploadFailure;
         }
 
         private void Pause_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
