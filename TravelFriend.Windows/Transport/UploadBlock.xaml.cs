@@ -75,9 +75,8 @@ namespace TravelFriend.Windows.Transport
 
         private void BreakPointManager_OnUploadCompleted()
         {
+            _uploadBlockViewModel.UploadStatus = UploadStatus.Pause;
             _uploadBlockViewModel.Progress = 100;
-            _uploadBlockViewModel.Timestamp = string.Empty;
-            _uploadBlockViewModel.Speed = string.Empty;
         }
 
         private void UploadBlock_Unloaded(object sender, RoutedEventArgs e)

@@ -7,6 +7,7 @@
              mc:Ignorable="d" HorizontalAlignment="Stretch">
     <UserControl.Resources>
         <converter:UploadStatusConverter x:Key="UploadStatusConverter"/>
+        <converter:FileTypeConverter x:Key="FileTypeConverter"/>
     </UserControl.Resources>
     <Border BorderThickness="0 0 0 1" BorderBrush="{StaticResource LightGray}" Background="White" Height="40" HorizontalAlignment="Stretch">
         <Grid HorizontalAlignment="Stretch">
@@ -26,7 +27,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Grid.RowSpan="2" Source="/Resources/Video.png" VerticalAlignment="Center" Width="30"/>
+                <Image Grid.Column="0" Grid.RowSpan="2" Source="{Binding FileType,Converter={StaticResource FileTypeConverter}}" VerticalAlignment="Center" Width="30"/>
                 <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="{Binding FileName}" FontSize="12" VerticalAlignment="Bottom"/>
                 <TextBlock Grid.Column="1" Grid.Row="1" Margin="10 0 0 0" Text="{Binding FileSize}" FontSize="10" Foreground="{StaticResource DarkGray}" VerticalAlignment="Top"/>
             </Grid>

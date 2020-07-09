@@ -62,7 +62,7 @@ namespace TravelFriend.Windows.Common
                 await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.UserAvatar}?username={UserName}&isCompress=true&width={width}&height={height}"), ms);
                 await Dispatcher.InvokeAsync(() =>
                 {
-                    var image = ImageHelper.GetAvatarAsync(ms);
+                    var image = ImageHelper.GetImageByStreamAsync(ms);
                     this.Source = image == null ? new BitmapImage(new Uri("/Resources/DefaultBigAvatar.png", UriKind.Relative)) : image;
                 });
             }

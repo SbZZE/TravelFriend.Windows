@@ -65,7 +65,7 @@ namespace TravelFriend.Windows.Common
                 var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.TeamAvatar}?teamid={TeamId}&isCompress=true&width={width}&height={height}"), ms);
                 await Dispatcher.InvokeAsync(() =>
                 {
-                    var image = ImageHelper.GetAvatarAsync(ms);
+                    var image = ImageHelper.GetImageByStreamAsync(ms);
                     this.Source = image == null ? new BitmapImage(new Uri("/Resources/DefaultTeamAvatar.png", UriKind.Relative)) : image;
                 });
             }

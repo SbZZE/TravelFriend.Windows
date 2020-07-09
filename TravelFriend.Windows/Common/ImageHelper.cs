@@ -15,7 +15,7 @@ namespace TravelFriend.Windows.Common
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        public static BitmapImage GetAvatarAsync(Stream ms)
+        public static BitmapImage GetImageByStreamAsync(Stream ms)
         {
             BitmapImage bmp = null;
             try

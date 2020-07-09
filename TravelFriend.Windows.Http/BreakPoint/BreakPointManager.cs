@@ -114,16 +114,17 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         var response = await HttpManager.Instance.BreakPointUploadAsync<BreakPointUploadResponse>(
                                 new UploadAlbumFileRequest(upload.TargetId, upload.AlbumId, (AlbumType)upload.AlbumType, upload.FileName, (FileType)upload.FileType, upload.Identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
                             );
-                        //当前分片上传失败
-                        if (response.code == 202)
+                        Logger.Log(response.message);
+                        //当前分片上传失败(只要不是完成和分片成功都视为失败)
+                        if (!response.Ok && response.code != 201)
                         {
-                            OnUploadFailure();
+                            OnUploadFailure?.Invoke();
                             break;
                         }
                         //上传完成
                         if (response.Ok)
                         {
-                            OnUploadCompleted();
+                            OnUploadCompleted?.Invoke();
                             UploadManager.DeleteUploader(upload);
                             break;
                         }
@@ -141,7 +142,7 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         //计算剩余时间
                         var time = (totalSize - uploadedLength) / speed;
                         //上传进度通知
-                        OnUploadProgressChanged(progress, (int)time, speed / 1024);
+                        OnUploadProgressChanged?.Invoke(progress, (int)time, speed / 1024);
                     }
                 }
             }

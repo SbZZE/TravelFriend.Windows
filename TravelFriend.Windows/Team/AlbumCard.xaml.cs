@@ -40,13 +40,10 @@ namespace TravelFriend.Windows.Team
                     if (ms != null && ms.Length > 0)
                     {
                         ms.Position = 0;
-                        using (BinaryReader br = new BinaryReader(ms))
+                        this.Dispatcher.Invoke(() =>
                         {
-                            this.Dispatcher.Invoke(() =>
-                            {
-                                Cover.Source = ImageHelper.ByteArrayToBitmapImage(br.ReadBytes((int)ms.Length));
-                            });
-                        }
+                            Cover.Source = ImageHelper.GetImageByStreamAsync(ms);
+                        });
                     }
                 }
             }

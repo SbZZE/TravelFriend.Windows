@@ -20,9 +20,9 @@ namespace TravelFriend.Windows.Common
 
         public static FileType GetFileType(string fileExtension)
         {
-            if (Images.Contains(fileExtension))
+            if (Images.Contains(fileExtension.ToLower()))
                 return FileType.IMAGE;
-            if (Videos.Contains(fileExtension))
+            if (Videos.Contains(fileExtension.ToLower()))
                 return FileType.VIDEO;
             else
                 return FileType.UNKNOWN;

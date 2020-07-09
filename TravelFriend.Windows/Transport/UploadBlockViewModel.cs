@@ -157,6 +157,11 @@ namespace TravelFriend.Windows.Transport
             set
             {
                 _uploadStatus = value;
+                if (_uploadStatus == UploadStatus.Pause)
+                {
+                    Timestamp = string.Empty;
+                    Speed = string.Empty;
+                }
                 Change(nameof(UploadStatus));
             }
         }
