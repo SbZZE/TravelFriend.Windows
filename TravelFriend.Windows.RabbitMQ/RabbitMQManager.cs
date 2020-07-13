@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using TravelFriend.Windows.Database;
+using TravelFriend.Windows.Http;
 
 namespace TravelFriend.Windows.RabbitMQ
 {
@@ -19,7 +20,7 @@ namespace TravelFriend.Windows.RabbitMQ
         {
             IConnectionFactory connFactory = new ConnectionFactory//创建连接工厂对象
             {
-                HostName = "47.106.139.187",//IP地址
+                HostName = "123.56.6.43",//IP地址
                 Port = 5672,//端口号
                 UserName = "root",//用户账号
                 Password = "root"//用户密码

@@ -25,8 +25,8 @@ namespace TravelFriend.Windows.Common
                     ms.Position = 0;
                     bmp = new BitmapImage();
                     bmp.BeginInit();
+                    bmp.CreateOptions = BitmapCreateOptions.None;
                     bmp.CacheOption = BitmapCacheOption.OnLoad;
-                    bmp.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
                     bmp.StreamSource = ms;
                     bmp.EndInit();
                     bmp.Freeze();

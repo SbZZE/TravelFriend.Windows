@@ -6,7 +6,7 @@ namespace TravelFriend.Windows.Http
 {
     public class ApiUtils
     {
-        private static string BaseUrl => "http://47.106.139.187:8081/api";
+        private static string BaseUrl => "http://123.56.6.43:8081/api";
 
         public static string Register => BaseUrl + "/user/register";
         public static string Login => BaseUrl + "/user/login";
@@ -20,6 +20,8 @@ namespace TravelFriend.Windows.Http
         public static string CreateAlbum => BaseUrl + "/album/create";
         public static string AlbumList => BaseUrl + "/album/list";
         public static string AlbumCover => BaseUrl + "/album/cover";
+        public static string GetThumbnail => BaseUrl + "/album/file/thumb";
+        public static string ThumbnailList => BaseUrl + "/album/file/list";
         public static string BreakPointUpload => BaseUrl + "/breakpoint/upload";
     }
 }

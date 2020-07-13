@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TravelFriend.Windows.Common;
+using TravelFriend.Windows.Http;
 using TravelFriend.Windows.Http.Album;
 using TravelFriend.Windows.Http.BreakPoint;
 using TravelFriend.Windows.Transport;
@@ -38,6 +39,20 @@ namespace TravelFriend.Windows.Album
             TeamName = teamName;
             AlbumName = albumName;
             AlbumType = albumType;
+            Loaded += AlbumPage_Loaded;
+        }
+
+        private async void AlbumPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            var response = await HttpManager.Instance.GetAsync<GetThumbnailListResponse>(new HttpRequest($"{ApiUtils.ThumbnailList}?albumid={AlbumId}"));
+            if (response.Ok)
+            {
+                var thumbnails = response.Data;
+                foreach (var thumbnail in thumbnails)
+                {
+                    AlbumDetail.Children.Add(new Thumbnail(thumbnail.FileId));
+                }
+            }
         }
 
         private void Return_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

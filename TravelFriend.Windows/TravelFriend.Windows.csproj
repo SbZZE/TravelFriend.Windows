@@ -32,6 +32,7 @@
     <None Remove="Resources\Gray\Send.png" />
     <None Remove="Resources\Gray\Setting.png" />
     <None Remove="Resources\Gray\Team.png" />
+    <None Remove="Resources\Gray\Thumbnail.png" />
     <None Remove="Resources\Gray\ToggleDown.png" />
     <None Remove="Resources\Gray\ToggleUp.png" />
     <None Remove="Resources\Green\Birthday.png" />
@@ -61,6 +62,7 @@
     <None Remove="Resources\Transport.png" />
     <None Remove="Resources\Travel.png" />
     <None Remove="Resources\Video.png" />
+    <None Remove="Resources\Watch.png" />
     <None Remove="Resources\zhangzhier.png" />
     <None Remove="Team\TeamDetail" />
   </ItemGroup>
@@ -133,6 +135,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\Team.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\Thumbnail.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\ToggleDown.png">
@@ -223,6 +228,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Video.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Watch.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\zhangzhier.png">

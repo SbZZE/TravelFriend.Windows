@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Album.Thumbnail"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TravelFriend.Windows.Album"
+             mc:Ignorable="d" Width="200" Height="280">
+    <Grid Margin="5">
+        <Border Background="{StaticResource LightGray}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="/Resources/Gray/Thumbnail.png" Height="60"/>
+                <TextBlock Text="{DynamicResource NoThumbnail}" Margin="0,10,0,0" FontSize="14" Foreground="{StaticResource DarkGray}"/>
+            </StackPanel>
+        </Border>
+        <Image x:Name="ThumbnailImage" Stretch="UniformToFill" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter"/>
+        <Border x:Name="Shade" Background="Black" Opacity="0.5" Cursor="Hand" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MouseLeave="Shade_MouseLeave">
+            <Image Source="/Resources/Watch.png" Width="60"/>
+        </Border>
+    </Grid>
+</UserControl>

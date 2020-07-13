@@ -71,4 +71,5 @@
     <sys:String x:Key="InputTeamName">请输入团队名称</sys:String>
     <sys:String x:Key="Determine">确定</sys:String>
     <sys:String x:Key="Transport">传输</sys:String>
+    <sys:String x:Key="NoThumbnail">暂无缩略图</sys:String>
 </ResourceDictionary>
