@@ -5,14 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TravelFriend.Windows.Album"
              mc:Ignorable="d" Width="200" Height="280">
-    <Grid Margin="5">
-        <Border Background="{StaticResource LightGray}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter">
+    <UserControl.Resources>
+        <Storyboard x:Key="LoadingStoryboard">
+            <DoubleAnimation To="360" RepeatBehavior="Forever" Duration="0:0:2"
+                                             Storyboard.TargetName="LoadingTransform"
+                                             Storyboard.TargetProperty="Angle"/>
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid Margin="5" Background="{StaticResource LightGray}">
+        <Border Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter" Visibility="{Binding NoThumbnailVisible}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Image Source="/Resources/Gray/Thumbnail.png" Height="60"/>
                 <TextBlock Text="{DynamicResource NoThumbnail}" Margin="0,10,0,0" FontSize="14" Foreground="{StaticResource DarkGray}"/>
             </StackPanel>
         </Border>
-        <Image x:Name="ThumbnailImage" Stretch="UniformToFill" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter"/>
+        <Image Source="/Resources/Green/Loading.png" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding LoadingVisible}" RenderTransformOrigin="0.5,0.5" IsVisibleChanged="Image_IsVisibleChanged">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="LoadingTransform" Angle="0"/>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="ThumbnailImage" Stretch="Fill" Cursor="Hand" MouseEnter="ThumbnailImage_MouseEnter" Visibility="{Binding ThumbnailVisible}"/>
         <Border x:Name="Shade" Background="Black" Opacity="0.5" Cursor="Hand" Visibility="Collapsed" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" MouseLeave="Shade_MouseLeave">
             <Image Source="/Resources/Watch.png" Width="60"/>
         </Border>

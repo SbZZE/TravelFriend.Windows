@@ -128,7 +128,6 @@ namespace TravelFriend.Windows.Http
                 http.Method = "GET";
                 http.Headers.Add("token", AccountManager.Instance.UserToken);
                 http.ContentType = "application/json";
-                http.Timeout = 5 * 1000;
 
                 using (WebResponse response = await http.GetResponseAsync())
                 {

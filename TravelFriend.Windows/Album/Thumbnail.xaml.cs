@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,26 +23,35 @@ namespace TravelFriend.Windows.Album
     public partial class Thumbnail : UserControl
     {
         public string FileId;
+        private ThumbnailViewModel ThumbnailViewModel;
         public Thumbnail(string fileId)
         {
             InitializeComponent();
+            ThumbnailViewModel = new ThumbnailViewModel();
+            DataContext = ThumbnailViewModel;
             FileId = fileId;
             Loaded += Thumbnail_Loaded;
         }
 
         private async void Thumbnail_Loaded(object sender, RoutedEventArgs e)
         {
+            ThumbnailViewModel.LoadStatus = LoadStatus.Loading;
             //请求获取
             using (MemoryStream ms = new MemoryStream())
             {
-                await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.GetThumbnail}?fileid={FileId}&width=200&height=300"), ms);
+                await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.GetThumbnail}?fileid={FileId}&width=260&height=260"), ms);
                 if (ms != null && ms.Length > 0)
                 {
                     ms.Position = 0;
                     this.Dispatcher.Invoke(() =>
                     {
                         ThumbnailImage.Source = ImageHelper.GetImageByStreamAsync(ms);
+                        ThumbnailViewModel.LoadStatus = LoadStatus.LoadSuccess;
                     });
+                }
+                else
+                {
+                    ThumbnailViewModel.LoadStatus = LoadStatus.LoadFailure;
                 }
             }
         }
@@ -54,6 +64,19 @@ namespace TravelFriend.Windows.Album
         private void Shade_MouseLeave(object sender, MouseEventArgs e)
         {
             Shade.Visibility = Visibility.Collapsed;
+        }
+
+        private void Image_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            Storyboard story = (Storyboard)this.FindResource("LoadingStoryboard");
+            if (ThumbnailViewModel.LoadingVisible == Visibility.Visible)
+            {
+                story.Begin();
+            }
+            else
+            {
+                story.Stop();
+            }
         }
     }
 }
