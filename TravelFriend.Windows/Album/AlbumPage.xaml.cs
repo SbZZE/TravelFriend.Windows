@@ -71,16 +71,17 @@ namespace TravelFriend.Windows.Album
             if (fileDialog.ShowDialog() == true)
             {
                 var filePaths = fileDialog.FileNames;
-                foreach (var filePath in filePaths)
+                if (App.Current.MainWindow is MainWindow mainWindow)
                 {
-                    FileInfo fileInfo = new FileInfo(filePath);
-                    if (App.Current.MainWindow is MainWindow mainWindow)
+                    foreach (var filePath in filePaths)
                     {
+                        FileInfo fileInfo = new FileInfo(filePath);
                         var uploadBlock = new UploadBlock(fileInfo.Name, ((double)fileInfo.Length / 1024 / 1024).ToString("0.00"), FileHelper.GetFileType(fileInfo.Extension), $"{TeamName}/{AlbumName}");
                         mainWindow.TransportContainer.UploadList.Items.Add(uploadBlock);
                         var uploader = uploadBlock.UploadPrepare(TeamId, AlbumId, AlbumType, filePath);
                         uploadBlock.UploadStart(uploader);
                     }
+                    mainWindow.TransportContainer.EmptyTip.Visibility = mainWindow.TransportContainer.UploadList.Items.IsEmpty ? Visibility.Visible : Visibility.Collapsed;
                 }
             }
         }

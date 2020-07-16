@@ -107,6 +107,7 @@ namespace TravelFriend.Windows
                 mainWindow.Transport.Visibility = Visibility.Visible;
                 mainWindow.TransportContainer.LoadTransportList();
                 mainWindow.WindowState = WindowState.Normal;
+                mainWindow.Home.IsChecked = true;
                 RabbitMQ.RabbitMQManager.Connection();
 
                 //获取个人资料

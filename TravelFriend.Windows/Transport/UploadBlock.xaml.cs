@@ -77,6 +77,11 @@ namespace TravelFriend.Windows.Transport
         {
             _uploadBlockViewModel.UploadStatus = UploadStatus.Pause;
             _uploadBlockViewModel.Progress = 100;
+            if (Window.GetWindow(this) is MainWindow mainWindow)
+            {
+                mainWindow.TransportContainer.UploadList.Items.Remove(this);
+                mainWindow.TransportContainer.EmptyTip.Visibility = mainWindow.TransportContainer.UploadList.Items.IsEmpty ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         private void UploadBlock_Unloaded(object sender, RoutedEventArgs e)

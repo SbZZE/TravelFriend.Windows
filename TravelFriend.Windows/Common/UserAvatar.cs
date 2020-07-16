@@ -22,15 +22,7 @@ namespace TravelFriend.Windows.Common
 
         public UserAvatar()
         {
-            Unloaded += UserAvatar_Unloaded;
             NotifyManager.UserAvatarSubject.Add(this);//订阅头像变化
-        }
-
-        private void UserAvatar_Unloaded(object sender, RoutedEventArgs e)
-        {
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
-            GC.Collect();
         }
 
         public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register(

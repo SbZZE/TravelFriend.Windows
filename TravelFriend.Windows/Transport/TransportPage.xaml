@@ -23,14 +23,18 @@
                 </Grid.ColumnDefinitions>
                 <Border Margin="10 0 0 0" Width="14" Height="14" Background="White"/>
                 <CheckBox IsChecked="{Binding IsRememberPassword}" Margin="10 0 0 0" Foreground="{StaticResource LightGray}" BorderBrush="{StaticResource LightGray}" Background="{StaticResource MainGreen}" Style="{StaticResource MaterialDesignCheckBox}" VerticalAlignment="Center" HorizontalAlignment="Left" Cursor="Hand"/>
-                <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="名称" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="2" Margin="5 0 0 0" Text="上传到（目标/相册）" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="3" Margin="5 0 0 0" Text="进度" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="1" Margin="10 0 0 0" Text="{DynamicResource TransportName}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="2" Margin="5 0 0 0" Text="{DynamicResource UploadTo}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Column="3" Margin="5 0 0 0" Text="{DynamicResource Progress}" FontSize="14" FontWeight="Bold" Foreground="{StaticResource DarkGray}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
             </Grid>
         </Border>
         <Grid Grid.Row="3" Margin="20 0" HorizontalAlignment="Stretch">
             <ListBox x:Name="UploadList" HorizontalContentAlignment="Stretch">
             </ListBox>
         </Grid>
+        <StackPanel x:Name="EmptyTip" Grid.Row="3" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Image Source="/Resources/Gray/NoUploadData.png" Width="70" Height="70"/>
+            <TextBlock Text="{DynamicResource NoUploadData}" Foreground="{StaticResource LightGray}" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+        </StackPanel>
     </Grid>
 </UserControl>

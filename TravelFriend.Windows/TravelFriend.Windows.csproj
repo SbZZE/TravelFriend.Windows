@@ -25,6 +25,7 @@
     <None Remove="Resources\Gray\Message.png" />
     <None Remove="Resources\Gray\Min.png" />
     <None Remove="Resources\Gray\NoMax.png" />
+    <None Remove="Resources\Gray\NoUploadData.png" />
     <None Remove="Resources\Gray\Pause.png" />
     <None Remove="Resources\Gray\Play.png" />
     <None Remove="Resources\Gray\Right.png" />
@@ -115,6 +116,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\NoMax.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Gray\NoUploadData.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Gray\Pause.png">

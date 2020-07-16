@@ -30,6 +30,7 @@ namespace TravelFriend.Windows.Transport
 
         public void LoadTransportList()
         {
+            UploadList.Items.Clear();
             var uploaders = UploadManager.GetAllUploader(AccountManager.Instance.Account);
             foreach (var uploader in uploaders)
             {
@@ -39,6 +40,7 @@ namespace TravelFriend.Windows.Transport
                 UploadList.Items.Add(uploadBlock);
                 uploadBlock.UploadPrepare(uploader.TargetId, uploader.AlbumId, (AlbumType)uploader.AlbumType, uploader.FilePath);
             }
+            EmptyTip.Visibility = UploadList.Items.IsEmpty ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }
