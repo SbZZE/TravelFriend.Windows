@@ -50,6 +50,7 @@ namespace TravelFriend.Windows.Album
                 var thumbnails = response.Data;
                 foreach (var thumbnail in thumbnails)
                 {
+                    ResetColumnCount(ActualWidth);
                     AlbumDetail.Children.Add(new Thumbnail(thumbnail.FileId));
                 }
             }
@@ -81,6 +82,26 @@ namespace TravelFriend.Windows.Album
                         uploadBlock.UploadStart(uploader);
                     }
                 }
+            }
+        }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ResetColumnCount(e.NewSize.Width);
+            AlbumDetail.Measure(AlbumDetail.RenderSize);
+        }
+
+        public void ResetColumnCount(double width)
+        {
+            if (AlbumDetail.Children.Count <= 0)
+            {
+                return;
+            }
+            int columnNum = (int)width / 270;
+            //只在列数改变的情况下赋值，有效减少重绘次数
+            if (columnNum != AlbumDetail.ColumnCount)
+            {
+                AlbumDetail.ColumnCount = columnNum;
             }
         }
     }

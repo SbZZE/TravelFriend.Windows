@@ -36,7 +36,7 @@ namespace TravelFriend.Windows.Team
                 //请求获取
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.AlbumCover}?albumid={album.AlbumId}&width=160&height=160"), ms);
+                    var res = await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.AlbumCover}?albumid={album.AlbumId}"), ms);
                     if (ms != null && ms.Length > 0)
                     {
                         ms.Position = 0;

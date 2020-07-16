@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TravelFriend.Windows.Album"
+             xmlns:local="clr-namespace:TravelFriend.Windows.Album" SizeChanged="UserControl_SizeChanged"
              mc:Ignorable="d" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid Background="{StaticResource BackgroundGray}">
         <Grid.RowDefinitions>
@@ -18,9 +18,9 @@
             <Image x:Name="Return" MouseLeftButtonUp="Return_MouseLeftButtonUp" Cursor="Hand" Source="/Resources/Green/Return.png" Width="24" Height="24" HorizontalAlignment="Left" SnapsToDevicePixels="True"/>
             <TextBlock Grid.Column="1" Text="{DynamicResource Return}" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="18" Foreground="{StaticResource MainGreen}" Margin="5 0 0 0" FontWeight="Bold" MouseLeftButtonUp="Return_MouseLeftButtonUp"/>
         </Grid>
-        <Button Width="80" Height="30" Content="上传" Background="{StaticResource MainGreen}" Click="Button_Click" BorderThickness="0" HorizontalAlignment="Right"/>
-        <ScrollViewer Grid.Row="1" Margin="0,10,0,0">
-            <WrapPanel x:Name="AlbumDetail"/>
+        <Button Width="80" Height="30" Content="{DynamicResource Upload}" Background="{StaticResource MainGreen}" Click="Button_Click" BorderThickness="0" HorizontalAlignment="Right"/>
+        <ScrollViewer x:Name="Scroll" Grid.Row="1" Margin="0,10,0,0">
+            <local:WaterfallPanel x:Name="AlbumDetail" ColumnCount="4"></local:WaterfallPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

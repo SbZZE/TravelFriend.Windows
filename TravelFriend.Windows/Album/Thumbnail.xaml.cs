@@ -39,7 +39,7 @@ namespace TravelFriend.Windows.Album
             //请求获取
             using (MemoryStream ms = new MemoryStream())
             {
-                await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.GetThumbnail}?fileid={FileId}&width=260&height=260"), ms);
+                await HttpManager.Instance.DownloadAsync(new HttpRequest($"{ApiUtils.GetThumbnail}?fileid={FileId}"), ms);
                 if (ms != null && ms.Length > 0)
                 {
                     ms.Position = 0;
