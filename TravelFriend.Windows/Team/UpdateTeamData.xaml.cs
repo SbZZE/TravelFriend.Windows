@@ -23,9 +23,12 @@ namespace TravelFriend.Windows.Team
     /// </summary>
     public partial class UpdateTeamData : UserControl
     {
-        public UpdateTeamData()
+        private string TeamId;
+
+        public UpdateTeamData(string teamId)
         {
             InitializeComponent();
+            TeamId = teamId;
         }
 
         private void Close_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -40,25 +43,21 @@ namespace TravelFriend.Windows.Team
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            var data = (sender as FrameworkElement).DataContext;
-            if (data is TeamModel teamModel)
+            var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateTeamRequest(TeamId, TeamName.Text, TeamProfile.Text));
+            if (response.Ok)
             {
-                var response = await HttpManager.Instance.PostAsync<HttpResponse>(new UpdateTeamRequest(teamModel.TeamId, TeamName.Text, TeamProfile.Text));
-                if (response.Ok)
+                Visibility = Visibility.Collapsed;
+                if (App.Current.MainWindow is MainWindow window)
                 {
-                    Visibility = Visibility.Collapsed;
-                    if (App.Current.MainWindow is MainWindow window)
-                    {
-                        //创建成功，清空文本框
-                        window.Toast.Show(response.message);
-                        TeamName.Text = "";
-                        TeamProfile.Text = "";
-                    }
+                    //创建成功，清空文本框
+                    window.Toast.Show(response.message);
+                    TeamName.Text = "";
+                    TeamProfile.Text = "";
                 }
-                else
-                {
-                    Toast.Show(response.message);
-                }
+            }
+            else
+            {
+                Toast.Show(response.message);
             }
         }
     }

@@ -28,24 +28,21 @@ namespace TravelFriend.Windows.Main
         public UpdatePersonalData()
         {
             InitializeComponent();
-            this.IsVisibleChanged += UpdatePersonalData_IsVisibleChanged;
+            Loaded += UpdatePersonalData_Loaded;
             ViewModel = new UpdatePersonalDataViewModel();
             DataContext = ViewModel;
         }
 
-        private void UpdatePersonalData_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void UpdatePersonalData_Loaded(object sender, RoutedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
+            if (user != null && !string.IsNullOrEmpty(user.UserName))
             {
-                var user = UserManager.GetUserByUserName(AccountManager.Instance.Account);
-                if (user != null && !string.IsNullOrEmpty(user.UserName))
-                {
-                    ViewModel.NickName = user.NickName;
-                    ViewModel.Gender = user.Gender;
-                    ViewModel.Address = user.Address;
-                    ViewModel.Birthday = user.Birthday;
-                    ViewModel.Signature = user.Signature;
-                }
+                ViewModel.NickName = user.NickName;
+                ViewModel.Gender = user.Gender;
+                ViewModel.Address = user.Address;
+                ViewModel.Birthday = user.Birthday;
+                ViewModel.Signature = user.Signature;
             }
         }
 

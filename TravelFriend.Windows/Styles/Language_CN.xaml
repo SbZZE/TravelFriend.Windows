@@ -77,4 +77,9 @@
     <sys:String x:Key="TransportName">名称</sys:String>
     <sys:String x:Key="UploadTo">上传到（目标/相册）</sys:String>
     <sys:String x:Key="NoUploadData">暂无上传内容</sys:String>
+    <sys:String x:Key="SelectFile">选择文件</sys:String>
+    <sys:String x:Key="Name">名称：</sys:String>
+    <sys:String x:Key="Introduction">简介：</sys:String>
+    <sys:String x:Key="InputAlbumIntroduction">请输入相册简介</sys:String>
+    <sys:String x:Key="InputAlbumName">请输入相册名称</sys:String>
 </ResourceDictionary>

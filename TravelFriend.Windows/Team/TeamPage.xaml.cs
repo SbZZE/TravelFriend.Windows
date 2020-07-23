@@ -113,7 +113,8 @@ namespace TravelFriend.Windows.Team
         {
             if (App.Current.MainWindow is MainWindow mainwindow)
             {
-                mainwindow.CreateTeam.Visibility = Visibility.Visible;
+                mainwindow.ShadePopup.Content = new CreateTeam();
+                mainwindow.ShadePopup.Visibility = Visibility.Visible;
             }
         }
     }

@@ -170,7 +170,13 @@ namespace TravelFriend.Windows.Http
             client.Timeout = -1;
             var restRequest = new RestRequest(Method.POST);
             restRequest.AddHeader("token", AccountManager.Instance.UserToken);
-            restRequest.AddJsonBody(JsonConvert.SerializeObject(uploadRequest));
+            if (uploadRequest.Pairs != null && uploadRequest.Pairs.Count != 0)
+            {
+                foreach (var pair in uploadRequest.Pairs)
+                {
+                    restRequest.AddParameter(pair.Key, pair.Value);
+                }
+            }
             restRequest.AddFile(uploadRequest.FileKey, uploadRequest.FilePath);
             IRestResponse response = client.Execute(restRequest);
             try

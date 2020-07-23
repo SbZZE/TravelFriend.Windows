@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TravelFriend.Windows.Team"
-             mc:Ignorable="d" Width="190" Height="230" Margin="10">
+             mc:Ignorable="d" Width="190" Height="230" Margin="5 10">
     <Border Background="White" CornerRadius="2" Width="170" Height="210" Cursor="Hand">
         <Border.Style>
             <Style TargetType="Border">

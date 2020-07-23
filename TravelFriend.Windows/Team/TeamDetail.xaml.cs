@@ -89,11 +89,17 @@ namespace TravelFriend.Windows.Team
         {
             if (App.Current.MainWindow is MainWindow mainWindow)
             {
-                mainWindow.UpdateTeamData.DataContext = new TeamModel()
-                {
-                    TeamId = TeamId
-                };
-                mainWindow.UpdateTeamData.Visibility = Visibility.Visible;
+                mainWindow.ShadePopup.Content = new UpdateTeamData(TeamId);
+                mainWindow.ShadePopup.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void CreateAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.ShadePopup.Content = new CreateAlbum(TeamId);
+                mainWindow.ShadePopup.Visibility = Visibility.Visible;
             }
         }
     }

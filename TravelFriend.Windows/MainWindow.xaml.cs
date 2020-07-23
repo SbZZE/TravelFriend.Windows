@@ -78,7 +78,7 @@ namespace TravelFriend.Windows
             dialog.Filter = "图片(*.jpg;*.jpg;*.jpeg;*.gif;*.png)|*.jpg;*.jpeg;*.gif;*.png";
             if (dialog.ShowDialog() == true)
             {
-                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.UserAvatar}?username={AccountManager.Instance.Account}", dialog.FileName, "avatar"));
+                var response = HttpManager.Instance.UploadFile<HttpResponse>(new UploadRequest($"{ApiUtils.UserAvatar}?username={AccountManager.Instance.Account}", dialog.FileName, "avatar", null));
                 if (response.Ok)
                 {
                     Toast.Show(RStrings.UpdateSuccess);

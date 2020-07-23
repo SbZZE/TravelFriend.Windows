@@ -33,7 +33,8 @@ namespace TravelFriend.Windows.Main
         {
             this.IsOpen = false;
             var mainWindow = (MainWindow)App.Current.MainWindow;
-            mainWindow.UpdatePersonalData.Visibility = Visibility.Visible;
+            mainWindow.ShadePopup.Content = new UpdatePersonalData();
+            mainWindow.ShadePopup.Visibility = Visibility.Visible;
         }
     }
 }

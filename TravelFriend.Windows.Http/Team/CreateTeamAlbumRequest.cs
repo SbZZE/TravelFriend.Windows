@@ -12,12 +12,8 @@ namespace TravelFriend.Windows.Http
         /// </summary>
         /// <param name="albumName">相册名称</param>
         /// <param name="cover">相册封面文件路径</param>
-        public CreateTeamAlbumRequest(string albumName, string cover) : base(ApiUtils.CreateAlbum, cover, "cover")
+        public CreateTeamAlbumRequest(string cover, Dictionary<string, string> pairs) : base(ApiUtils.CreateAlbum, cover, "cover", pairs)
         {
-            AlbumName = albumName;
         }
-
-        [JsonProperty("albumname")]
-        public string AlbumName { get; set; }
     }
 }

@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="TravelFriend.Windows.Album.CreateAlbum"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:TravelFriend.Windows.Album"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="5 0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource LightGreen}"/>
+            <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="{StaticResource MainGreen}"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="Black" Opacity="0.7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Border CornerRadius="10" Height="300" Width="480" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{DynamicResource CreateAlbum}" FontSize="18" Margin="25 20 0 0" Foreground="{StaticResource MainGreen}" VerticalAlignment="Center"/>
+                <Image x:Name="Close" MouseLeftButtonUp="Close_MouseLeftButtonUp" Cursor="Hand" Grid.Column="1" Source="/Resources/Green/Close.png" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="24" Margin="0 0 25 0"/>
+                <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="25 0 0 0">
+                        <TextBlock Text="{DynamicResource Name}"/>
+                        <TextBox x:Name="Name" Width="200" materialDesign:HintAssist.Hint="{DynamicResource InputAlbumName}" materialDesign:HintAssist.Foreground="{StaticResource DarkGray}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="25 30 0 0">
+                        <TextBlock Text="{DynamicResource Introduction}" VerticalAlignment="Top" Margin="0 3 0 0"/>
+                        <TextBox x:Name="Introduction" TextWrapping="Wrap" materialDesign:HintAssist.Hint="{DynamicResource InputAlbumIntroduction}" VerticalAlignment="Top" VerticalContentAlignment="Top" materialDesign:HintAssist.Foreground="{StaticResource DarkGray}" Height="90" Width="200"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 10" VerticalAlignment="Center">
+                    <Border BorderThickness="2" BorderBrush="{StaticResource LightGreen}" Height="140" Width="120">
+                        <Image x:Name="Cover" Height="140" Width="120" Stretch="UniformToFill"/>
+                    </Border>
+                    <Button Width="120" Height="30" Content="{DynamicResource SelectFile}" Margin="0 10 0 0" Background="{StaticResource MainGreen}" Foreground="White" BorderThickness="0" Click="Button_Click"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="Save" Height="30" Width="70" Click="Save_Click" Background="{StaticResource MainGreen}" Foreground="White" Content="{DynamicResource Save}" BorderThickness="0"/>
+                    <Button x:Name="Cancel" Height="30" Width="70" Background="White" Click="Cancel_Click" BorderThickness="1" BorderBrush="{StaticResource MainGreen}" Content="{DynamicResource Cancel}" Foreground="Black" Margin="50 0 0 0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
