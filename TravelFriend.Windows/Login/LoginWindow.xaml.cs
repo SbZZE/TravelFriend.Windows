@@ -122,8 +122,8 @@ namespace TravelFriend.Windows
                     user.Password = LoginViewModel.IsRememberPassword ? LoginViewModel.Password : string.Empty;
                     //把最近登录的账号信息存到本地数据库
                     UserManager.SetUserToLast(user);
-                    NotifyManager.UpdateUserAvatar(user.UserName);
-                    NotifyManager.UpdateUserInfo(user.UserName);
+                    NotifyManager.UserInfoSubject.Notify();
+                    NotifyManager.UserAvatarSubject.Notify();
                 }
                 mainWindow.ReloadTeams();
                 ChatManager.Instance.ConnectChat();
