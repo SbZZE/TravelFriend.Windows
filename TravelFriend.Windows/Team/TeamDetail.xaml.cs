@@ -25,11 +25,13 @@ namespace TravelFriend.Windows.Team
     {
         private string TeamId;
         private string TeamName;
-        public TeamDetail(string teamId, string teamName)
+        private bool IsLeader;
+        public TeamDetail(string teamId, string teamName, bool isLeader)
         {
             InitializeComponent();
             TeamId = teamId;
             TeamName = teamName;
+            IsLeader = isLeader;
             Loaded += TeamDetail_Loaded;
         }
 
@@ -43,7 +45,7 @@ namespace TravelFriend.Windows.Team
                 {
                     foreach (var member in memberResponse.Members)
                     {
-                        MemberList.Items.Add(new MemberCard() { DataContext = member });
+                        MemberList.Items.Add(new MemberCard(IsLeader) { DataContext = member });
                     }
                 }
 

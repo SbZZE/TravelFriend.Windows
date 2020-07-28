@@ -114,7 +114,6 @@ namespace TravelFriend.Windows.Http.BreakPoint
                         var response = await HttpManager.Instance.BreakPointUploadAsync<BreakPointUploadResponse>(
                                 new UploadAlbumFileRequest(upload.TargetId, upload.AlbumId, (AlbumType)upload.AlbumType, upload.FileName, (FileType)upload.FileType, upload.Identifier, totalSize, totalChunks, chunkNumber, CHUNKSIZE, bytesRead), finalBuffer
                             );
-                        Logger.Log(response.message);
                         //当前分片上传失败(只要不是完成和分片成功都视为失败)
                         if (!response.Ok && response.code != 201)
                         {

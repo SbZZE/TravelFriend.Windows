@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:converter="clr-namespace:TravelFriend.Windows.Converter"
              xmlns:local="clr-namespace:TravelFriend.Windows.Team" 
              xmlns:common="clr-namespace:TravelFriend.Windows.Common"
@@ -37,7 +38,7 @@
                         </Image.Clip>
                     </common:UserAvatar>
                 </Border>
-                <TextBlock Grid.Column="2" Text="..." FontSize="14" Margin="0 0 10 0" VerticalAlignment="Top" Cursor="Hand"/>
+                <materialDesign:PackIcon x:Name="Delete" Grid.Column="2" Kind="WindowClose" Cursor="Hand" Background="Transparent" Foreground="Black" MouseLeftButtonUp="Delete_MouseLeftButtonUp" Width="15" Height="15" Margin="0 5 5 0" VerticalAlignment="Top" Visibility="Collapsed"/>
                 <TextBlock Grid.Column="1" Text="{Binding NickName}" FontSize="16" Margin="15 0 10 5" VerticalAlignment="Bottom"/>
                 <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding IsLeader,Converter={StaticResource BoolenToString}}" Foreground="{StaticResource Gray}" FontSize="12" Margin="15 5 10 0" VerticalAlignment="Top"/>
             </Grid>

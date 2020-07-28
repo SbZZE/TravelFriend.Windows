@@ -91,7 +91,7 @@ namespace TravelFriend.Windows.Team
         {
             if ((sender as FrameworkElement).DataContext is TeamModel team)
             {
-                var detail = new TeamDetail(team.TeamId, team.TeamName);
+                var detail = new TeamDetail(team.TeamId, team.TeamName, team.IsLeader);
                 DetailContainer.Content = detail;
             }
         }
